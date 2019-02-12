@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Prompt:400,500,600,700,800');
+body {
+    font-family: 'Prompt', sans-serif;
+    background: #263238;
+}
+
+.img {
+    background: url('../img/hexagons.svg');
+    background-size: cover;
+    height: 100vh;
+}
+
+#logo {
+    margin: 40px;
+    -webkit-animation: rotation 4s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+    from {-webkit-transform: rotate(0deg);}
+    to   {-webkit-transform: rotate(359deg);}
+}
+
+#list {
+    float: right;
+    list-style: none;
+    margin: auto;
+    margin: 40px;
+    font-size: 24px;
+    color: #fff;
+}
+
+#list a {
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#list a:hover {
+    color: #F06292;
+}
+
+.link {
+    display: inline;
+    margin: 40px;
+}
+
+.content {
+    text-align: center;
+    margin: auto;
+    height: 100%;
+    top: 50%;
+}
+
+#arrow-right {
+    transform: rotate(-90deg);
+    float: right;
+}
+
+#arrow-left {
+    transform: rotate(90deg);
+    float: left;
+}
