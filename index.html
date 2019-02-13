@@ -78,11 +78,11 @@
             <a href="javascript: scrollToHome();"><img id="contact-top" class="arrow-up" src="img/arrow.svg"></a>
             <h1 class="heading" id="contact-text"><span>Get In Touch</span></h1>
             <div id="form-container">
-                <form>
-                    <input class="enter" type="text" placeholder="Name">
-                    <input class="enter" type="text" placeholder="Email">
-                    <input class="field" type="text-field">
-                    <button class="btn submit" type="submit">Submit</button>
+                <form name="contact" method='POST' data-netlify="true">
+                    <input class="enter" type="text" name="name" placeholder="Name">
+                    <input class="enter" type="email" name="email"  placeholder="Email">
+                    <input class="field" type="text-field" name="message">
+                    <button class="btn submit" type="submit">Send</button>
                 </form>
 
             </div>
