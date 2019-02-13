@@ -39,7 +39,7 @@ body::-webkit-scrollbar {
 .img {
     height: 100vh;
     width: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 10%;
 }
 
 #logo {
@@ -118,7 +118,7 @@ body::-webkit-scrollbar {
     margin-top: 160px;
     height: 100%;
     top: 50%;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
 }
 
 #about {
@@ -138,12 +138,12 @@ body::-webkit-scrollbar {
 
 .arrow-down {
     margin-top: 5%;
-    margin-bottom: 80px;
+    margin-bottom: 10%;
 }
 
 .arrow-up {
     transform: rotate(180deg);
-    margin-top: 40px;
+    margin-top: 10%;
 }
 
 
@@ -153,13 +153,14 @@ body::-webkit-scrollbar {
     text-align: center;
     margin: auto;
     align-items: center;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .heading {
     color: #fff;
     font-size: 32px;
-    margin: 40px 0px 60px 0px;
+    margin: 20px 0px 60px 0px;
+    width: 100vw;
 }
 
 .heading>span {
@@ -176,7 +177,7 @@ body::-webkit-scrollbar {
     top: 50%;
     border-bottom: 4px solid #EEFF41;
     border-radius: 4px;
-    width: 729px;
+    width: 500px;
     margin: 0 60px;
 }
 
@@ -190,11 +191,12 @@ body::-webkit-scrollbar {
 
 .card-container {
     margin: auto;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     display: grid;
-    grid-column-gap: 10%;
+    grid-column-gap: 1%;
     grid-template-columns: auto auto;
     justify-items: center;
+    flex-wrap: wrap;
 }
 
 .card {
@@ -204,13 +206,15 @@ body::-webkit-scrollbar {
 
 .card img {
     border-radius: 4px 0px 0px 4px;
+    height: 10em;
+    width: 12em;
 }
 
 .card-body {
     background-color: #fff;
-    width: 340px;
-    height: 215px;
     border-radius: 0px 4px 4px 0px;
+    height: 10em;
+    width: 18em;
 }
 
 .card-body>p {
@@ -222,7 +226,6 @@ body::-webkit-scrollbar {
     padding: 8px 20px;
     background-color: #F50057;
     text-decoration: none;
-    top: 90%;
     right: 0;
     position: relative;
 }
@@ -235,6 +238,7 @@ body::-webkit-scrollbar {
 #form-container {
     display: flex;
     justify-content: center;
+    margin-bottom: 8%;
 }
 
 #form-container form {
@@ -242,7 +246,7 @@ body::-webkit-scrollbar {
     flex-direction: column;
     width: auto;
     margin: auto;
-    margin-top: 140px;
+    margin-top: 5%;
 }
 
 .enter {

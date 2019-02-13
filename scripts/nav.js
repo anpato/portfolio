@@ -1,6 +1,6 @@
 const d = document;
 
-const home = d.getElementById('container');
+const home = d.getElementById('logo');
 const link1 = d.getElementById('one');
 const link2 = d.getElementById('two');
 const link3 = d.getElementById('three');
@@ -29,6 +29,6 @@ function scrollToContact() {
 function scrollToHome() {
     home.scrollIntoView({
         behavior: 'smooth',
-        block: 'start'
+        block: 'end'
     })
 }
