@@ -7,7 +7,7 @@ const link3 = d.getElementById('three');
 
 const homeDown = d.getElementById('home-bottom');
 
-const projectTop = d.getElementById('project-top');
+const projectTop = d.getElementById('projects');
 const projectBtm = d.getElementById('project-down');
 
 const contactTop = d.getElementById('contact-text');
@@ -32,3 +32,4 @@ function scrollToHome() {
         block: 'end'
     })
 }
+

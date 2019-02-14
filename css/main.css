@@ -114,11 +114,9 @@ body::-webkit-scrollbar {
 
 .content {
     text-align: center;
-    margin: auto;
     margin-top: 160px;
-    height: 100%;
-    top: 50%;
-    margin-bottom: 10px;
+    height: 100vh;
+    width: 100%;
 }
 
 #about {
@@ -138,14 +136,21 @@ body::-webkit-scrollbar {
 
 .arrow-down {
     margin-top: 5%;
+}
+
+#project-top {
+    transform: rotate(180deg);
+    margin-top: 80px;
+}
+
+#project-down {
     margin-bottom: 10%;
 }
 
-.arrow-up {
-    transform: rotate(180deg);
+#contact-top {
     margin-top: 10%;
+    transform: rotate(180deg);
 }
-
 
 #projects {
     height: 100vh;
@@ -197,6 +202,7 @@ body::-webkit-scrollbar {
     grid-template-columns: auto auto;
     justify-items: center;
     flex-wrap: wrap;
+    padding: 40px;
 }
 
 .card {
@@ -297,3 +303,6 @@ body::-webkit-scrollbar {
 .submit:active {
     background-color: #ff4081;
 }
+
+/*media queries*/
+
