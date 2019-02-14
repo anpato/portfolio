@@ -402,12 +402,12 @@ body::-webkit-scrollbar {
     .heading>span:before,
     .heading span:after {
         content: '';
-        position: absolute;
+        position: relative;
         top: 50%;
         border-bottom: 4px solid #EEFF41;
         border-radius: 4px;
         width: auto;
-        margin: 0 60px;
+        margin: 0 20px;
     }
     
     .heading>span:before {
@@ -420,11 +420,14 @@ body::-webkit-scrollbar {
 
     #projects {
         height: 100%;
+        width: 100%;
+        text-align: center;
     }
 
     .card-container {
-        display: block;
-        margin:auto;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
         text-align: center;
         width: 80%;
     }
@@ -434,17 +437,18 @@ body::-webkit-scrollbar {
     }
     
     .card{
-        display: block;
+        justify-content: center;
+        display: flex;
         position: relative;
         margin: auto;
-        width: 80%;
-        margin-left: 10px;
+        width: 100%;
         margin-bottom: 20px;
     }
 
     #contact {
         margin-top: 80px;
         height: 100%;
+        width: 100%;
     }
 
     #form-container {
