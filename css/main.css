@@ -42,6 +42,10 @@ body::-webkit-scrollbar {
     margin-bottom: 10%;
 }
 
+#top {
+    display: none;
+}
+
 #logo {
     margin: 28px 40px;
     animation: rotation 6s infinite linear;
@@ -92,6 +96,10 @@ body::-webkit-scrollbar {
     margin: 40px;
 }
 
+.menu-wrap {
+    display: none;
+}
+
 #one {
     text-decoration: underline;
     text-decoration-color: #CE93D8;
@@ -114,11 +122,9 @@ body::-webkit-scrollbar {
 
 .content {
     text-align: center;
-    margin: auto;
     margin-top: 160px;
-    height: 100%;
-    top: 50%;
-    margin-bottom: 10px;
+    height: 100vh;
+    width: 100%;
 }
 
 #about {
@@ -138,14 +144,21 @@ body::-webkit-scrollbar {
 
 .arrow-down {
     margin-top: 5%;
+}
+
+#project-top {
+    transform: rotate(180deg);
+    margin-top: 80px;
+}
+
+#project-down {
     margin-bottom: 10%;
 }
 
-.arrow-up {
-    transform: rotate(180deg);
+#contact-top {
     margin-top: 10%;
+    transform: rotate(180deg);
 }
-
 
 #projects {
     height: 100vh;
@@ -197,6 +210,7 @@ body::-webkit-scrollbar {
     grid-template-columns: auto auto;
     justify-items: center;
     flex-wrap: wrap;
+    padding: 40px;
 }
 
 .card {
@@ -297,3 +311,102 @@ body::-webkit-scrollbar {
 .submit:active {
     background-color: #ff4081;
 }
+
+/*media queries*/
+
+@media(max-width: 900px){
+    
+    .nav {
+        display: inline-block;
+        width: 100vw;
+    }
+
+    #top {
+        margin: 0;
+        margin: 20px;
+        display: block;
+        float: left;
+        transition: all 0.5s;
+    }
+
+    #logo {
+        margin: 20px;
+        float: right;
+        transition: all 0.5s;
+    }
+
+    .link {
+        display: none;
+    }
+    
+    .burger {
+        float: right;
+    }
+
+    .menu-wrap {
+        display: block;
+        background-color: #263238;
+        width: 15em;
+        height: 55%;
+        z-index: 1;
+        list-style: none;
+        margin: auto;
+        margin-left: -900px;
+        font-size: 24px;
+        color: #fff;
+        position: fixed;
+        text-align: center;
+        border: 2px solid #fff;
+        border-radius: 4px;
+        transition: all .5s;
+    }
+
+    .show {
+        background-color: #263238;
+        list-style: none;
+        margin: auto;
+        margin-left: 0px;
+        font-size: 24px;
+        color: #fff;
+        position: absolute;
+        text-align: center;
+        border: 2px solid #fff;
+        border-radius: 4px;
+        transition: .5s;
+    }
+    .menu-wrap ul {
+        margin-top: 70px;
+    }
+
+    .menu-wrap li {
+        border-bottom: 4px solid #81D4FA;
+        width: 60%;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    .menu-wrap a {
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.3s;
+        margin: 30px;
+
+    }
+
+    .content {
+        margin-top: 80px;
+    }
+
+    #about {
+        width: 80%;
+    }
+
+    .card-container {
+        display: block;
+    }
+    
+    .card{
+        display: block;
+    }
+}
+
