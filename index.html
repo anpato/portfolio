@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="./img/SymLogo.ico" />
     <title>Trio Designs</title>
@@ -14,7 +15,10 @@
 <body>
     <div id="container">
         <div class="img">
-            <nav class="nav">
+            <nav class="nav">                    
+                <div id="top" class="burger burger-squeeze">
+                    <div class="burger-lines"></div>
+                </div>
                 <img id="logo" src="img/SymLogo.svg">
                 <ul id="list">
                     <a href="index.html">
@@ -26,67 +30,81 @@
                     <a href="javascript: scrollToContact();">
                         <li id="three" class="link">Contact</li>
                     </a>
+
                 </ul>
             </nav>
-            <div class="content">
-                <div id="about">
-                    <h3>About Me</h3>
-                </div>
-                <a href="javascript: scrollToProject();"><img class="arrow-down" id="home-bottom" src="img/arrow.svg"></a>
+        <div class="content">
+            <div class="menu-wrap">
+                <ul>
+                    <a href="index.html">
+                        <li id="one" class="menu-link">Home</li>
+                    </a>
+                    <a href="javascript: scrollToProject();">
+                        <li id="two" class="menu-link">Projects</li>
+                    </a>
+                    <a href="javascript: scrollToContact();">
+                        <li id="three" class="menu-link">Contact</li>
+                    </a>
+                </ul>
             </div>
+            <div id="about">
+                <h3>About Me</h3>
+            </div>
+            <a href="javascript: scrollToProject();"><img class="arrow-down" id="home-bottom" src="img/arrow.svg"></a>
         </div>
-        <div id="projects">
-            <a href="javascript: scrollToHome();"><img id="project-top" class="arrow-up" src="img/arrow.svg"></a>
-            <h1 class="heading" id="project-text"><span>Projects</span></h1>
-            <div class="card-container">
-                <div class="card">
-                    <img src="./img/projects/project-management-6.jpg">
-                    <div class="card-body">
-                        <h5>Card</h5>
-                        <p>Some example text</p>
-                        <a class="btn" href="#">Go To Project</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="./img/projects/project-management-6.jpg">
-                    <div class="card-body">
-                        <h5>Card</h5>
-                        <p>Some example text</p>
-                        <a class="btn" href="#">Go To Project</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="./img/projects/project-management-6.jpg">
-                    <div class="card-body">
-                        <h5>Card</h5>
-                        <p>Some example text</p>
-                        <a class="btn" href="#">Go To Project</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="./img/projects/project-management-6.jpg">
-                    <div class="card-body">
-                        <h5>Card</h5>
-                        <p>Some example text</p>
-                        <a class="btn" href="#">Go To Project</a>
-                    </div>
+    </div>
+    <div id="projects">
+        <a href="javascript: scrollToHome();"><img id="project-top" class="arrow-up" src="img/arrow.svg"></a>
+        <h1 class="heading" id="project-text"><span>Projects</span></h1>
+        <div class="card-container">
+            <div class="card">
+                <img src="./img/projects/project-management-6.jpg">
+                <div class="card-body">
+                    <h5>Card</h5>
+                    <p>Some example text</p>
+                    <a class="btn" href="#">Go To Project</a>
                 </div>
             </div>
-            <a href="javascript: scrollToContact();"><img class="arrow-down" id="project-down" src="img/arrow.svg"></a>
+            <div class="card">
+                <img src="./img/projects/project-management-6.jpg">
+                <div class="card-body">
+                    <h5>Card</h5>
+                    <p>Some example text</p>
+                    <a class="btn" href="#">Go To Project</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./img/projects/project-management-6.jpg">
+                <div class="card-body">
+                    <h5>Card</h5>
+                    <p>Some example text</p>
+                    <a class="btn" href="#">Go To Project</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./img/projects/project-management-6.jpg">
+                <div class="card-body">
+                    <h5>Card</h5>
+                    <p>Some example text</p>
+                    <a class="btn" href="#">Go To Project</a>
+                </div>
+            </div>
         </div>
-        <div id="contact">
-            <a href="javascript: scrollToHome();"><img id="contact-top" class="arrow-up" src="img/arrow.svg"></a>
-            <h1 class="heading" id="contact-text"><span>Get In Touch</span></h1>
-            <div id="form-container">
-                <form name="contact" method='POST' data-netlify="true">
-                    <input class="enter" type="text" name="name" placeholder="Name">
-                    <input class="enter" type="email" name="email"  placeholder="Email">
-                    <input class="field" type="text-field" name="message">
-                    <button class="btn submit" type="submit">Send</button>
-                </form>
+        <a href="javascript: scrollToContact();"><img class="arrow-down" id="project-down" src="img/arrow.svg"></a>
+    </div>
+    <div id="contact">
+        <a href="javascript: scrollToHome();"><img id="contact-top" class="arrow-up" src="img/arrow.svg"></a>
+        <h1 class="heading" id="contact-text"><span>Get In Touch</span></h1>
+        <div id="form-container">
+            <form name="contact" method='POST' data-netlify="true">
+                <input class="enter" type="text" name="name" placeholder="Name">
+                <input class="enter" type="email" name="email" placeholder="Email">
+                <input class="field" type="text-field" name="message">
+                <button class="btn submit" type="submit">Send</button>
+            </form>
 
-            </div>
         </div>
+    </div>
     </div>
     <script type="text/javascript" src="scripts/nav.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
