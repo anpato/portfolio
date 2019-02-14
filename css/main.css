@@ -36,6 +36,17 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+
+.img {
+    height: 100vh;
+    width: 100%;
+    margin-bottom: 10%;
+}
+
+#top {
+    display: none;
+}
+
 #logo {
     margin: 28px 40px;
     animation: rotation 6s infinite linear;
@@ -84,6 +95,10 @@ body::-webkit-scrollbar {
 .link {
     display: inline;
     margin: 40px;
+}
+
+.menu-wrap {
+    display: none;
 }
 
 #one {
@@ -292,4 +307,100 @@ body::-webkit-scrollbar {
 }
 
 /*media queries*/
+
+@media(max-width: 900px){
+    
+    .nav {
+        display: inline-block;
+        width: 100vw;
+    }
+
+    #top {
+        margin: 0;
+        margin: 20px;
+        display: block;
+        float: left;
+        transition: all 0.5s;
+    }
+
+    #logo {
+        margin: 20px;
+        float: right;
+        transition: all 0.5s;
+    }
+
+    .link {
+        display: none;
+    }
+    
+    .burger {
+        float: right;
+    }
+
+    .menu-wrap {
+        display: block;
+        background-color: #263238;
+        width: 15em;
+        height: 55%;
+        z-index: 1;
+        list-style: none;
+        margin: auto;
+        margin-left: -900px;
+        font-size: 24px;
+        color: #fff;
+        position: fixed;
+        text-align: center;
+        border: 2px solid #fff;
+        border-radius: 4px;
+        transition: all .5s;
+    }
+
+    .show {
+        background-color: #263238;
+        list-style: none;
+        margin: auto;
+        margin-left: 0px;
+        font-size: 24px;
+        color: #fff;
+        position: absolute;
+        text-align: center;
+        border: 2px solid #fff;
+        border-radius: 4px;
+        transition: .5s;
+    }
+    .menu-wrap ul {
+        margin-top: 70px;
+    }
+
+    .menu-wrap li {
+        border-bottom: 4px solid #81D4FA;
+        width: 60%;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    .menu-wrap a {
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.3s;
+        margin: 30px;
+
+    }
+
+    .content {
+        margin-top: 80px;
+    }
+
+    #about {
+        width: 80%;
+    }
+
+    .card-container {
+        display: block;
+    }
+    
+    .card{
+        display: block;
+    }
+}
 
