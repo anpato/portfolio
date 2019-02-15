@@ -27,7 +27,7 @@ function scrollToHome() {
     })
 }
 
-function scrollToContact(){
+function scrollToContact() {
     contact.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
@@ -43,7 +43,7 @@ burgerToggle = e => {
 }
 
 menuHide = () => {
-    if(window.scrollY > 10){
+    if (window.scrollY > 10) {
         burger.classList.remove('open');
         menu.classList.remove('show');
     }
@@ -55,4 +55,3 @@ arrowDwn.addEventListener('click', scrollToProject);
 burger.addEventListener('click', burgerToggle)
 
 window.addEventListener('scroll', menuHide);
-
