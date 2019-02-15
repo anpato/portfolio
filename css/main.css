@@ -3,6 +3,14 @@
 html {
     scroll-behavior: smooth;
     background-color: #263238;
+    overflow: -moz-scrollbars-none;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar { 
+    display: none; 
 }
 
 #app {
@@ -19,6 +27,7 @@ html {
     margin: 0;
     height: 100%;
     padding: 0;
+
 }
 
 .nav {
