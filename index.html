@@ -2,123 +2,116 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/main.css" />
     <link rel="icon" href="./img/SymLogo.ico" />
     <title>Trio Designs</title>
 </head>
 
-<body>
+<body id="app">
     <div id="container">
-
-            <nav class="nav">                    
-                <div id="top" class="burger burger-squeeze">
-                    <div class="burger-lines"></div>
-                </div>
-                <img id="logo" src="img/SymLogo.svg">
-                <ul id="list">
-                    <a href="index.html">
-                        <li id="one" class="link">Home</li>
+        <img id="logo" src="img/SymLogo.svg" />
+        <div class="nav">
+            <div class="burger burger-squeeze">
+                <div class="burger-lines"></div>
+            </div>
+            <div class="link-items">
+                <ul class="links">
+                    <a href="./index.html">
+                        <li id="one">Home</li>
                     </a>
-                    <a href="javascript: scrollToProject();">
-                        <li id="two" class="link">Projects</li>
-                    </a>
-                    <a href="javascript: scrollToContact();">
-                        <li id="three" class="link">Contact</li>
-                    </a>
-
-                </ul>
-            </nav>
-        <div class="content">
-            <div class="menu-wrap">
-                <ul>
-                    <a href="index.html">
-                        <li id="one" class="menu-link">Home</li>
-                    </a>
-                    <a href="javascript: scrollToProject();">
-                        <li id="two" class="menu-link">Projects</li>
+                    <a href="javascript: scrollToProject(); ">
+                        <li id="two">Projects</li>
                     </a>
                     <a href="javascript: scrollToContact();">
-                        <li id="three" class="menu-link">Contact</li>
+                        <li id="three">Contact</li>
                     </a>
                 </ul>
             </div>
-            <div id="about">
-                <h3>About Me</h3>
-            </div>
+        </div>
 
+        <div class="menu">
+            <ul id="slide-menu" class="menu-links">
+                <a href="">
+                    <li id="one">Home</li>
+                </a>
+                <a href="">
+                    <li id="two">Projects</li>
+                </a>
+                <a href="">
+                    <li id="three">Contact</li>
+                </a>
+            </ul>
+        </div>
+        <div id="about">
+            <h1>Welcome To My Portfolio</h1>
+            <div class="bio">
+                <h4>About Me</h4>
+            </div>
+            <img id="arrow-down" src="img/arrow.svg" />
+        </div>
         <div id="projects">
-            <a href="javascript: scrollToHome();"><img id="project-top" class="arrow-up" src="img/arrow.svg"></a>
-            <h1 class="heading" id="project-text"><span>Projects</span></h1>
+            <div id="proj-top" class="heading">
+                <span>Projects</span>
+            </div>
             <div class="card-container">
                 <div class="card">
-                    <img src="./img/projects/project-management-6.jpg">
+                    <img src="img/projects/project-management-6.jpg">
                     <div class="card-body">
-                        <h5>Card</h5>
-                        <p>Some example text</p>
-                        <a class="btn" href="#">Go To Project</a>
+                        <h5 class="card-title">Project</h5>
+                        <p>Some quick example text to take up some space</p>
+                        <a href="" class="btn primary-btn">View</a>
                     </div>
-
-            <a href="javascript: scrollToProject();"><img class="arrow-down" id="home-bottom" src="img/arrow.svg"></a>
-        </div>
-    </div>
-    <div id="projects">
-        <a href="javascript: scrollToHome();"><img id="project-top" class="arrow-up" src="img/arrow.svg"></a>
-        <h1 class="heading" id="project-text"><span>Projects</span></h1>
-        <div class="card-container">
-            <div class="card">
-                <img src="./img/projects/project-management-6.jpg">
-                <div class="card-body">
-                    <h5>Card</h5>
-                    <p>Some example text</p>
-                    <a class="btn" href="#">Go To Project</a>
-
                 </div>
-            </div>
-            <div class="card">
-                <img src="./img/projects/project-management-6.jpg">
-                <div class="card-body">
-                    <h5>Card</h5>
-                    <p>Some example text</p>
-                    <a class="btn" href="#">Go To Project</a>
+                <div class="card">
+                    <img src="img/projects/project-management-6.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">Project</h5>
+                        <p>Some quick example text to take up some space</p>
+                        <a href="" class="btn primary-btn">View</a>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <img src="./img/projects/project-management-6.jpg">
-                <div class="card-body">
-                    <h5>Card</h5>
-                    <p>Some example text</p>
-                    <a class="btn" href="#">Go To Project</a>
+                <div class="card">
+                    <img src="img/projects/project-management-6.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">Project</h5>
+                        <p>Some quick example text to take up some space</p>
+                        <a href="" class="btn primary-btn">View</a>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <img src="./img/projects/project-management-6.jpg">
-                <div class="card-body">
-                    <h5>Card</h5>
-                    <p>Some example text</p>
-                    <a class="btn" href="#">Go To Project</a>
+                <div class="card">
+                    <img src="img/projects/project-management-6.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">Project</h5>
+                        <p>Some quick example text to take up some space</p>
+                        <a href="" class="btn primary-btn">View</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <a href="javascript: scrollToContact();"><img class="arrow-down" id="project-down" src="img/arrow.svg"></a>
-    </div>
-    <div id="contact">
-        <a href="javascript: scrollToHome();"><img id="contact-top" class="arrow-up" src="img/arrow.svg"></a>
-        <h1 class="heading" id="contact-text"><span>Get In Touch</span></h1>
-        <div id="form-container">
-            <form name="contact" method='POST' data-netlify="true">
-                <input class="enter" type="text" name="name" placeholder="Name">
-                <input class="enter" type="email" name="email" placeholder="Email">
-                <input class="field" type="text-field" name="message">
-                <button class="btn submit" type="submit">Send</button>
-            </form>
 
+        <div id="contact">
+            <div class="heading" id="contact-head">
+                <span>Get In Touch</span>
+            </div>
+            <img id="arrow-up" src="./img/arrow.svg">
+            <div class="form-container">
+
+                <form name="contact" method="POST" data-netifly="true" class="form">
+                    <input type="name" name="name" placeholder="Name">
+                    <input type="email" name="email" placeholder="Email">
+                    <textarea type="text" name="message" placeholder="Leave a message"></textarea>
+                    <button type="submit" class="btn">Submit</button>
+                    </textarea>
+                </form>
+            </div>
         </div>
-    </div>
     </div>
     <script type="text/javascript" src="scripts/nav.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
