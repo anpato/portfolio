@@ -5,12 +5,13 @@ html {
     background-color: #263238;
     overflow: -moz-scrollbars-none;
     overflow-y: scroll;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
+    /* Firefox */
     -ms-overflow-style: none;
 }
 
-html::-webkit-scrollbar { 
-    display: none; 
+html::-webkit-scrollbar {
+    display: none;
 }
 
 #app {
@@ -99,9 +100,9 @@ html::-webkit-scrollbar {
     display: block;
     position: fixed;
     top: 10%;
-    height: 100%;
-    width: 280px;
-    margin-left: -300px;
+    height: 40%;
+    width: 100%;
+    margin-left: -110%;
     padding: 10px;
     text-align: center;
     box-shadow: 4px 2px 15px 1px rgba(255, 255, 255, 0.3);
@@ -113,7 +114,7 @@ html::-webkit-scrollbar {
 #slide-menu {
     width: 20%;
     margin: auto;
-    margin: 140px auto;
+    margin: 30px auto;
 }
 
 #slide-menu li {
@@ -130,6 +131,7 @@ html::-webkit-scrollbar {
 .menu-show {
     box-shadow: 4px 2px 15px 1px #B9ADAD;
     margin: 0;
+    display: block;
 }
 
 #one {
@@ -196,6 +198,10 @@ html::-webkit-scrollbar {
 .heading span:after {
     right: 0;
     left: auto;
+}
+
+.heading h3 {
+    display: none;
 }
 
 /*About Section*/
@@ -317,9 +323,54 @@ html::-webkit-scrollbar {
     color: #fff;
 }
 
-.form input:active, .form input:focus, .form textarea:active, .form textarea:focus {
+.form input:active,
+.form input:focus,
+.form textarea:active,
+.form textarea:focus {
     border: 4px solid #81D4FA;
     border-radius: 4px;
 }
 
 
+@media(max-width: 900px) {
+
+    .link-items {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+        margin: 20px;
+    }
+
+    #logo {
+        float: right;
+        clear: both;
+        margin-top: 0px;
+    }
+
+    #about {
+        height: 100%;
+    }
+
+    .bio {
+        width: 90%;
+    }
+
+    #projects {
+        height: 100%;
+    }
+
+    #contact {
+        height: 100%;
+    }
+
+    .heading span {
+        display: none;
+    }
+
+    .heading h3 {
+        text-decoration: underline;
+        text-decoration-color: #EEFF41;
+    }
+}

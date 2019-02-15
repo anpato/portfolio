@@ -10,7 +10,8 @@ const arrowDwn = document.getElementById('arrow-down');
 
 //hamburger 
 const burger = document.querySelector('.burger-squeeze');
-const menu = document.querySelector('.menu-wrap');
+
+const menu = document.querySelector('.menu');
 
 //scroll functions
 function scrollToProject() {
@@ -39,13 +40,13 @@ function scrollToContact() {
 burgerToggle = e => {
     e.preventDefault;
     burger.classList.toggle('open');
-    menu.classList.toggle('show');
+    menu.classList.toggle('menu-show');
 }
 
 menuHide = () => {
-    if (window.scrollY > 10) {
+    if (window.scrollY > 50) {
         burger.classList.remove('open');
-        menu.classList.remove('show');
+        menu.classList.remove('menu-show');
     }
 }
 
