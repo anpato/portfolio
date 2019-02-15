@@ -52,6 +52,13 @@ menuHide = () => {
 arrowUp.addEventListener('click', scrollToHome);
 arrowDwn.addEventListener('click', scrollToProject);
 
+
 burger.addEventListener('click', burgerToggle)
 
 window.addEventListener('scroll', menuHide);
+
+
+burger.addEventListener('click', burgerToggle)
+
+window.addEventListener('scroll', menuHide);
+
