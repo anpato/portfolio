@@ -370,6 +370,7 @@ html::-webkit-scrollbar {
     }
 
     .heading h3 {
+        display: block;
         text-decoration: underline;
         text-decoration-color: #EEFF41;
     }
