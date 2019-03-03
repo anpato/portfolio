@@ -2,120 +2,128 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="icon" href="./img/SymLogo.ico" />
-    <title>Trio Designs</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Trio Designs by Andre Pato</title>
+  <link href="./css/main.min.css" rel="stylesheet">
+  <link href="./css/burger.css" rel="stylesheet">
+  <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Prompt:400,600,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous">
+
+
 </head>
 
-<body id="app">
-    <div id="container">
-        <img id="logo" src="img/SymLogo.svg" />
-        <div class="nav">
-            <div class="burger burger-squeeze">
-                <div class="burger-lines"></div>
-            </div>
-            <div class="link-items">
-                <ul class="links">
-                    <a href="./index.html">
-                        <li id="one">Home</li>
-                    </a>
-                    <a href="javascript: scrollToProject(); ">
-                        <li id="two">Projects</li>
-                    </a>
-                    <a href="javascript: scrollToContact();">
-                        <li id="three">Contact</li>
-                    </a>
-                </ul>
-            </div>
-        </div>
-
-        <div class="menu">
-            <ul id="slide-menu" class="menu-links">
-                <a href="./index.html">
-                    <li id="one">Home</li>
-                </a>
-                <a href="javascript: scrollToProject();">
-                    <li id="two">Projects</li>
-                </a>
-                <a href="javascript: scrollToContact();">
-                    <li id="three">Contact</li>
-                </a>
-            </ul>
-        </div>
-        <div id="about">
-            <h1>Welcome To My Portfolio</h1>
-            <div class="bio">
-                <h4>About Me</h4>
-            </div>
-            <img id="arrow-down" src="img/arrow.svg" />
-        </div>
-        <div id="projects">
-            <div id="proj-top" class="heading">
-                <span>Projects</span>
-                <h3>Projects</h3>
-            </div>
-            <div class="card-container">
-                <div class="card">
-                    <img src="img/projects/project-management-6.jpg">
-                    <div class="card-body">
-                        <h5 class="card-title">Project</h5>
-                        <p>Some quick example text to take up some space</p>
-                        <a href="" class="btn primary-btn">View</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="img/projects/project-management-6.jpg">
-                    <div class="card-body">
-                        <h5 class="card-title">Project</h5>
-                        <p>Some quick example text to take up some space</p>
-                        <a href="" class="btn primary-btn">View</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="img/projects/project-management-6.jpg">
-                    <div class="card-body">
-                        <h5 class="card-title">Project</h5>
-                        <p>Some quick example text to take up some space</p>
-                        <a href="" class="btn primary-btn">View</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="img/projects/project-management-6.jpg">
-                    <div class="card-body">
-                        <h5 class="card-title">Project</h5>
-                        <p>Some quick example text to take up some space</p>
-                        <a href="" class="btn primary-btn">View</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="contact">
-            <div class="heading" id="contact-head">
-                <span>Get In Touch</span>
-                <h3>Get In Touch</h3>
-            </div>
-            <img id="arrow-up" src="./img/arrow.svg">
-            <div class="form-container">
-                <form name="contact" method="POST" data-netlify="true" class="form">
-                    <input type="text" name="name" placeholder="Name">
-                    <input type="email" name="email" placeholder="Email">
-                    <textarea type="text" name="message" placeholder="Leave a message"></textarea>
-                    <button type="submit" class="btn">Submit</button>
-                    </textarea>
-                </form>
-            </div>
-        </div>
+<body>
+  <div id="particles-js">
+    <div class="inactive">
+      <a><i class="fab fa-linkedin fa-3x "></i></a>
+      <a><i class="fab fa-facebook-square fa-3x "></i></a>
+      <a><i class="fab fa-github-square fa-3x "></i></a>
     </div>
-    <script type="text/javascript" src="scripts/nav.js"></script>
-    <script type="text/javascript" src="scripts/main.js"></script>
+    <nav class="main-nav">
+
+      <img src="./img/SymLogo.svg" alt="logo">
+      <ul class="links">
+        <li><a href="javascript: scrollToTop()">Home</a></li>
+        <li><a href="javascript: scrollToBio()">About</a></li>
+        <li><a href="javascript: scrollToProj()">Projects</a></li>
+      </ul>
+      <div class="burger burger-squeeze">
+        <div class="burger-lines"></div>
+      </div>
+      <div class="mobile-menu">
+          <ul class="mobile-links">
+            <li><a href="javascript: scrollToTop()">Home</a></li>
+            <li><a href="javascript: scrollToBio()">About</a></li>
+            <li><a href="javascript: scrollToProj()">Projects</a></li>
+          </ul>
+      </div>
+    </nav>
+    <section id="landing">
+      <h1>Welcome</h1>
+      <h4><span>Design</span><span>Prototype</span><span>Build</span></h4>
+      <a href="javascript: scrollToBio()" class="btn btn-primary">Show Me More</a>
+    </section>
+  </div>
+  <div id="container"class="about">
+    <div id="about">
+      <div id="about-section" class="content">
+        <div id="bio">
+          <h2>About Me</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur culpa exercitationem quasi omnis sit
+            consectetur, commodi vero facere officiis saepe autem, harum, magni repellat dicta illum a. Beatae, error
+            explicabo.</p>
+        </div>
+      </div>
+      <div class="skills">
+        <h2>Stack</h2>
+        <ul>
+          <li>Adobe Xd <img src="./img/Adobe_XD_CC_icon.png"></li>
+          <li>Html 5 <img src="./img/html5.png"></li>
+          <li>CSS3 <img src="./img/css-3.png"></li>
+          <li>Sass <img src="./img/sass.png"></li>
+          <li>Javascript(ES6) <img src="./img/javascript.png"></li>
+          <li>React JS <img src="./img/react.png"></li>
+        </ul>
+      </div>
+      <div class="contact">
+        <div id="form-container">
+          <h3>Get In Touch</h3>
+          <form name="contact" method="POST" data-netlify="true">
+            <input type="name" placeholder="Name"name="name">
+            <input type="email" placeholder="Email"name="email">
+            <textarea type="text" placeholder="Get in touch" name="message"></textarea>
+            <button class="btn-submit" type="submit" onclick="">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="container" class=" projects">
+    <h3>Checkout My Projects</h3>
+    <div id="grid-container">
+      <div class="card">
+        <img src="./img/projects/copura.png">
+        <div class="card-body">
+          <h4>CocaPura Tequila</h4>
+          <p>Text</p>
+          <a href="https://anpato.github.io/CoPura/" target="_blank" class="link-btn">Go To</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="./img/projects/lopes-group.png">
+        <div class="card-body">
+          <h4>Lopes Group Realty</h4>
+          <p>Text</p>
+          <a href="https://anpato.github.io/Lopes-Real-Estate/" target="_blank" class="link-btn">Go To</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="./img/projects/pattycake.png">
+        <div class="card-body">
+          <h4>PattyCake</h4>
+          <p>Text</p>
+          <a href="https://anpato.github.io/pattyCake/" target="_blank" class="link-btn">Go To</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+
+  </footer>
+
+  <!--scripts-->
+  <script src="./js/hexigon.js"></script>
+    <script src="./js/particles.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 
 </html>
