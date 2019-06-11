@@ -5,6 +5,14 @@
   "repository": "https://github.com/anpato/portfolio.git",
   "author": "Andre Pato <anpato1994@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "dev":"nodemon server.js",
+    "heroku-postbuild":"npm run build",
+    "seed": "node ./db/seed.js",
+    "reset": "node ./db/reset.js",
+    "create:Db": "dropdb --if-exists -e portfolio && createdb -e portfolio"
+  },
   "dependencies": {
     "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
