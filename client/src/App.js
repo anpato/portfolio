@@ -11,7 +11,7 @@ function App() {
   return (
 
     <Scroll render={({x,y}) => (
-      <div>
+      <div className="app">
       <Header yHeight={y}/>
       <Switch>
         <Route exact path='/' component={(props)=><Public {...props}/>}/>
