@@ -1,9 +1,38 @@
-const Axios = require('axios')
-let data = []
+const express = require('express')
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const passport = require('passport')
+const dotenv = require('dotenv')
+dotenv.config()
 
-async function run(){
-    return Axios.get('https://api.coincap.io/v2/assets')
-}
+const {userAuthorized} = require('./Auth/Auth');
+const AuthRouter = require('./Routes/authRouter');
+const AppRouter = require('./Routes/appRouter')
 
-run().then(resp => resp.data).then(res => data.push(res))
- console.log(data)
+const PORT = process.env.PORT || 3001;
+
+const app = express();
+
+app.use(logger('dev'));
+app.use(cors());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
+
+app.use('/auth', AuthRouter);
+app.use('/app', userAuthorized,AppRouter)
+app.use(passport.initialize())
+// Test Message
+app.get('/', (req, res) => {
+    try {
+        res.send({msg: 'Working'})
+    } catch (error) {
+        throw error
+    }
+});
+
+// listening Port
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}!`);
+});

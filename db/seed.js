@@ -21,7 +21,7 @@ const main = async () => {
         description : 'asddsadasdasd'
     })
 
-    await User.addProject(project1)
+    await user.addProject(project1)
 
 }
 

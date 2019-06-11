@@ -1,7 +1,7 @@
 const {Sequelize} = require('sequelize')
 const bcrypt = require('bcrypt')
 
-const db = new Sequelize( process.env.DATABSE_URL || 'postgres://localhost:5432/crypto', {
+const db = new Sequelize( process.env.DATABSE_URL || 'postgres://localhost:5432/portfolio', {
     database : 'portfolio',
     dialect : 'postgres',
     define : {
@@ -57,9 +57,7 @@ User.beforeCreate(async (user, options) => {
 User.hasMany(Project, {
     onDelete:'cascade'
 });
-Project.belongsTo(User, {
-    onDelete:'cascade'
-})
+Project.belongsTo(User)
 
 module.exports = {
     Project,
