@@ -36,12 +36,11 @@ export default class Admin extends Component {
             return <Redirect to={{
                 pathname:'/admin/authenticated',
                 state : {isAuthenticated}
-            }}
-                />
+            }}/>
         }
         return (
             <div className="admin-form">
-                <Panel>
+                <Panel className="panel">
                     <Form onChange={this.handleChange} onSubmit={this.handleSubmit}>
                         <Input
                             label = 'Username'

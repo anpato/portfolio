@@ -1,20 +1,26 @@
 import React from 'react';
 import Header from './components/Header';
-import './App.css';
+import './styles/App.scss';
 import Admin from './components/Admin';
 import Public from './components/Public';
 import {Route,Switch} from 'react-router-dom';
 import Private from './components/Private';
+import {Scroll} from 'react-fns'
 function App() {
+
   return (
-    <div>
-      <Header/>
+
+    <Scroll render={({x,y}) => (
+      <div>
+      <Header yHeight={y}/>
       <Switch>
-        <Route exact path='/' component={Public}/>
-        <Route exact path='/admin/login' component={Admin}/>
-        <Route exact path='/admin/authenticated' component={Private}/>
+        <Route exact path='/' component={(props)=><Public {...props}/>}/>
+        <Route exact path='/admin/login' component={(props)=> <Admin {...props}/>}/>
+        <Route exact path='/admin/authenticated' component={(props)=> <Private {...props}/>}/>
       </Switch>
-    </div>
+      </div>
+    )}/>
+
   );
 }
 
