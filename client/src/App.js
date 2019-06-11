@@ -6,6 +6,8 @@ import Public from './components/Public';
 import {Route,Switch} from 'react-router-dom';
 import Private from './components/Private';
 import {Scroll} from 'react-fns'
+import Particles from 'react-particles-js'
+
 function App() {
 
   return (

@@ -1,0 +1,16 @@
+.public {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-template-rows: auto;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+
+    svg {
+        position: absolute;
+        bottom: 1em;
+        left: 50%;
+        margin: auto;
+        font-size: 52px;
+    }
+}
