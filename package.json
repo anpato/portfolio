@@ -1,0 +1,8 @@
+{
+  "name": "portfolio",
+  "version": "1.5.0",
+  "main": "index.js",
+  "repository": "https://github.com/anpato/portfolio.git",
+  "author": "Andre Pato <anpato1994@gmail.com>",
+  "license": "MIT"
+}
