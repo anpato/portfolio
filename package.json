@@ -14,12 +14,17 @@
     "create:Db": "dropdb --if-exists -e portfolio && createdb -e portfolio"
   },
   "dependencies": {
+    "aws-sdk": "^2.474.0",
     "bcrypt": "^3.0.6",
+    "busboy": "^0.3.1",
+    "busboy-body-parser": "^0.3.2",
+    "connect-busboy": "^0.0.2",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
+    "nodemailer": "^6.2.1",
     "nodemon": "^1.19.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
