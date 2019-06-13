@@ -1,13 +1,15 @@
 import React from 'react'
 import {Appbar} from 'muicss/react'
+import Logo from '../assets/img/SymLogo.svg'
 
 const Header = props => {
   const {yHeight} = props
   const toggleHeight = yHeight > 40 ? 'header small' : 'header'
-   
+  
   
   return (
     <nav className={toggleHeight}>
+      <img src={Logo} alt='logo'/>
     </nav>   
   )
 }

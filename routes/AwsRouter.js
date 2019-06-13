@@ -10,32 +10,33 @@ const user_key = process.env.AWS_KEY
 const aws_secret = process.env.AWS_SECRET 
 
 
-const uploadToS3 = (file,url) => {
-    let s3Bucket = new AWS.S3({
-        accessKeyId: user_key,
-        secretAccessKey : aws_secret,
-        Bucket : bucket
-    });
-    s3Bucket.createBucket(() => {
-        let params = {
-            Bucket : bucket,
-            Key : file.name,
-            Body : file.data
-        };
-        s3Bucket.upload(params, (err,data) => {
-            if(err){
-                console.log(err);
-            }
-            data.location = url
-            return data.location
-        })
-    })
-}
 
 
 AwsRouter.post('/upload/:id', async (req,res,next) => {
     const file = req.files.element2
-
+    let data = req.body.element2
+    const uploadToS3 = (file) => {
+        let s3Bucket = new AWS.S3({
+            accessKeyId: user_key,
+            secretAccessKey : aws_secret,
+            Bucket : bucket,
+            file : file
+            
+        });
+        s3Bucket.createBucket(() => {
+            let params = {
+                Bucket : bucket,
+                Key : file.name,
+                Body : file.data
+            };
+            s3Bucket.upload(params, (err,data) => {
+                if(err){
+                    console.log(err);
+                }
+                return data.location
+            })
+        })
+    }
     try {
         const findUser = await User.findByPk(req.params.id)
 

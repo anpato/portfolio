@@ -2,11 +2,46 @@
 @import 'Header';
 @import 'Public';
 @import 'CallToAction';
+@import 'ContactForm';
+@import 'Stack';
+@import 'Social';
 
 
 .app {
     button {
         border-radius: 6px;
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.3)
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        background-color: #81D4FA;
     }
+}
+
+ul {
+    list-style: none;
+    li {
+        text-decoration: none;
+    }    
+}
+
+
+#section-one {
+    height: 100vh;
+    display: grid;
+    border-bottom: 4px solid #F06292;
+    justify-content: center;
+    align-items: center;
+}
+
+#section-two {
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 4px solid #EEFD41;
+}
+#section-three {
+    height: 100vh;
+    display: grid;
+    border-bottom: 4px solid #81D4FA;
+    justify-content: center;
+    align-items: center;
 }
