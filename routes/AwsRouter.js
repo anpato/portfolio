@@ -64,14 +64,17 @@ AwsRouter.post('/', async(req,res) => {
         });
 
         let info = await transporter.sendMail({
-            from: process.env.MAILER_EMAIL,
-            to : req.body.to,
+            from: req.body.from,
+            to : process.env.MAILER_EMAIL,
             subject: req.body.subject,
             text: req.body.text
-        })
+        });
+        console.log(req.body)
+
         console.log('sent', info.messageId);
         res.send(info);
     } catch(error) {
+        console.log(error)
         throw error
     }
 })
