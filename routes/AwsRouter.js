@@ -15,6 +15,7 @@ const aws_secret = process.env.AWS_SECRET
 AwsRouter.post('/upload/:id', async (req,res,next) => {
     const file = req.files.element2
     let data = req.body.element2
+    try {
     const uploadToS3 = (file) => {
         let s3Bucket = new AWS.S3({
             accessKeyId: user_key,
@@ -33,11 +34,12 @@ AwsRouter.post('/upload/:id', async (req,res,next) => {
                 if(err){
                     console.log(err);
                 }
+                res.send(data.location)
                 return data.location
             })
         })
     }
-    try {
+
         const findUser = await User.findByPk(req.params.id)
 
         const busboy = new Busboy({headers:req.headers})
