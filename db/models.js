@@ -46,6 +46,9 @@ const Project = db.define('project', {
     },
     image : {
         type : Sequelize.STRING
+    },
+    url : {
+        type : Sequelize.STRING
     }
 });
 

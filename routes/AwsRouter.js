@@ -12,43 +12,43 @@ const aws_secret = process.env.AWS_SECRET
 
 
 
-AwsRouter.post('/upload/:id', async (req,res,next) => {
-    const file = req.files.element2
-    let data = req.body.element2
+AwsRouter.post('/upload/user/:id/project/', async (req,res,next) => {
     try {
-    const uploadToS3 = (file) => {
-        let s3Bucket = new AWS.S3({
-            accessKeyId: user_key,
-            secretAccessKey : aws_secret,
-            Bucket : bucket,
-            file : file
-            
-        });
-        s3Bucket.createBucket(() => {
-            let params = {
+        const file = req.files.image
+        const userId = req.params.id
+        const uploadToS3 = (file) => {
+            let s3Bucket = new AWS.S3({
+                accessKeyId: user_key,
+                secretAccessKey : aws_secret,
                 Bucket : bucket,
-                Key : file.name,
-                Body : file.data
-            };
-            s3Bucket.upload(params, (err,data) => {
-                if(err){
-                    console.log(err);
-                }
-                res.send(data.location)
-                return data.location
+                file : file
+                
+            });
+            s3Bucket.createBucket(() => {
+                let params = {
+                    Bucket : bucket,
+                    Key : file.name,
+                    Body : file.data
+                };
+                s3Bucket.upload(params,async  (err,data) => {
+                    if(err){
+                        throw err
+                    }
+                    console.log(userId)
+                    const params = {
+                        name: req.body.name,
+                        description: req.body.description,
+                        image: data.Location,
+                        url : req.body.url
+                    }
+
+                    const project = await Project.create(params)
+                    await project.setUser(userId)
+                    res.send(project)
+                })
             })
-        })
-    }
-
-        const findUser = await User.findByPk(req.params.id)
-
-        const busboy = new Busboy({headers:req.headers})
-        const element1 = req.body.element1
-        await busboy.on('finish', () => {
-            uploadToS3(file)
-        })
-        req.pipe(busboy)
-        res.send(findUser)
+        }
+        uploadToS3(file)
     } catch (error) {
         res.send({msg:'Upload failed'})
         throw error
@@ -66,17 +66,14 @@ AwsRouter.post('/', async(req,res) => {
         });
 
         let info = await transporter.sendMail({
-            from: req.body.from,
-            to : process.env.MAILER_EMAIL,
+            from: process.env.MAILER_EMAIL,
+            to : req.body.to,
             subject: req.body.subject,
             text: req.body.text
-        });
-        console.log(req.body)
-
+        })
         console.log('sent', info.messageId);
         res.send(info);
     } catch(error) {
-        console.log(error)
         throw error
     }
 })
