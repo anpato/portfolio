@@ -9,6 +9,6 @@ projectRouter.get('/', async(req,res) => {
     } catch (error) {
         throw erro
     }
-})
+});
 
 module.exports = projectRouter

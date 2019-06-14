@@ -13,6 +13,7 @@ const AuthRouter = require('./routes/authRouter');
 const AppRouter = require('./routes/appRouter');
 const AwsRouter = require('./routes/AwsRouter');
 const ProjectRouter = require('./routes/projectRouter')
+const ContactRouter = require('./routes/contactRouter')
 
 const PORT = process.env.PORT || 3001;
 
@@ -32,6 +33,7 @@ app.use('/images', AwsRouter);
 app.use('/auth', AuthRouter);
 app.use('/app', userAuthorized,AppRouter)
 app.use('/projects',ProjectRouter);
+app.use('/contact', ContactRouter)
 app.use(passport.initialize())
 
 // Test Message
