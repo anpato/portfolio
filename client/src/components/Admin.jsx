@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Panel, Input, Button, Form} from 'muicss/react'
 import {Redirect,Link} from 'react-router-dom'
 import {FiChevronLeft} from 'react-icons/fi'
+import { loginUser } from '../services/api';
 export default class Admin extends Component {
     constructor(){
         super();
@@ -13,7 +14,12 @@ export default class Admin extends Component {
     }
 
     componentDidMount() {
-        this.setState({isAuthenticated:false})
+        const token = localStorage.getItem('token')
+        if(token){
+            this.setState({isAuthenticated:true})
+        }else {
+            this.setState({isAuthenticated:false})
+        }
     }
     
 
@@ -24,7 +30,9 @@ export default class Admin extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault()
+        const {username,password} = this.state
         try {
+            await loginUser({username,password})
             this.setState({isAuthenticated:true})
         } catch (error) {
             this.setState({isAuthenticated:false})

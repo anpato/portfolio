@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const passport = require('passport');
 const dotenv = require('dotenv');
-const busboy = require('connect-busboy');
-const busboyBodyParser = require('busboy-body-parser');
 dotenv.config()
 
 const {userAuthorized} = require('./Auth/Auth');
@@ -20,12 +18,10 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // middleware
-app.use(busboy());
 app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-app.use(busboyBodyParser());
 
 
 // routes

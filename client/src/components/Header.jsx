@@ -1,5 +1,4 @@
 import React from 'react'
-import {Appbar} from 'muicss/react'
 import Logo from '../assets/img/SymLogo.svg'
 
 const Header = props => {

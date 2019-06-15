@@ -16,9 +16,6 @@
   "dependencies": {
     "aws-sdk": "^2.474.0",
     "bcrypt": "^3.0.6",
-    "busboy": "^0.3.1",
-    "busboy-body-parser": "^0.3.2",
-    "connect-busboy": "^0.0.2",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
@@ -31,9 +28,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7",
     "pg": "^7.11.0",
-    "sequelize": "^5.8.9",
-    "url": "^0.11.0"
+    "sequelize": "^5.8.9"
   }
 }
