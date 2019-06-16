@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {Panel, Button} from 'muicss/react'
 
 const AdminProjects =  (props) => {
-    const {projects, removeProject,state} = props
+    const {projects, removeProject, state} = props
         if(projects.length > 0){
             if(state){
                 return (
@@ -19,7 +19,7 @@ const AdminProjects =  (props) => {
                                         <p>This project is still in the works! Stay tuned for updates!</p>
                                     }
                                     <Button variant='raised'>Edit</Button>
-                                    <Button variant='raised' onClick={()=> removeProject(project.id)}>Delete</Button>
+                                    <Button className="danger" variant='raised' onClick={()=> removeProject(project.id)}>Delete</Button>
                                 </Panel>
                             )
                         })}
