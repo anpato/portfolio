@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {Form, Panel, Input, Button, Textarea} from 'muicss/react'
 import { uploadProjects } from '../services/api';
-
+import S3FileUpload from 'react-s3';
+import { config } from '../services/AwsConfig'
 export default class ProjectUpload extends Component {
     constructor(props){
         super(props);
@@ -10,34 +11,29 @@ export default class ProjectUpload extends Component {
             name: '',
             description: '',
             url: '',
-            image : null,
-            files: null
+            image : '',
         }
     }
 
-    handleChange = e => {
-        const {name,value} = e.target
-        this.setState({[name]:value})
-        
-    }
-
-    handleUpload = async (e) => {
-        await this.setState({image: e.target.files})
-        const formData = new FormData()
-        // await formData.append('image', this.state.image[0])
-        await this.setState({files:formData.append('image', this.state.image[0])})
+    handleUpload = e => {
+        S3FileUpload.uploadFile(e.target.files[0], config)
+        .then(data => {
+            this.setState({image:data.location})
+            console.log(data.location)
+            return data
+        })
+        .catch(err => alert(err))
     }
 
     handleSubmit = async (e) => {
         e.preventDefault()
-        const {name,url,description,userId,files} = this.state
-        console.log(files)
-        await uploadProjects({name,url,description,userId,files})
+        const {name,url,description,userId,image} = this.state
+        await uploadProjects({name,url,description,userId,image})
     }
 
     render() {
         const {name,description,url,image} = this.state
-        console.log(this.state.files)
+
         return (
             <Panel className="project-upload">
                 <Form onSubmit={this.handleSubmit}>
@@ -62,8 +58,7 @@ export default class ProjectUpload extends Component {
                         type="file"
                         required={true}
                         label="Project Image"
-                        name="image"
-                        defaultValue={image}/>
+                    />
                     <Textarea 
                         onChange={this.handleChange}
                         floatingLabel={true}
