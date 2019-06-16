@@ -15,6 +15,10 @@ export default class ProjectUpload extends Component {
         }
     }
 
+    componentDidMount() {
+        this.setState({isSubmit:false})
+    }
+
     handleUpload = e => {
         S3FileUpload.uploadFile(e.target.files[0], config)
         .then(data => {
@@ -31,10 +35,11 @@ export default class ProjectUpload extends Component {
     }
 
     handleSubmit = async (e) => {
+        const {fetchProjects} = this.props
         e.preventDefault()
         const {name,url,description,userId,image} = this.state
         await uploadProjects({name,url,description,userId,image})
-        await getProjects()
+        fetchProjects()
     }
 
     render() {
@@ -42,31 +47,27 @@ export default class ProjectUpload extends Component {
 
         return (
             <Panel className="project-upload">
-                <Form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+                <Form ref="uploadForm" onSubmit={this.handleSubmit} onChange={this.handleChange}>
                     <Input
                         floatingLabel={true}
                         type="text"
-                        required={true}
                         label="Project Name"
                         name="name"
                         defaultValue={name}/>
                     <Input
                         floatingLabel={true}
                         type="text"
-                        required={true}
                         label="Project Url"
                         name="url"
                         defaultValue={url}/>
                     <Input 
                         onChange={this.handleUpload}
                         type="file"
-                        required={true}
                         label="Project Image"
                     />
                     <Textarea 
                         floatingLabel={true}
                         type="text"
-                        required={true}
                         label="Project Description"
                         name="description"
                         defaultValue={description}/>

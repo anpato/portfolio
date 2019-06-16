@@ -1,4 +1,20 @@
 .admin-home {
     position: relative;
     top: 4em;
+
+    .admin-projects {
+        width: 90%;
+        height: auto;
+        margin: 2em auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border-radius: 6px;
+        padding: auto 4em
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }

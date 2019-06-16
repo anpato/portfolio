@@ -59,3 +59,12 @@ export const uploadProjects = async (data) => {
         throw error
     }
 }
+
+export const deleteProject = async (id) => {
+    try {
+        const remove = await api.delete(`projects/${id}`);
+        return remove
+    } catch (error) {
+        throw error
+    }
+}

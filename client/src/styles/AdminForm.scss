@@ -1,8 +1,10 @@
+
 .admin-form {
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
+
         h3 {
             margin: auto;
             text-align: center;
@@ -40,5 +42,20 @@
                     background-blend-mode: normal, lighten, soft-light;
                 }
         }   
+    }
+}
+.project-upload {
+    width: 80%;
+    margin: 2em auto;
+    border-radius: 6px;
+    form {
+        display: flex;
+        flex-direction:column;
+        width: 80%;
+        margin: auto;
+        button {
+            margin: auto;
+            width: 10%;
+        }
     }
 }
