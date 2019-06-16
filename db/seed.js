@@ -1,5 +1,6 @@
 const {User, Project} = require('./models');
-
+const dotenv = require('dotenv')
+dotenv.config()
 const main = async () => {
     await User.destroy({
         where : {}
@@ -13,16 +14,8 @@ const main = async () => {
         last_name: 'pato',
         username : 'anpato',
         email : 'andre@mail.com',
-        password : '1234'
+        password : process.env.LOGIN_PASSWORD
     });
-
-    const project1 = await Project.create({
-        name : 'test',
-        description : 'asddsadasdasd'
-    })
-
-    await user.addProject(project1)
-
 }
 
 async function run() {

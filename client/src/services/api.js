@@ -1,6 +1,5 @@
 const Axios = require('axios');
 const S3FileUpload = require('react-s3');
-const { config } = require('./AwsConfig')
 const JwtToken = 'token';
 const BASE_URL = 'http://localhost:3001';
 
@@ -52,23 +51,9 @@ export const getProjects = async () => {
     }
 }
 
-export const uploadFile = async (file,config) => {
-    try {
-        const send = await Axios.get(S3FileUpload.uploadFile(file,config))
-        console.log(send)
-    } catch (error) {
-        
-    }
-}
-
 export const uploadProjects = async (data) => {
-    const {name,url,description,userId} = data
-    const formData = new FormData()
-    formData.append('data',data)
     try {
-        console.log(data)
         const upload = await api.post('/images/upload/user/1/project/',data)
-        console.log(upload)
         return upload
     } catch (error) {
         throw error

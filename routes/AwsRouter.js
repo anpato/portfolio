@@ -1,6 +1,5 @@
 const express = require('express')
 const AwsRouter = express.Router()
-const AWS = require('aws-sdk');
 const {Project} = require('../db/models')
 
 

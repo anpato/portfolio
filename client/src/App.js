@@ -10,17 +10,17 @@ import {Scroll} from 'react-fns'
 function App() {
 
   return (
-
-    <Scroll render={({x,y}) => (
-      <div className="app">
-      <Header yHeight={y}/>
+    <div className="app">
+      <Scroll render={({x,y}) => (
+        <Header yHeight={y}/>
+      )}/>
       <Switch>
         <Route exact path='/' component={(props)=><Public {...props}/>}/>
         <Route exact path='/admin/login' component={(props)=> <Admin {...props}/>}/>
         <Route exact path='/admin/authenticated' component={(props)=> <Private {...props}/>}/>
       </Switch>
       </div>
-    )}/>
+    
 
   );
 }

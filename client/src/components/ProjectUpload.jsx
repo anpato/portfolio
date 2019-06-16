@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Form, Panel, Input, Button, Textarea} from 'muicss/react'
-import { uploadProjects } from '../services/api';
+import { uploadProjects, getProjects } from '../services/api';
 import S3FileUpload from 'react-s3';
 import { config } from '../services/AwsConfig'
 export default class ProjectUpload extends Component {
@@ -25,20 +25,25 @@ export default class ProjectUpload extends Component {
         .catch(err => alert(err))
     }
 
+    handleChange = e => {
+        const {name, value} = e.target
+        this.setState({[name]:value})
+    }
+
     handleSubmit = async (e) => {
         e.preventDefault()
         const {name,url,description,userId,image} = this.state
         await uploadProjects({name,url,description,userId,image})
+        await getProjects()
     }
 
     render() {
-        const {name,description,url,image} = this.state
+        const {name,description,url} = this.state
 
         return (
             <Panel className="project-upload">
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit} onChange={this.handleChange}>
                     <Input
-                        onChange={this.handleChange}
                         floatingLabel={true}
                         type="text"
                         required={true}
@@ -46,7 +51,6 @@ export default class ProjectUpload extends Component {
                         name="name"
                         defaultValue={name}/>
                     <Input
-                        onChange={this.handleChange} 
                         floatingLabel={true}
                         type="text"
                         required={true}
@@ -60,7 +64,6 @@ export default class ProjectUpload extends Component {
                         label="Project Image"
                     />
                     <Textarea 
-                        onChange={this.handleChange}
                         floatingLabel={true}
                         type="text"
                         required={true}
