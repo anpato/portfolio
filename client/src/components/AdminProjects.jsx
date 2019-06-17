@@ -1,8 +1,9 @@
 import React from 'react'
 import {Panel, Button} from 'muicss/react'
+import projects from '../Data/Projects.json'
 
 const AdminProjects =  (props) => {
-    const {projects, removeProject, state} = props
+    const { removeProject, state} = props
         if(projects.length > 0){
             if(state){
                 return (

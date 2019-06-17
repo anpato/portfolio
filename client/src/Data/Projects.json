@@ -1,0 +1,44 @@
+[
+    {
+        "name":"Coça Pura Tequila",
+        "url":"https://anpato.github.io/CoPura/ ",
+        "image":"https://andre-portfolio-projects.s3.amazonaws.com/copura.png",
+        "description":"Built to showcase a new product launch, this client requested that their site be built using the latest technologies to showcase their product. It quickly grew into an informational page and e-commerce page capable of taking payments and notifying administrators of new orders."
+    },    
+    {
+        "name":"Lopes Group Real Estate",
+        "url":"https://anpato.github.io/Lopes-Real-Estate/",
+        "image":"https://andre-portfolio-projects.s3.amazonaws.com/lopes-group.png",
+        "description":"Built for a budding real estate client, I leveraged bootstrap to ensure that this website was responsive and fluid on all devices. Simplicity and UX were the key elements in this project."
+    },
+    {
+        "name":"Dev-Stop ",
+        "url":"http://dev-stop.surge.sh/",
+        "image":"https://andre-portfolio-projects.s3.amazonaws.com/dev-stop.jfif",
+        "description":"A blog showcasing full-stack skills implementing full CRUD functionality. The decision to use MUICSS styling framework allowed to me focus strictly on functionality. Built using React, Express and Postgresql, pairing seamless style and functionality was key to success."
+    },
+    {
+        "name":" Newsie",
+        "url":"http://newsie-app.surge.sh/",
+        "image":"https://andre-portfolio-projects.s3.amazonaws.com/newsie.jfif",
+        "description":"This app was built in conjunction with General Assembly's SEI and UX/UI cohorts. The goal was to follow a prototype created by the UI/UX students and bring it to life with real data and functionality."
+    },
+    {
+        "name":"Recyclo",
+        "url":"http://recyclo.surge.sh",
+        "image":"https://andre-portfolio-projects.s3.amazonaws.com/recyclo.jfif",
+        "description":"Built using React, Express and Postgresql;  Recyclo was created by a team of 3 developers with myself included. With recycling becoming a hotly debated topic, Recyclo was created to give users more information regarding recycling and locations to recycle specific materials."
+    },
+    {
+        "name":"Galidodge",
+        "url":"https://anpato.github.io/GaliDodge/ ",
+        "image":"https://andre-portfolio-projects.s3.amazonaws.com/galidodge.jfif",
+        "description":"A fun game created using HTML,CSS, Javascript, and P5 canvas."
+    },
+    {
+        "name": "CryptKey",
+        "url":"",
+        "image":"https://andre-portfolio-projects.s3.amazonaws.com/cryptkey.jfif",
+        "description":""
+    }
+]
