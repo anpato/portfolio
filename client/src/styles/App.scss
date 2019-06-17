@@ -1,0 +1,67 @@
+@import 'AdminForm';
+@import 'Header';
+@import 'Public';
+@import 'CallToAction';
+@import 'ContactForm';
+@import 'Stack';
+@import 'Social';
+@import 'AdminHome';
+@import 'Projects';
+
+.app {
+    button {
+        border-radius: 6px;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        background-color: #81D4FA;
+    }
+    button:hover {
+        color: #f4f4f4;
+        background-color: #1976d2;
+    }
+
+    .danger {
+        background-color: #ef9a9a
+    }
+
+    .danger:hover {
+        background-color: #af4448;
+    }
+}
+
+ul {
+    list-style: none;
+    li {
+        text-decoration: none;
+    }    
+}
+
+
+#section-one {
+    height: 100vh;
+    display: grid;
+    border-bottom: 4px solid #F06292;
+    justify-content: center;
+    align-items: center;
+    .intro-text {
+        font-size: 38px;
+        text-align: center;
+        color: #f9f9f9;
+        font-weight: 800;
+    }
+}
+
+#section-two {
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 4px solid #EEFD41;
+}
+#section-three {
+    height: 100%;
+    h2 {
+        text-align: center;
+        text-decoration: underline;
+        color: #f9f9f9;
+    }
+}

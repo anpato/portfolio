@@ -1,0 +1,29 @@
+.contact-form {
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 6px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    grid-column: 1;
+    grid-row: 2;
+    margin-left: 4em;
+    margin-top: -28em;
+    width: 60%;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        
+        label {
+            text-align: left;
+        }
+        button  {
+            margin: auto;
+            width: 50%;
+        }
+        textarea {
+            label {
+                text-align: left;
+            }
+        }
+    }
+}
