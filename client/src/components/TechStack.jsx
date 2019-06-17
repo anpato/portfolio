@@ -5,6 +5,7 @@ import Css from '../assets/img/css-3.png';
 import Sass from '../assets/img/sass.png';
 import Javascript from '../assets/img/javascript.png';
 import ReactImg from '../assets/img/react.png'
+import Node from '../assets/img/node.png'
 
 const TechStack = () => {
     return (
@@ -17,6 +18,7 @@ const TechStack = () => {
                 <li>Sass <img src={Sass} alt='sass logo'/></li>
                 <li>Javascript(ES6) <img src={Javascript} alt='javascript-logo'/></li>
                 <li>React JS <img src={ReactImg} alt='react-logo'/></li>
+                <li>NodeJs (Express) <img src={Node} alt="node"/> </li>
             </ul>
         </div>
     )
