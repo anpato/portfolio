@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Form, Panel, Input, Button, Textarea} from 'muicss/react'
-import { uploadProjects, getProjects } from '../services/api';
+import { uploadProjects } from '../services/api';
 import S3FileUpload from 'react-s3';
 import { config } from '../services/AwsConfig'
 export default class ProjectUpload extends Component {

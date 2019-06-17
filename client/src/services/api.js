@@ -1,5 +1,4 @@
 const Axios = require('axios');
-const S3FileUpload = require('react-s3');
 const JwtToken = 'token';
 const BASE_URL = 'http://localhost:3001';
 
@@ -64,6 +63,15 @@ export const deleteProject = async (id) => {
     try {
         const remove = await api.delete(`projects/${id}`);
         return remove
+    } catch (error) {
+        throw error
+    }
+}
+
+export const contact = async (data) => {
+    try {
+        const resp = await api.post('/contact', data)
+        return resp
     } catch (error) {
         throw error
     }

@@ -52,9 +52,10 @@ ul {
     border-bottom: 4px solid #EEFD41;
 }
 #section-three {
-    height: 100vh;
-    display: grid;
-    border-bottom: 4px solid #81D4FA;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    h2 {
+        text-align: center;
+        text-decoration: underline;
+        color: #f9f9f9;
+    }
 }

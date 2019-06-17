@@ -11,14 +11,12 @@ contactRouter.post('/', async(req,res) => {
                 pass: process.env.MAILER_PASS
             }
         });
-
         let info = await transporter.sendMail({
-            from: process.env.MAILER_EMAIL,
-            to : req.body.to,
+            from: req.body.from,
+            to : process.env.MAILER_EMAIL,
             subject: req.body.subject,
             text: req.body.text
         })
-        console.log('sent', info.messageId);
         res.send(info);
     } catch(error) {
         throw error

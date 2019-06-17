@@ -1,14 +1,20 @@
 .public {
+    .public-projects {
+        width: 90%;
+        height: auto;
+        margin: 2em auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 22em);
+        grid-template-rows: auto;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 2em;
+        border-radius: 6px;
+        padding: auto 4em;
 
-    justify-content: center;
-    align-content: center;
-    text-align: center;
-
-    // svg {
-    //     position: absolute;
-    //     bottom: 1em;
-    //     left: 50%;
-    //     margin: auto;
-    //     font-size: 52px;
-    // }
+        .project {
+            margin: auto;
+        }
+    }
 }
+
