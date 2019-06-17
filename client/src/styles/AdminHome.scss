@@ -6,11 +6,14 @@
         width: 90%;
         height: auto;
         margin: 2em auto;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 22em);
+        grid-template-rows: auto;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 2em;
         border-radius: 6px;
-        padding: auto 4em
+        padding: auto 4em;
     }
 }
 
