@@ -11,4 +11,17 @@ projectRouter.get('/', async(req,res) => {
     }
 });
 
+projectRouter.delete('/:id', async (req,res) => {
+    try {
+        await Project.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        res.send({msg:`Project ${req.params.id} was removed`});
+    } catch (error) {
+        throw error
+    }
+})
+
 module.exports = projectRouter
