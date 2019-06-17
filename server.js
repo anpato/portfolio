@@ -6,7 +6,7 @@ const passport = require('passport');
 const dotenv = require('dotenv');
 dotenv.config()
 
-const {userAuthorized} = require('./Auth/Auth');
+const {userAuthorized} = require('./Auth/auth');
 const AuthRouter = require('./routes/authRouter');
 const AppRouter = require('./routes/appRouter');
 const AwsRouter = require('./routes/AwsRouter');
