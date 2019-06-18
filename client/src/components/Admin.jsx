@@ -63,6 +63,7 @@ export default class Admin extends Component {
                         <Input
                             label = 'Password'
                             name="password"
+                            type="password"
                             required={true}
                             floatingLabel={true} 
                             defaultValue={password}/>

@@ -44,7 +44,6 @@ export default class Public extends Component {
 
     render() {
         const {projects} = this.state
-        console.log(this.state.isComplete)
         return (
             <div  className="public">
                 <Social/>

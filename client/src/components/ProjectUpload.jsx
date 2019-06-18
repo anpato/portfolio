@@ -23,7 +23,6 @@ export default class ProjectUpload extends Component {
         S3FileUpload.uploadFile(e.target.files[0], config)
         .then(data => {
             this.setState({image:data.location})
-            console.log(data.location)
             return data
         })
         .catch(err => alert(err))
