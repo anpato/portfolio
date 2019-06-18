@@ -3,11 +3,6 @@ import {Panel, Button, Form, Input, Select, Option, Textarea} from 'muicss/react
 import { contact } from '../services/api';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const encode = (data) => {
-    return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-        .join("&");
-}
 export default class ContactForm extends Component {
     constructor(){
         super();
@@ -40,21 +35,13 @@ export default class ContactForm extends Component {
             subject : input,
             text : `This message is from ${firstname} ${lastname} and here is their message: ${message}`,
         }
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode({ "form-name": "contact", ...this.state })
-        })  
-            .then(()=> this.setState({isSent:true}))
-            .then(() => setTimeout(()=>{this.setState({isFullfilled:true})},2000))
-            .catch(error => this.setState({isFullfilled:false,isSent:false,isError:true}));
-        // try {
-        //     this.setState({isSent:true})
-        //     await contact(params)
-            
-        // } catch (error) {
-        //     this.setState({isFullfilled:false,isSent:false,isError:true})
-        // }
+        try {
+            this.setState({isSent:true})
+            await contact(params)
+            setTimeout(()=>{this.setState({isFullfilled:true})},2000)
+        } catch (error) {
+            this.setState({isFullfilled:false,isSent:false,isError:true})
+        }
     }
 
     render() {
