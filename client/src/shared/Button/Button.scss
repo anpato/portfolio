@@ -1,0 +1,71 @@
+@import '../../styles/Pallete.scss';
+.btn {
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0.4em 1.4em;
+  font-weight: 600;
+}
+
+.fab {
+  height: 40px;
+  width: 40px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  line-height: 40px;
+  padding: 0;
+  font-size: 24px;
+  &:active {
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
+  }
+}
+
+.raised {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  padding: 0.4em 1.4em;
+  border-radius: 6px;
+  &:active {
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
+  }
+}
+
+.flat {
+  box-shadow: none;
+  padding: 0.4em 1.4em;
+  border-radius: 2px;
+  &:active {
+    transform: scale(1.1, 1.1);
+  }
+}
+
+.gold {
+  background: $Amber;
+  border: 2px solid $Amber;
+  &:hover {
+    background: $AmberHover;
+    border: 2px solid $AmberHover;
+  }
+}
+
+.blue {
+  background: $Blue;
+  border: 2px solid $Blue;
+  color: #f8f8f8;
+  &:hover {
+    background: $BlueHover;
+    border: 2px solid $BlueHover;
+    color: #333;
+  }
+}
+
+.red {
+  background: $Red;
+  border: 2px solid $Red;
+  color: #f8f8f8;
+  &:hover {
+    background: $RedHover;
+    border: 2px solid $RedHover;
+    color: #f8f8f8;
+  }
+}
