@@ -8,11 +8,11 @@ import logger from 'morgan'
 import cors from 'cors'
 import { db } from './config'
 import Router from './routes'
-import { genID } from './services/crypto'
+import { genID } from './services'
 
 const App = express()
 const sameSite = process.argv[2] || true
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || process.env.LOCAL_PORT
 
 App.use(helmet())
 App.disable('x-powered-by')
@@ -41,8 +41,6 @@ App.get('/', (req, res) =>
 )
 App.use('/api', Router)
 
-App.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`)
-})
+App.listen(PORT)
 
 export default App
