@@ -1,13 +1,5 @@
 import { User } from '../database'
-import {
-  signToken,
-  HashPassword,
-  VerifyPassword,
-  verifySecret,
-  hashSecret
-} from '../auth'
-
-import { SendUUID, UUID } from '../services/'
+import { signToken, HashPassword, VerifyPassword } from '../auth'
 
 export const loginUser = async (req, res) => {
   try {
@@ -27,23 +19,6 @@ export const loginUser = async (req, res) => {
     res.status(401).json({ error: 'Token Invalid' })
   }
 }
-
-// export const loginUser = async (req, res) => {
-//   try {
-//     const { email, password } = req.body
-//     const uuid = new UUID(new Date().getTime()).uuid()
-//     const hashedUUID = await hashSecret(uuid)
-//     const user = await User.findOneAndUpdate({ email }, { uuid: hashedUUID })
-//     if (user && (await VerifyPassword(user, password, res))) {
-//       await SendUUID(uuid, user.email)
-//       res.json({ message: 'Sending Email' })
-//     } else {
-//       res.status(401).json({ error: 'Invalid Credentials' })
-//     }
-//   } catch (error) {
-//     res.status(500).json({ error: error })
-//   }
-// }
 
 export const registerUser = async (req, res) => {
   try {

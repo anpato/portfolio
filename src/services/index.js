@@ -1,2 +1,2 @@
-export * from './SendUUID'
+export * from './Mailer'
 export * from './UUID'

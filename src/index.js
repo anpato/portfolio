@@ -33,13 +33,13 @@ connection.once('open', () => {
   console.log(`connected to ${db().name}`)
 })
 // Mongodb Connection
-App.use('/api', Router)
 App.get('/', (req, res) =>
   res
     .status(200)
     .cookie('sessionID', App.locals.sessionID, { sameSite: sameSite })
     .json({ msg: 'Portfolio' })
 )
+App.use('/api', Router)
 
 App.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`)

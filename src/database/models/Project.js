@@ -13,10 +13,13 @@ export const ProjectModel = new Schema(
     image_url: {
       type: String
     },
+    github_link: {
+      type: String
+    },
     deploy_link: {
       type: String
     },
-    development: {
+    released: {
       type: Boolean,
       required: true
     }

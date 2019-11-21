@@ -19,7 +19,7 @@ export const awsFileUpload = (req, res, next) => {
   }
 
   s3.upload(params, (err, data) => {
-    if (err) console.log(err)
+    if (err) throw err
     if (data) {
       fs.unlinkSync(req.file.path)
       res.locals.file = data.Location

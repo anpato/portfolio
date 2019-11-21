@@ -11,8 +11,7 @@ export const authenticate = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1]
     const data = jwt.verify(token, TOKEN_KEY)
     res.locals.user = data
-
-    next()
+    if (compare(req)) next()
   } catch (error) {
     res.status(403).send({ error: 'Unauthorized' })
   }
