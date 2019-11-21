@@ -1,0 +1,53 @@
+@import 'Pallete';
+
+.theme--wrapper {
+  transition: all 0.3s ease;
+}
+
+.theme--dark {
+  background: $DarkMain;
+  height: 100vh;
+  .nav-layout {
+    background: $DarkSecondary;
+    nav {
+      a {
+        color: #757575;
+        &:hover {
+          color: #e0e0e0;
+        }
+      }
+    }
+  }
+  .nav-active {
+    border-bottom: 2px solid $Highlight;
+  }
+  .theme-toggle {
+    background: $BlueScheme;
+    border-color: $BlueScheme;
+  }
+}
+
+.theme--light {
+  background: $White;
+
+  .theme-toggle {
+    background: $DarkMain;
+    border-color: $DarkMain;
+    color: $WhiteHover;
+  }
+
+  .nav-active {
+    border-bottom: 2px solid $RedScheme;
+  }
+  .nav-layout {
+    background-image: linear-gradient(120deg, #ebedee 0%, #fdfbfb 100%);
+    nav {
+      a {
+        color: $DarkMain;
+        &:hover {
+          color: #757575;
+        }
+      }
+    }
+  }
+}

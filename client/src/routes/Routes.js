@@ -5,7 +5,7 @@ import { getToken } from '../services/TokenService'
 import { _VerifyToken } from '../services/AuthServices'
 import Home from '../views/Home'
 
-const Routes = () => {
+const Routes = ({ darkTheme }) => {
   const [authenticated, setAuthentication] = useState(false)
   const handleRedirect = () => {
     if (authenticated) {
@@ -26,7 +26,11 @@ const Routes = () => {
   return (
     <>
       <Switch>
-        <Route exact path="/" component={props => <Home {...props} />} />
+        <Route
+          exact
+          path="/"
+          component={props => <Home {...props} darkTheme={darkTheme} />}
+        />
         {/* <ProtectedRoute
           path="/dashboard"
           component={Home}

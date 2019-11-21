@@ -1,9 +1,9 @@
 import React from 'react'
 import './Flex.scss'
-export const FlexLayout = ({ className, children, variant, layout }) => (
+export const FlexLayout = ({ className, children, align, layout }) => (
   <div
     className={`flex-layout ${className ? className : ''} ${
-      variant ? variant : ''
+      align ? align : ''
     } ${layout ? layout : ''}`}
   >
     {children}

@@ -1,0 +1,13 @@
+.animated-welcome {
+  width: 80%;
+  margin: auto;
+  .animated-message {
+    flex: 4;
+  }
+  .right {
+    flex: 3;
+    img {
+      max-width: 100%;
+    }
+  }
+}

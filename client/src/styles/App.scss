@@ -1,4 +1,20 @@
+@import 'Theme';
+@import 'Navbar';
+@import 'Welcome';
+
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  position: relative;
+}
+a {
+  text-decoration: none;
+}
+button {
+  outline: none;
+}
+
+main {
+  padding-top: 10%;
 }
