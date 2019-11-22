@@ -5,6 +5,14 @@
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-height: 48px;
+  // opacity: 0.6;
+  &:hover {
+    opacity: 1;
+  }
+
+  .nav-active {
+    opacity: 1;
+  }
   img {
     animation: spin 4s linear infinite;
     margin: 0.5em 1em;

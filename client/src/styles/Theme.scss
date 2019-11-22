@@ -6,7 +6,6 @@
 
 .theme--dark {
   background: $DarkMain;
-  height: 100vh;
   .nav-layout {
     background: $DarkSecondary;
     nav {
@@ -25,6 +24,15 @@
     background: $BlueScheme;
     border-color: $BlueScheme;
   }
+  .welcome {
+    background-image: linear-gradient(
+      to bottom,
+      $DarkSecondary 0%,
+      #141313 50%,
+      $DarkMain 100%
+    );
+  }
+
   .animated-message {
     color: white;
     .toggle {
@@ -35,11 +43,20 @@
       color: $YellowScheme;
     }
   }
+
+  .about {
+    color: $White;
+    .bubble {
+      background: $DarkSecondary;
+      &:after {
+        border-right-color: $DarkSecondary;
+      }
+    }
+  }
 }
 
 .theme--light {
   background: $White;
-
   .theme-toggle {
     background: $DarkMain;
     border-color: $DarkMain;
@@ -60,6 +77,14 @@
       }
     }
   }
+  .welcome {
+    background-image: linear-gradient(
+      to bottom,
+      $WhiteHover 0%,
+      #eee 50%,
+      $White 100%
+    );
+  }
   .animated-message {
     .toggle {
       color: $RedScheme;
@@ -67,6 +92,14 @@
 
     .toggle-off {
       color: $BlueScheme;
+    }
+  }
+  .about {
+    .bubble {
+      background: $WhiteHover;
+      &:after {
+        border-right-color: $WhiteHover;
+      }
     }
   }
 }

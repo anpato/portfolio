@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import AnimatedWelcome from './components/AnimatedWelcome'
+import About from './components/About'
 
 export default class Home extends PureComponent {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class Home extends PureComponent {
     return (
       <main>
         <AnimatedWelcome darkTheme={this.props.darkTheme} />
+        <About />
       </main>
     )
   }

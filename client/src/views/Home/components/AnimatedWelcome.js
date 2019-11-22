@@ -38,16 +38,20 @@ export default class AnimatedWelcome extends PureComponent {
     const toggleTimerClass =
       this.state.timer % 2 === 0 ? 'toggle toggle-off' : 'toggle'
     return (
-      <FlexLayout className="animated-welcome" layout=" space center">
-        <Message selectedWord={this.state.wordToDisplay}>
-          <h1 className={toggleTimerClass}>{this.state.wordToDisplay}</h1>
-        </Message>
-        <div className="right">
-          <img
-            src={this.props.darkTheme ? darkModeCloud : lightModeCloud}
-            alt={this.props.darkTheme ? multiPlatformDark : multiPlatformLight}
-          />
-        </div>
+      <FlexLayout className="welcome" layout="center">
+        <FlexLayout className="animated-welcome" layout=" space center">
+          <Message selectedWord={this.state.wordToDisplay}>
+            <h1 className={toggleTimerClass}>{this.state.wordToDisplay}</h1>
+          </Message>
+          <div className="right">
+            <img
+              src={this.props.darkTheme ? darkModeCloud : lightModeCloud}
+              alt={
+                this.props.darkTheme ? multiPlatformDark : multiPlatformLight
+              }
+            />
+          </div>
+        </FlexLayout>
       </FlexLayout>
     )
   }

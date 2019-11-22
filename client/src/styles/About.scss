@@ -1,0 +1,50 @@
+.about {
+  width: 90%;
+  margin: 2em auto;
+
+  .about-img {
+    img {
+      margin: auto;
+      max-width: 60%;
+    }
+  }
+
+  .bubble {
+    position: absolute;
+    border-radius: 0.4em;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 1em 0;
+    width: 80%;
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 15%;
+      width: 0;
+      height: 0;
+      border: 57px solid transparent;
+      border-left: 0;
+      border-bottom: 0;
+      margin-top: -28.5px;
+      margin-left: -57px;
+    }
+  }
+  .about-text {
+    margin-top: 4em;
+    position: relative;
+    width: 40%;
+    h2 {
+      text-align: center;
+      font-weight: 800;
+      text-decoration: dotted;
+    }
+    p {
+      text-align: center;
+      font-size: 1rem;
+      margin: auto;
+      width: 80%;
+      letter-spacing: 2px;
+      line-break: 20px;
+    }
+  }
+}
