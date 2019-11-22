@@ -5,11 +5,36 @@
     margin-right: 2em;
     text-align: center;
     flex: 3;
+    .toggle {
+      font-size: 2.5rem;
+    }
+    // h1:nth-child(2) {
+    //   transition: all 0.3s ease;
+    //   // color: red;
+    //   animation: fade 3s forwards infinite;
+    //   color: $RedScheme;
+    // }
   }
   .right {
     flex: 3;
     img {
       max-width: 100%;
     }
+  }
+}
+
+@keyframes fade {
+  0% {
+    // opacity: 1;
+    color: $RedScheme;
+  }
+  50% {
+    // transform: rotateX(90deg);
+    // opacity: 0;
+    color: transparent;
+  }
+  100% {
+    // transform: translateX(0em);
+    // opacity: 1;
   }
 }

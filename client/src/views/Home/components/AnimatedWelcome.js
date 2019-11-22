@@ -6,9 +6,9 @@ export default class AnimatedWelcome extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      wordsToSwap: ['Web', 'Full Stack'],
-      words: ['I', 'am', 'a', 'Mobile', 'developer'],
-      wordToDisplay: '',
+      wordsToSwap: ['Mobile', 'Full Stack'],
+      words: ['I', 'am', 'a', 'developer'],
+      wordToDisplay: 'Web',
       timer: 0
     }
   }
@@ -21,24 +21,28 @@ export default class AnimatedWelcome extends PureComponent {
   }
 
   swapword = () => {
-    const wordsArr = this.state.words
-    const wordsToSwap = this.state.wordsToSwap
-    const wordToRemove = wordsArr[3]
-    const wordToAdd = wordsToSwap.splice(0, 1)[0]
-    wordsArr.splice(3, 1, wordToAdd)
-    this.setState({
-      wordsToSwap: [...wordsToSwap, wordToRemove],
-      words: wordsArr
-    })
+    const words = this.state.wordsToSwap
+    const wordToSwap = words.splice(0, 1)[0]
+    this.setState(state => ({
+      wordsToSwap: [...words, state.wordToDisplay],
+      wordToDisplay: wordToSwap,
+      timer: state.timer + 1
+    }))
   }
 
   render() {
     return (
       <FlexLayout className="animated-welcome" layout=" space center">
         <div className="animated-message">
-          {this.state.words.map((word, index) => (
-            <h1 key={index}>{word}</h1>
-          ))}
+          <h2>I Am A</h2>
+          <h1
+            className={
+              this.state.timer % 2 === 0 ? 'toggle' : 'toggle toggle-off'
+            }
+          >
+            {this.state.wordToDisplay}
+          </h1>
+          <h2>Developer</h2>
         </div>
         <div className="right">
           <img

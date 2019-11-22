@@ -25,6 +25,16 @@
     background: $BlueScheme;
     border-color: $BlueScheme;
   }
+  .animated-message {
+    color: white;
+    .toggle {
+      color: $Highlight;
+    }
+
+    .toggle-off {
+      color: $YellowScheme;
+    }
+  }
 }
 
 .theme--light {
@@ -48,6 +58,15 @@
           color: #757575;
         }
       }
+    }
+  }
+  .animated-message {
+    .toggle {
+      color: $RedScheme;
+    }
+
+    .toggle-off {
+      color: $BlueScheme;
     }
   }
 }
