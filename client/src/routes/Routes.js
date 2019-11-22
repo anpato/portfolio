@@ -4,6 +4,7 @@ import ProtectedRoute from './ProtectedRoute'
 import { getToken } from '../services/TokenService'
 import { _VerifyToken } from '../services/AuthServices'
 import Home from '../views/Home'
+import Projects from '../views/Projects'
 
 const Routes = ({ darkTheme }) => {
   const [authenticated, setAuthentication] = useState(false)
@@ -30,6 +31,11 @@ const Routes = ({ darkTheme }) => {
           exact
           path="/"
           render={props => <Home {...props} darkTheme={darkTheme} />}
+        />
+        <Route
+          exact
+          path="/projects"
+          render={props => <Projects {...props} darkTheme={darkTheme} />}
         />
         {/* <ProtectedRoute
           path="/dashboard"

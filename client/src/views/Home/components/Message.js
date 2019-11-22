@@ -1,5 +1,4 @@
 import React from 'react'
-import { useTrail, animated } from 'react-spring'
 
 const Message = ({ children, selectedWord }) => {
   return (
