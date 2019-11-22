@@ -7,7 +7,6 @@ export default class AnimatedWelcome extends PureComponent {
     super(props)
     this.state = {
       wordsToSwap: ['Mobile', 'Full Stack'],
-      words: ['I', 'am', 'a', 'developer'],
       wordToDisplay: 'Web',
       timer: 0
     }
@@ -31,17 +30,13 @@ export default class AnimatedWelcome extends PureComponent {
   }
 
   render() {
+    const toggleTimerClass =
+      this.state.timer % 2 === 0 ? 'toggle' : 'toggle toggle-off'
     return (
       <FlexLayout className="animated-welcome" layout=" space center">
         <div className="animated-message">
           <h2>I Am A</h2>
-          <h1
-            className={
-              this.state.timer % 2 === 0 ? 'toggle' : 'toggle toggle-off'
-            }
-          >
-            {this.state.wordToDisplay}
-          </h1>
+          <h1 className={toggleTimerClass}>{this.state.wordToDisplay}</h1>
           <h2>Developer</h2>
         </div>
         <div className="right">
