@@ -18,7 +18,7 @@ export default class AnimatedWelcome extends PureComponent {
   }
 
   componentDidMount() {
-    this.word = setInterval(() => this.swapword(), 3000)
+    this.word = setInterval(() => this.swapword(), 2500)
   }
   componentWillUnmount() {
     clearInterval(this.word)

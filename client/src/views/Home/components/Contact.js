@@ -31,11 +31,13 @@ export default class Contact extends Component {
           <div className="image-wrapper">
             <img
               className={sent ? ` posted sent-posted` : 'posted'}
-              src={BitmojiPosted}
+              src="https://andre-portfolio-projects.s3.amazonaws.com/assets/bitmoji-posted.png"
+              alt={BitmojiPosted}
             />
             <img
               className={sent ? `talk sent-talk` : 'talk'}
-              src={BitmojiTalk}
+              src="https://andre-portfolio-projects.s3.amazonaws.com/assets/bitmoji-talk-soon.png"
+              alt={BitmojiTalk}
             />
           </div>
           <FormGroup

@@ -6,6 +6,7 @@
   width: 100%;
   max-height: 48px;
   // opacity: 0.6;
+  z-index: 1000;
   &:hover {
     opacity: 1;
   }
