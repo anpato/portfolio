@@ -53,6 +53,21 @@
       }
     }
   }
+  .contact-wrapper {
+    background: $DarkSecondary;
+    .input {
+      input {
+        color: $White;
+      }
+    }
+    textarea {
+      color: $White;
+      border-bottom: 2px solid $Highlight;
+      &::placeholder {
+        color: $Highlight;
+      }
+    }
+  }
 }
 
 .theme--light {
@@ -99,6 +114,21 @@
       background: $WhiteHover;
       &:after {
         border-right-color: $WhiteHover;
+      }
+    }
+  }
+  .contact-wrapper {
+    background: $White;
+    .input {
+      input {
+        color: $White;
+      }
+    }
+    textarea {
+      color: $DarkMain;
+      border-bottom: 2px solid $Blue;
+      &::placeholder {
+        color: $Blue;
       }
     }
   }

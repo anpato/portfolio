@@ -15,6 +15,7 @@
     transition: all 0.4s ease;
     background: none;
   }
+
   label {
     transition: all 0.4s ease;
     pointer-events: none;
@@ -23,6 +24,23 @@
     bottom: 10px;
     background: none;
     font-weight: 600;
+    opacity: 0.6;
+  }
+}
+
+textarea {
+  padding: 0.4em 0.5em;
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  transition: all 0.4s ease;
+  background: none;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  &::placeholder {
+    opacity: 0.6;
   }
 }
 
@@ -110,6 +128,25 @@
   input:focus + label,
   input:active + label {
     color: $AmberHover;
+  }
+}
+
+.input-green {
+  input {
+    border-bottom: 2px solid $Highlight;
+    &:focus,
+    &:active {
+      border-bottom: 2px solid $HighlightHover;
+    }
+  }
+
+  label {
+    color: $Highlight;
+  }
+
+  input:focus + label,
+  input:active + label {
+    color: $HighlightHover;
   }
 }
 

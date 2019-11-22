@@ -11,11 +11,11 @@ const NavBar = ({ window, darkTheme, setTheme }) => (
         <NavLink exact to="/" activeClassName="nav-active">
           Home
         </NavLink>
-        <NavLink exact to="/path" activeClassName="nav-active">
-          Home
+        <NavLink exact to="/projects" activeClassName="nav-active">
+          Projects
         </NavLink>
-        <NavLink exact to="/path/exact" activeClassName="nav-active">
-          Home
+        <NavLink exact to="/resume" activeClassName="nav-active">
+          Resume
         </NavLink>
       </nav>
     </FlexLayout>

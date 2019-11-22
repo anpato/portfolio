@@ -69,3 +69,14 @@
     color: #f8f8f8;
   }
 }
+
+.green {
+  background: $Highlight;
+  border: 2px solid $Highlight;
+  color: $DarkMain;
+  &:hover {
+    background: $HighlightHover;
+    border: 2px solid $HighlightHover;
+    color: $DarkMain;
+  }
+}
