@@ -31,7 +31,9 @@
     padding-top: 20%;
     padding-bottom: 10%;
     .animated-welcome {
+      width: 100%;
       .animated-message {
+        margin-right: 0;
         h2 {
           font-size: 2.1rem;
         }
