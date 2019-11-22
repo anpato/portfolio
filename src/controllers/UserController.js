@@ -3,7 +3,7 @@ import { signToken, HashPassword, VerifyPassword } from '../auth'
 
 export const loginUser = async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email })
+    const user = await User.findOne({ username: req.body.username })
     if (await VerifyPassword(user, req.body.password)) {
       const payload = {
         _id: user._id,
