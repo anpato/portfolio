@@ -29,7 +29,7 @@ const Routes = ({ darkTheme }) => {
         <Route
           exact
           path="/"
-          component={props => <Home {...props} darkTheme={darkTheme} />}
+          render={props => <Home {...props} darkTheme={darkTheme} />}
         />
         {/* <ProtectedRoute
           path="/dashboard"

@@ -5,7 +5,6 @@
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-height: 48px;
-  // opacity: 0.6;
   z-index: 1000;
   &:hover {
     opacity: 1;
@@ -40,7 +39,7 @@
   right: 1em;
   z-index: 2000;
   transition: all 0.3s ease;
-  opacity: 0.6;
+  opacity: 0.7;
   &:hover {
     opacity: 0.9;
   }
@@ -52,5 +51,12 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 500px) {
+  .theme-toggle {
+    top: 93vh;
+    right: 0.2em;
   }
 }

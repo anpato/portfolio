@@ -48,3 +48,21 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  .about {
+    .about-img {
+      align-self: center;
+      margin: auto;
+    }
+    .bubble {
+      &:after {
+        display: none;
+      }
+    }
+    .about-text {
+      margin-top: 0;
+      width: 90%;
+    }
+  }
+}
