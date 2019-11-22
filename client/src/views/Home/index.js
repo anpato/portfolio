@@ -11,7 +11,7 @@ export default class Home extends PureComponent {
   render() {
     return (
       <main>
-        <AnimatedWelcome />
+        <AnimatedWelcome darkTheme={this.props.darkTheme} />
       </main>
     )
   }

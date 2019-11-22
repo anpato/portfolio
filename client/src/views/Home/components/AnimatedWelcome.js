@@ -1,13 +1,18 @@
 import React, { PureComponent } from 'react'
-import multiPlatform from '../../../assets/multi-platform.png'
+import multiPlatformDark from '../../../assets/multi-platform-dark.png'
+import multiPlatformLight from '../../../assets/multi-platform-light.png'
 import { FlexLayout } from '../../../shared'
 import Message from './Message'
+const darkModeCloud =
+  'https://andre-portfolio-projects.s3.amazonaws.com/assets/svg-dark.png'
+const lightModeCloud =
+  'https://andre-portfolio-projects.s3.amazonaws.com/assets/multi-platform.png'
 export default class AnimatedWelcome extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      wordsToSwap: ['Mobile', 'Full Stack'],
-      wordToDisplay: 'Web',
+      wordsToSwap: ['Mobile Developer', 'Full Stack Developer', 'Andre Pato'],
+      wordToDisplay: 'Web Developer',
       timer: 0
     }
   }
@@ -31,18 +36,16 @@ export default class AnimatedWelcome extends PureComponent {
 
   render() {
     const toggleTimerClass =
-      this.state.timer % 2 === 0 ? 'toggle' : 'toggle toggle-off'
+      this.state.timer % 2 === 0 ? 'toggle toggle-off' : 'toggle'
     return (
       <FlexLayout className="animated-welcome" layout=" space center">
-        <div className="animated-message">
-          <h2>I Am A</h2>
+        <Message selectedWord={this.state.wordToDisplay}>
           <h1 className={toggleTimerClass}>{this.state.wordToDisplay}</h1>
-          <h2>Developer</h2>
-        </div>
+        </Message>
         <div className="right">
           <img
-            src="https://andre-portfolio-projects.s3.amazonaws.com/assets/multi-platform.png"
-            alt={multiPlatform}
+            src={this.props.darkTheme ? darkModeCloud : lightModeCloud}
+            alt={this.props.darkTheme ? multiPlatformDark : multiPlatformLight}
           />
         </div>
       </FlexLayout>
