@@ -1,39 +1,44 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import multiPlatform from '../../../assets/multi-platform.png'
 import { FlexLayout } from '../../../shared'
 import Message from './Message'
-export default class AnimatedWelcome extends Component {
+export default class AnimatedWelcome extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      wordsToSwap: ['stand', 'jump', 'walk', 'run'],
-      words: ['Lorem', 'ipsum', 'dolor'],
+      wordsToSwap: ['Web', 'Full Stack'],
+      words: ['I', 'am', 'a', 'Mobile', 'developer'],
       wordToDisplay: '',
-      ready: false
-    }
-  }
-
-  shouldComponentUpdate(state) {
-    if (state.ready) {
-      return false
-    } else {
-      return true
+      timer: 0
     }
   }
 
   componentDidMount() {
-    this.setState({ ready: true })
+    this.word = setInterval(() => this.swapword(), 3000)
+  }
+  componentWillUnmount() {
+    clearInterval(this.word)
+  }
+
+  swapword = () => {
+    const wordsArr = this.state.words
+    const wordsToSwap = this.state.wordsToSwap
+    const wordToRemove = wordsArr[3]
+    const wordToAdd = wordsToSwap.splice(0, 1)[0]
+    wordsArr.splice(3, 1, wordToAdd)
+    this.setState({
+      wordsToSwap: [...wordsToSwap, wordToRemove],
+      words: wordsArr
+    })
   }
 
   render() {
     return (
-      <FlexLayout className="animated-welcome">
+      <FlexLayout className="animated-welcome" layout=" space center">
         <div className="animated-message">
-          <Message
-            words={this.state.words}
-            wordToDisplay={this.state.wordToDisplay}
-            wordSwap={this.handleWordSwap}
-          />
+          {this.state.words.map((word, index) => (
+            <h1 key={index}>{word}</h1>
+          ))}
         </div>
         <div className="right">
           <img
