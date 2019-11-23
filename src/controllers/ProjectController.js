@@ -5,7 +5,6 @@ const checkGif = files => {
     static: []
   }
   files.forEach(file => {
-    // console.log(file)
     if (file.includes('.gif')) {
       Object.assign(obj, { gif: file })
     } else {
