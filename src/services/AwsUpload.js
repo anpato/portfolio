@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import fs from 'fs'
-import awsSdk from 'aws-sdk'
+import awsSdk, { DataExchange } from 'aws-sdk'
 
 awsSdk.config.update({
   accessKeyId: process.env.AWS_KEY,
@@ -11,20 +11,25 @@ awsSdk.config.update({
 const s3 = new awsSdk.S3()
 
 export const awsFileUpload = (req, res, next) => {
-  const params = {
-    ACL: 'public-read',
-    Bucket: process.env.AWS_BUCKET,
-    Body: fs.createReadStream(req.file.path),
-    Key: `project/${new Date().getDate()}-${req.file.originalname}`
-  }
-
-  s3.upload(params, (err, data) => {
-    if (err) throw err
-    if (data) {
-      fs.unlinkSync(req.file.path)
-      res.locals.file = data.Location
-      next()
+  const date = new Date().getTime()
+  const files = []
+  req.files.map(file => {
+    const params = {
+      ACL: 'public-read',
+      Bucket: process.env.AWS_BUCKET,
+      Body: file.buffer,
+      Key: `project/${date}-${file.originalname}`
     }
+    s3.upload(params, (err, data) => {
+      if (err) throw err
+      if (data) {
+        files.push(data.Location)
+        if (files.length === req.files.length) {
+          res.locals.files = files
+          next()
+        }
+      }
+    })
   })
 }
 

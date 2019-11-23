@@ -1,4 +1,19 @@
 import { Project } from '../database'
+const checkGif = files => {
+  const obj = {
+    gif: '',
+    static: []
+  }
+  files.forEach(file => {
+    // console.log(file)
+    if (file.includes('.gif')) {
+      Object.assign(obj, { gif: file })
+    } else {
+      obj.static.push(file)
+    }
+  })
+  return obj
+}
 
 export const getProjects = async (req, res) => {
   try {
@@ -39,9 +54,10 @@ export const updateProject = async (req, res) => {
 
 export const uploadProject = async (req, res) => {
   try {
+    const images = checkGif(res.locals.files)
     const project = new Project({
       ...req.body,
-      image_url: res.locals.file
+      images
     })
     await project.save()
     res.send(project)

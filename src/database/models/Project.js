@@ -10,8 +10,11 @@ export const ProjectModel = new Schema(
       type: String,
       required: true
     },
-    image_url: {
-      type: String
+    images: {
+      gif: {
+        type: String
+      },
+      static: Array
     },
     github_link: {
       type: String
