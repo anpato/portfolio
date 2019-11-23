@@ -21,7 +21,7 @@ App.use(cookieParser())
 App.use(cors())
 App.use(bodyParser.urlencoded({ extended: true }))
 App.use(bodyParser.json())
-App.locals.sessionID = genID()
+// App.locals.sessionID = genID()
 // Mongodb Connection
 connect(db().connect, {
   useNewUrlParser: true,

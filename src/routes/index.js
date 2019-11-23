@@ -19,6 +19,11 @@ import {
 import { sendContact } from '../services'
 // Controller Methods
 const Router = ExpressRouter()
+const storage = multer.memoryStorage({
+  destination: (req, file, cb) => {
+    cb(null, '')
+  }
+})
 /* ============================================= */
 
 // Authentication Routes
@@ -38,7 +43,7 @@ Router.put('/projects/:project_id', authenticate, updateProject)
 Router.post(
   '/projects',
   authenticate,
-  multer({ dest: '../temp', limits: null }).single('project'),
+  multer({ storage }).array('project'),
   awsFileUpload,
   uploadProject
 )
@@ -49,7 +54,9 @@ Router.delete(
   awsFileRemove
 )
 // Project Routes
+
 /* ============================================== */
+
 // Contact Routes
 Router.post('/contact', sendContact)
 // Contact Routes

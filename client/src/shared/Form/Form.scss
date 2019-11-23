@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  align-items: center;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.inline {
+  flex-direction: row;
+}

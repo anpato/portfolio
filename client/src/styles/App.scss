@@ -1,0 +1,18 @@
+@import 'Theme';
+@import 'Navbar';
+@import 'Welcome';
+@import 'About';
+@import 'Contact';
+@import 'Projects';
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  position: relative;
+}
+a {
+  text-decoration: none;
+}
+button {
+  outline: none;
+}
