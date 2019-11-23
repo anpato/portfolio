@@ -1,7 +1,12 @@
 @import 'Pallete';
+
 .projects {
-  padding: 10% 0;
-  display: flex;
+  padding-top: 5%;
+  .spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }
   .project-wrapper {
     width: 70%;
 
@@ -26,7 +31,7 @@
     }
     .project-wrapper-card {
       margin: 2em auto;
-
+      border-radius: 4px;
       box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
       .detail-wrapper {
         position: relative;
@@ -50,6 +55,7 @@
         flex: 1;
         max-width: 40%;
         img {
+          border-top-right-radius: 4px;
           width: 100%;
         }
       }
@@ -59,18 +65,25 @@
 
 @keyframes slideRight {
   from {
+    opacity: 0;
     transform: translateX(-100%);
   }
   to {
+    opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes slideLeft {
   from {
+    opacity: 0;
     transform: translateX(100%);
   }
   to {
+    opacity: 1;
     transform: translateX(0);
   }
+}
+
+@media (max-width: 500px) {
 }
