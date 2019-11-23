@@ -28,21 +28,30 @@ export default class Projects extends Component {
   }
 
   renderProjects = () => {
+    const { darkTheme } = this.props
     if (this.state.projects.length) {
-      return this.state.projects.map(project => (
-        <ProjectCard
-          title={project.title}
-          released={project.released}
-          image={project.image_url}
-        />
-      ))
+      return this.state.projects.map((project, index) => {
+        return (
+          <ProjectCard
+            className={index % 2 === 0 ? 'forward' : 'reverse'}
+            direction={index % 2 === 0 ? 'forward' : 'reverse'}
+            key={project._id}
+            darkTheme={darkTheme}
+            title={project.title}
+            released={project.released}
+            image={project.images.gif}
+            description={project.description}
+            onClick={() => this.props.history.push(`/projects/${project._id}`)}
+          />
+        )
+      })
     }
   }
 
   render() {
     return (
       <FlexLayout className="projects" variant="center">
-        <FlexLayout className="project-wrapper" variant="start wrap ">
+        <FlexLayout className="project-wrapper" variant="center">
           {this.renderProjects()}
         </FlexLayout>
       </FlexLayout>

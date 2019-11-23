@@ -2,9 +2,18 @@
 
 .theme--wrapper {
   transition: all 0.4s ease;
+  height: 100%;
 }
 
 .theme--dark {
+  #root {
+    background-image: linear-gradient(
+      to bottom,
+      $DarkSecondary 0%,
+      #141313 50%,
+      $DarkMain 100%
+    );
+  }
   background-image: linear-gradient(
     to bottom,
     $DarkSecondary 0%,
@@ -65,15 +74,29 @@
       }
     }
   }
+  .projects {
+    .project-wrapper-card {
+      color: $WhiteHover;
+      background: #424242;
+      .in-process {
+        color: $DarkMain;
+      }
+      .released {
+        color: $White;
+      }
+    }
+  }
 }
 
 .theme--light {
-  background-image: linear-gradient(
-    to bottom,
-    $WhiteHover 0%,
-    #eee 50%,
-    $White 100%
-  );
+  #root {
+    background-image: linear-gradient(
+      to bottom,
+      $WhiteHover 0%,
+      #eee 50%,
+      $White 100%
+    );
+  }
   .theme-toggle {
     background: $DarkMain;
     border-color: $DarkMain;
@@ -123,6 +146,18 @@
       border-bottom: 2px solid $Blue;
       &::placeholder {
         color: $Blue;
+      }
+    }
+  }
+  .projects {
+    .project-wrapper-card {
+      color: $DarkMain;
+      background: $White;
+      .in-process {
+        color: $DarkMain;
+      }
+      .released {
+        color: $White;
       }
     }
   }
