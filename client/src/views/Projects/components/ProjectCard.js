@@ -28,7 +28,7 @@ const ProjectCard = ({
         onClick={onClick}
         className="nav-btn"
         variant="raised"
-        color={darkTheme ? 'green' : 'blue'}
+        color={darkTheme ? 'green' : 'red'}
       />
     </FlexLayout>
     <div className="wrapper">

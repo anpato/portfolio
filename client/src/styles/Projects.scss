@@ -75,4 +75,35 @@
 }
 
 @media (max-width: 500px) {
+  .projects {
+    padding-top: 20%;
+    .project-wrapper {
+      .nav-btn {
+        position: relative;
+      }
+      .forward {
+        .nav-btn {
+          left: 0em;
+          top: 1em;
+        }
+      }
+      .reverse {
+        .nav-btn {
+          right: 0;
+          top: 1em;
+        }
+      }
+      .project-wrapper-card {
+        flex-direction: column-reverse;
+        .detail-wrapper {
+          flex: 1;
+        }
+        .wrapper {
+          flex: 2;
+        }
+        .snack {
+        }
+      }
+    }
+  }
 }
