@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PublicService from '../../services/PublicServices'
-import { FlexLayout } from '../../shared'
+import { FlexLayout, Spinner } from '../../shared'
 import { Carousel } from 'react-responsive-carousel'
 
 export default class Project extends Component {
@@ -13,18 +13,26 @@ export default class Project extends Component {
   }
 
   componentDidMount() {
+    this.setState({ isLoading: true })
     this.fetchProject()
   }
 
   fetchProject = async () => {
-    const project = await new PublicService(
-      this.props.match.params.project_id
-    ).getProject()
-    this.setState({ project })
+    try {
+      const project = await new PublicService(
+        this.props.match.params.project_id
+      ).getProject()
+      this.setState(
+        state => ({ project: project }),
+        () => setTimeout(() => this.setState({ isLoading: false }), 1000)
+      )
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   renderProject = () => {
-    if (this.state.project) {
+    if (this.state.project && !this.state.isLoading) {
       const { title, description, images, released } = this.state.project
       return (
         <FlexLayout className="project-card" layout="col" align="center">
@@ -48,6 +56,8 @@ export default class Project extends Component {
           <p>{description}</p>
         </FlexLayout>
       )
+    } else {
+      return <Spinner color={this.props.darkTheme ? '#eeff41' : '#f06292'} />
     }
   }
 
