@@ -38,17 +38,6 @@
         text-align: center;
         align-items: center;
         flex: 2;
-
-        .snack {
-          padding: 0.4em 0.8em;
-          border-radius: 4px;
-        }
-        .in-process {
-          background: $Amber;
-        }
-        .released {
-          background: $Blue;
-        }
       }
 
       .wrapper {

@@ -72,11 +72,20 @@
     .project-wrapper-card {
       color: $WhiteHover;
       background: #424242;
-      .in-process {
-        color: $DarkMain;
-      }
-      .released {
-        color: $White;
+    }
+  }
+  .in-process {
+    color: $DarkMain;
+  }
+  .released {
+    color: $White !important;
+  }
+  .project {
+    .project-card {
+      background: #424242;
+      h2,
+      p {
+        color: $WhiteHover;
       }
     }
   }
@@ -141,16 +150,26 @@
       }
     }
   }
+
   .projects {
     .project-wrapper-card {
       color: $DarkMain;
       background: $White;
-      .in-process {
-        color: $DarkMain;
-      }
-      .released {
-        color: $White;
+    }
+  }
+  .project {
+    .project-card {
+      background: $White;
+      h2,
+      p {
+        color: $DarkSecondary;
       }
     }
+  }
+  .in-process {
+    color: $DarkMain;
+  }
+  .released {
+    color: $White;
   }
 }
