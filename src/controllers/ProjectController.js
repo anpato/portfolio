@@ -66,7 +66,10 @@ export const getProject = async (req, res) => {
 
 export const updateProject = async (req, res) => {
   try {
-    await Project.updateOne({ _id: req.params.project_id }, req.body)
+    await Project.updateOne(
+      { _id: req.params.project_id },
+      { ...req.body.project, tags: checkTags(req.body.tags) }
+    )
     const project = await Project.findById(req.params.project_id)
     res.send(project)
   } catch (error) {
@@ -104,9 +107,9 @@ export const deleteProject = async (req, res, next) => {
   }
 }
 
-export const addTag = async (req, res) => {
+export const getTags = async (req, res) => {
   try {
-    const tags = checkTags(req.body.tags)
+    const tags = await Tag.find()
     res.send(tags)
   } catch (error) {
     res.status(500).json({ error: error.message })

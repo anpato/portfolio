@@ -14,7 +14,8 @@ import {
   getProjects,
   getProject,
   filterProjects,
-  updateProject
+  updateProject,
+  getTags
 } from '../controllers/ProjectController'
 import { sendContact } from '../services'
 // Controller Methods
@@ -60,5 +61,11 @@ Router.delete(
 // Contact Routes
 Router.post('/contact', sendContact)
 // Contact Routes
+
+/* ============================================== */
+
+// Tags
+Router.get('/tags', getTags)
+// Tags
 
 export default Router
