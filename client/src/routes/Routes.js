@@ -6,24 +6,25 @@ import { _VerifyToken } from '../services/AuthServices'
 import Home from '../views/Home'
 import Projects from '../views/Projects'
 import Project from '../views/Project'
+import Login from '../views/Login'
 
 const Routes = ({ darkTheme }) => {
   const [authenticated, setAuthentication] = useState(false)
   const handleRedirect = () => {
     if (authenticated) {
-      return <Redirect to="/dashboard" />
+      return <Redirect to="/" />
     }
   }
-  // const fetchToken = () => {
-  // const token = getToken()
-  // if (token)
-  //   _VerifyToken(token)
-  //     .then(name => {
-  //       setAuthentication(true)
-  //       handleRedirect()
-  //     })
-  //     .catch(() => setAuthentication(false))
-  // }
+  const fetchToken = () => {
+    const token = getToken()
+    if (token)
+      _VerifyToken(token)
+        .then(() => {
+          setAuthentication(true)
+          handleRedirect()
+        })
+        .catch(() => setAuthentication(false))
+  }
 
   return (
     <>
@@ -42,6 +43,18 @@ const Routes = ({ darkTheme }) => {
           exact
           path="/projects/:project_id"
           render={props => <Project {...props} darkTheme={darkTheme} />}
+        />
+        <Route
+          exact
+          path="/login"
+          render={props => (
+            <Login
+              {...props}
+              darkTheme={darkTheme}
+              fetchToken={fetchToken}
+              authenticated={authenticated}
+            />
+          )}
         />
         {/* <ProtectedRoute
           path="/dashboard"

@@ -1,4 +1,5 @@
 import { api } from '../config'
+import { getToken } from './TokenService'
 
 export const _LoginUser = async user => {
   try {
@@ -14,6 +15,8 @@ export const _LoginUser = async user => {
 
 export const _VerifyToken = async () => {
   try {
+    const token = await getToken()
+    return token
   } catch (error) {
     throw error
   }
