@@ -25,6 +25,9 @@ export const ProjectModel = new Schema(
     released: {
       type: Boolean,
       required: true
+    },
+    tags: {
+      type: [{ type: Schema.Types.ObjectId, ref: 'tags' }]
     }
   },
   {

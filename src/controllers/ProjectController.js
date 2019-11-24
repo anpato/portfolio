@@ -1,4 +1,4 @@
-import { Project } from '../database'
+import { Project, Tag } from '../database'
 const checkGif = files => {
   const obj = {
     gif: '',
@@ -14,10 +14,33 @@ const checkGif = files => {
   return obj
 }
 
+const checkTags = async tags => {
+  let returnedTags = []
+  for (let i = 0; i < tags.length; i++) {
+    const findTag = await Tag.findOneAndUpdate(
+      { name: req.body.tags[i] },
+      { expire: new Date() },
+      {
+        upsert: true,
+        new: true,
+        setDefaultsOnInsert: true
+      }
+    )
+    returnedTags.push(findTag._id.toString())
+  }
+  return returnedTags
+}
+
 export const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find()
-    res.send(projects)
+    await Project.find()
+      .populate('tags')
+      .exec((err, data) => {
+        if (err) res.status(500).json({ error: err })
+        else {
+          res.send(data)
+        }
+      })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -54,9 +77,12 @@ export const updateProject = async (req, res) => {
 export const uploadProject = async (req, res) => {
   try {
     const images = checkGif(res.locals.files)
+
+    const tags = await checkTags(req.body.tags)
     const project = new Project({
-      ...req.body,
-      images
+      ...req.body.project,
+      images,
+      tags
     })
     await project.save()
     res.send(project)
@@ -73,6 +99,15 @@ export const deleteProject = async (req, res, next) => {
     res.locals.projectname = project.title
     await project.remove()
     next()
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
+
+export const addTag = async (req, res) => {
+  try {
+    const tags = checkTags(req.body.tags)
+    res.send(tags)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }

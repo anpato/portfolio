@@ -42,9 +42,9 @@ Router.get('/projects/filter/released', filterProjects)
 Router.put('/projects/:project_id', authenticate, updateProject)
 Router.post(
   '/projects',
-  authenticate,
-  multer({ storage }).array('project'),
-  awsFileUpload,
+  // authenticate,
+  // multer({ storage }).array('project'),
+  // awsFileUpload,
   uploadProject
 )
 Router.delete(
