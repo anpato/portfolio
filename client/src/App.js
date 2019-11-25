@@ -5,31 +5,23 @@ import NavBar from './components/NavBar'
 
 function App() {
   const [darkTheme, setTheme] = useState(false)
-  const [authenticated, setAuthentication] = useState(true)
+  const [authenticated, setAuthentication] = useState(false)
   return (
-    <Scroll
-      render={({ x, y }) => (
-        <div
-          className={`${
-            darkTheme ? 'theme--dark' : 'theme--light'
-          } theme--wrapper`}
-        >
-          <NavBar
-            window={{ x, y }}
-            darkTheme={darkTheme}
-            setTheme={setTheme}
-            authenticated={authenticated}
-            setAuthentication={setAuthentication}
-          />
-          <Routes
-            window={{ x, y }}
-            darkTheme={darkTheme}
-            setAuthentication={setAuthentication}
-            authenticated={authenticated}
-          />
-        </div>
-      )}
-    />
+    <div
+      className={`${darkTheme ? 'theme--dark' : 'theme--light'} theme--wrapper`}
+    >
+      <NavBar
+        darkTheme={darkTheme}
+        setTheme={setTheme}
+        authenticated={authenticated}
+        setAuthentication={setAuthentication}
+      />
+      <Routes
+        darkTheme={darkTheme}
+        setAuthentication={setAuthentication}
+        authenticated={authenticated}
+      />
+    </div>
   )
 }
 

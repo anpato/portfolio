@@ -28,7 +28,7 @@ export default class Projects extends Component {
           projects: [...state.projects, ...projects],
           filters: []
         }),
-        () => setTimeout(() => this.setState({ isLoading: false }), 1000)
+        () => this.setState({ isLoading: false })
       )
     } catch (error) {
       console.error(error)
@@ -40,41 +40,42 @@ export default class Projects extends Component {
 
   renderProjects = () => {
     const { darkTheme } = this.props
-    if (this.state.projects.length && !this.state.isLoading) {
-      return (
-        <>
-          <Filter filters={this.state.filters} />
-          <FlexLayout className="project-wrapper" variant="center">
-            {this.state.projects.map((project, index) => {
-              return (
-                <ProjectCard
-                  className={index % 2 === 0 ? 'forward' : 'reverse'}
-                  direction={index % 2 === 0 ? 'forward' : 'reverse'}
-                  key={project._id}
-                  darkTheme={darkTheme}
-                  title={project.title}
-                  released={project.released}
-                  image={project.images.gif}
-                  description={project.description}
-                  onClick={() =>
-                    this.props.history.push(`/projects/${project._id}`)
-                  }
-                />
-              )
-            })}
-          </FlexLayout>
-        </>
-      )
-    } else {
-      return <Spinner color={darkTheme ? '#eeff41' : '#f06292'} />
-    }
+    return (
+      <>
+        <Filter filters={this.state.filters} />
+        <FlexLayout className="project-wrapper" variant="center">
+          {this.state.projects.map((project, index) => {
+            return (
+              <ProjectCard
+                className={index % 2 === 0 ? 'forward' : 'reverse'}
+                direction={index % 2 === 0 ? 'forward' : 'reverse'}
+                key={project._id}
+                darkTheme={darkTheme}
+                title={project.title}
+                released={project.released}
+                image={project.images.gif}
+                description={project.description}
+                onClick={() =>
+                  this.props.history.push(`/projects/${project._id}`)
+                }
+              />
+            )
+          })}
+        </FlexLayout>
+      </>
+    )
   }
 
   render() {
+    const { darkTheme } = this.props
     return (
       <FlexLayout className="projects" variant="center">
         <SideBar />
-        {this.renderProjects()}
+        {!this.state.isLoading && this.state.projects.length ? (
+          this.renderProjects()
+        ) : (
+          <Spinner color={darkTheme ? '#eeff41' : '#f06292'} />
+        )}
       </FlexLayout>
     )
   }

@@ -28,22 +28,21 @@ export default class Login extends Component {
     e.preventDefault()
     this.setState({ isLoading: true })
     const { username, password } = this.state
-    try {
-      new ProtectedServices(null, {
-        username,
-        password
+    new ProtectedServices(null, {
+      username,
+      password
+    })
+      .handleLogin()
+      .then(async res => {
+        if (res === 200) this.props.fetchToken()
       })
-        .handleLogin()
-        .then(async res => {
-          if (res === 200) this.props.fetchToken()
+      .catch(err => {
+        this.setState({
+          isLoading: false,
+          error: 'Invalid Credentials',
+          password: ''
         })
-    } catch (error) {
-      this.setState({
-        isLoading: false,
-        error: 'Invalid Credentials',
-        password: ''
       })
-    }
   }
 
   handleChange = e =>
