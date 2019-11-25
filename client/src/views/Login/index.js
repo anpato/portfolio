@@ -15,7 +15,8 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      isLoading: false
+      isLoading: false,
+      error: ''
     }
   }
   componentDidMount() {
@@ -33,20 +34,25 @@ export default class Login extends Component {
       }).handleLogin()
       if (resp === 200) {
         this.props.fetchToken()
+        console.log(this.props.authenticated)
       }
     } catch (error) {
-      this.setState({ isLoading: false })
-      console.error(error)
+      this.setState({
+        isLoading: false,
+        error: 'Invalid Credentials',
+        password: ''
+      })
     }
   }
 
-  handleChange = e => this.setState({ [e.target.name]: e.target.value })
+  handleChange = e =>
+    this.setState({ [e.target.name]: e.target.value, error: '' })
 
   render() {
     // if (this.props.authenticated) {
     //   return <Redirect to="/" />
     // }
-    const { username, password, isLoading } = this.state
+    const { username, password, isLoading, error } = this.state
     const { darkTheme } = this.props
     return (
       <FlexLayout className="login" align="center">
@@ -75,11 +81,15 @@ export default class Login extends Component {
             <Button
               title={isLoading ? null : 'Login'}
               variant="raised"
+              disabled={error ? true : false}
               color={darkTheme ? 'green' : 'blue'}
             >
-              {isLoading ? <Spinner size={14} /> : null}
+              {isLoading ? (
+                <Spinner size={14} color={darkTheme ? '#eeff41' : '#f06292'} />
+              ) : null}
             </Button>
           </FormGroup>
+          {error ? <h4 className="error">{error}</h4> : null}
         </Card>
       </FlexLayout>
     )

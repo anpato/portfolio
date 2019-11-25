@@ -7,25 +7,29 @@ import Home from '../views/Home'
 import Projects from '../views/Projects'
 import Project from '../views/Project'
 import Login from '../views/Login'
+import ProtectedServices from '../services/ProtectedServices'
 
 const Routes = ({ darkTheme }) => {
   const [authenticated, setAuthentication] = useState(false)
   const handleRedirect = () => {
     if (authenticated) {
-      return <Redirect to="/" />
+      console.log(authenticated)
+      return <Redirect to="/projects" />
     }
   }
   const fetchToken = () => {
     const token = getToken()
     if (token)
-      _VerifyToken(token)
-        .then(() => {
-          setAuthentication(true)
-          handleRedirect()
+      new ProtectedServices(null, null, token)
+        .verifyToken()
+        .then(resp => {
+          if (resp.status === 200) {
+            setAuthentication(true)
+            handleRedirect()
+          }
         })
         .catch(() => setAuthentication(false))
   }
-
   return (
     <>
       <Switch>

@@ -3,6 +3,7 @@ import './Button.scss'
 export const Button = ({
   className,
   children,
+  disabled,
   color,
   onClick,
   type,
@@ -13,6 +14,7 @@ export const Button = ({
     className={`btn ${className} ${variant ? variant.toLowerCase() : null} ${
       color ? color.toLowerCase() : null
     }`}
+    disabled={disabled}
     onClick={onClick}
     type={type}
   >

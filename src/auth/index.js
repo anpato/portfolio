@@ -6,13 +6,23 @@ const jwt = jsonwebtoken
 const TOKEN_KEY = process.env.TOKEN_KEY
 const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS)
 
-export const authenticate = (req, res, next) => {
+export const authenticate = async (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1]
     const data = jwt.verify(token, TOKEN_KEY)
     res.locals.user = data
     // if (compare(req))
     next()
+  } catch (error) {
+    res.status(403).send({ error: 'Unauthorized' })
+  }
+}
+
+export const verifyToken = async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1]
+    const user = jwt.verify(token, TOKEN_KEY)
+    res.json(user)
   } catch (error) {
     res.status(403).send({ error: 'Unauthorized' })
   }

@@ -31,6 +31,7 @@ const storage = multer.memoryStorage({
 Router.post('/auth/sign-up', registerUser)
 Router.post('/auth/login', loginUser)
 Router.post('/auth/register', registerUser)
+Router.get('/auth/verify', verifyToken)
 // Authentication Routes
 
 /* ============================================= */
