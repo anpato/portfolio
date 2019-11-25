@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import {
   FlexLayout,
   Card,
@@ -28,14 +29,14 @@ export default class Login extends Component {
     this.setState({ isLoading: true })
     const { username, password } = this.state
     try {
-      const resp = await new ProtectedServices(null, {
+      new ProtectedServices(null, {
         username,
         password
-      }).handleLogin()
-      if (resp === 200) {
-        this.props.fetchToken()
-        console.log(this.props.authenticated)
-      }
+      })
+        .handleLogin()
+        .then(async res => {
+          if (res === 200) this.props.fetchToken()
+        })
     } catch (error) {
       this.setState({
         isLoading: false,
@@ -49,9 +50,9 @@ export default class Login extends Component {
     this.setState({ [e.target.name]: e.target.value, error: '' })
 
   render() {
-    // if (this.props.authenticated) {
-    //   return <Redirect to="/" />
-    // }
+    if (this.props.authenticated) {
+      return <Redirect to="/dashboard" />
+    }
     const { username, password, isLoading, error } = this.state
     const { darkTheme } = this.props
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Switch, Redirect, Route } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import { getToken } from '../services/TokenService'
@@ -8,27 +8,22 @@ import Projects from '../views/Projects'
 import Project from '../views/Project'
 import Login from '../views/Login'
 import ProtectedServices from '../services/ProtectedServices'
+import Dashboard from '../views/Dashboard'
 
-const Routes = ({ darkTheme }) => {
-  const [authenticated, setAuthentication] = useState(false)
+const Routes = ({ authenticated, setAuthentication, darkTheme, history }) => {
   const handleRedirect = () => {
     if (authenticated) {
-      console.log(authenticated)
-      return <Redirect to="/projects" />
+      return history.push('/dashboard')
     }
   }
   const fetchToken = () => {
     const token = getToken()
-    if (token)
-      new ProtectedServices(null, null, token)
-        .verifyToken()
-        .then(resp => {
-          if (resp.status === 200) {
-            setAuthentication(true)
-            handleRedirect()
-          }
-        })
-        .catch(() => setAuthentication(false))
+    if (token) {
+      setAuthentication(true)
+      handleRedirect()
+    } else {
+      setAuthentication(false)
+    }
   }
   return (
     <>
@@ -60,13 +55,12 @@ const Routes = ({ darkTheme }) => {
             />
           )}
         />
-        {/* <ProtectedRoute
+        <ProtectedRoute
           path="/dashboard"
-          component={Home}
-          fetchToken={fetchToken}
+          component={Dashboard}
           authenticated={authenticated}
         />
-        <ProtectedRoute
+        {/* <ProtectedRoute
           path="/customers"
           component={Customers}
           authenticated={authenticated}

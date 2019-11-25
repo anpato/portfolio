@@ -1,5 +1,5 @@
 import { api } from '../config'
-import { getToken, setToken } from '../services/TokenService'
+import { setToken } from '../services/TokenService'
 
 export default class ProtectedServices {
   constructor(id, user, token) {
@@ -20,7 +20,6 @@ export default class ProtectedServices {
   async verifyToken() {
     try {
       const resp = await api.get('/auth/verify', this.token)
-      console.log(resp.status)
       return resp.status
     } catch (error) {
       throw error
