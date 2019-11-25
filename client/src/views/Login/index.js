@@ -21,7 +21,7 @@ export default class Login extends Component {
     }
   }
   componentDidMount() {
-    this.props.fetchToken()
+    this.props.fetchToken(this.props.history)
   }
 
   handleSubmit = async e => {

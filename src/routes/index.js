@@ -41,12 +41,18 @@ Router.get('/auth/verify', verifyToken)
 Router.get('/projects', getProjects)
 Router.get('/projects/:project_id', getProject)
 Router.get('/projects/filter/released', filterProjects)
-Router.put('/projects/:project_id', authenticate, updateProject)
+Router.put(
+  '/projects/:project_id',
+  authenticate,
+  multer({ storage }).array('projects'),
+  awsFileUpload,
+  updateProject
+)
 Router.post(
   '/projects',
   // authenticate,
-  // multer({ storage }).array('project'),
-  // awsFileUpload,
+  multer({ storage }).array('projects'),
+  awsFileUpload,
   uploadProject
 )
 Router.delete(

@@ -17,8 +17,10 @@ export default class ManageProject extends Component {
       title: '',
       description: '',
       newTag: '',
+      newGif: '',
+      images: [],
       tags: [],
-      images: {},
+      newImage: '',
       isLoading: false,
       createNewTag: false,
       error: '',
@@ -39,6 +41,7 @@ export default class ManageProject extends Component {
       this.setState({
         title: project.title,
         description: project.description,
+        images: [...project.images.static, project.images.gif],
         tags
       })
     } catch (error) {
@@ -52,6 +55,19 @@ export default class ManageProject extends Component {
       tagError: '',
       error: ''
     })
+
+  handleImageUpload = key => {
+    this.setState(state => ({
+      images: [...state.images, state[key]],
+      [key]: ''
+    }))
+  }
+
+  handleImageChange = (e, key) => {
+    this.setState({
+      [key]: e.target.files[0]
+    })
+  }
 
   removeTag = tag => {
     const currentTagsToAdd = this.state.tags
@@ -102,8 +118,10 @@ export default class ManageProject extends Component {
   handleSubmit = async e => {
     e.preventDefault()
     this.setState({ isLoading: true })
-    const { title, description, tags } = this.state
+    const { title, description, tags, images } = this.state
     try {
+      const formData = new FormData()
+      images.forEach(image => formData.append('projects', image))
       const data = {
         project: {
           title,
@@ -111,10 +129,14 @@ export default class ManageProject extends Component {
         },
         tags
       }
+
+      for (let key in data) {
+        formData.append(key, JSON.stringify(data[key]))
+      }
       const resp = await new ProtectedServices(
         this.props.match.params.project_id,
         null,
-        data
+        formData
       ).updateProject()
       if (resp.status === 200) {
         this.props.history.push('/dashboard/projects')
@@ -153,8 +175,21 @@ export default class ManageProject extends Component {
     }
   }
 
+  renderImageSnacks = () => {
+    if (this.state.images.length) {
+      return this.state.images.map((image, index) => {
+        return (
+          <p key={index} className="snack released">
+            {typeof image === 'string' ? image : image.name}
+          </p>
+        )
+      })
+    }
+  }
+
   render() {
     const { title, description, isLoading, error } = this.state
+
     return (
       <FlexLayout className="project-manage" align="center">
         <FlexLayout className="upload-form" align="center">
@@ -179,6 +214,45 @@ export default class ManageProject extends Component {
               value={description}
               color="red"
             />
+            <FlexLayout className="image-field-wrapper" layout="col">
+              <label htmlFor="newGif">Gif</label>
+              <FlexLayout>
+                <TextInput
+                  type="file"
+                  name="project"
+                  onChange={e => this.handleImageChange(e, 'newGif')}
+                  color="red"
+                />
+                <Button
+                  title="+"
+                  variant="fab"
+                  color="blue"
+                  className="add-btn"
+                  type="button"
+                  onClick={() => this.handleImageUpload('newGif')}
+                />
+              </FlexLayout>
+            </FlexLayout>
+            <FlexLayout className="image-field-wrapper" layout="col">
+              <label htmlFor="newImage">New Image</label>
+              <FlexLayout>
+                <TextInput
+                  type="file"
+                  name="project"
+                  color="red"
+                  onChange={e => this.handleImageChange(e, 'newImage')}
+                />
+                <Button
+                  title="+"
+                  variant="fab"
+                  color="blue"
+                  className="add-btn"
+                  type="button"
+                  onClick={() => this.handleImageUpload('newImage')}
+                />
+              </FlexLayout>
+              {this.renderImageSnacks()}
+            </FlexLayout>
             <FlexLayout className="tag-area" layout="col">
               <FlexLayout className="tags" align="start space wrap">
                 {this.renderTags()}

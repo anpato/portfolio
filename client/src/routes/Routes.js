@@ -10,17 +10,11 @@ import Dashboard from '../views/Private/Dashboard'
 import AdminProjects from '../views/Private/AdminProjects'
 import ManageProject from '../views/Private/ManageProject'
 
-const Routes = ({ authenticated, setAuthentication, darkTheme, history }) => {
-  const handleRedirect = () => {
-    if (authenticated) {
-      return history.push('/dashboard')
-    }
-  }
+const Routes = ({ authenticated, setAuthentication, darkTheme }) => {
   const fetchToken = () => {
     const token = getToken()
     if (token) {
       setAuthentication(true)
-      handleRedirect()
     } else {
       setAuthentication(false)
     }
