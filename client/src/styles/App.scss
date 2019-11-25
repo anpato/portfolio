@@ -6,6 +6,8 @@
 @import 'Projects';
 @import 'Project';
 @import 'Login';
+@import 'AdminProjects';
+@import 'AdminUpload';
 body {
   margin: 0;
   padding: 0;
@@ -17,6 +19,10 @@ a {
 }
 button {
   outline: none;
+}
+
+.wrapper {
+  padding: 10% 0;
 }
 
 .snack {

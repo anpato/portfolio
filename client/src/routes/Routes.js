@@ -1,14 +1,14 @@
 import React from 'react'
-import { Switch, Redirect, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import { getToken } from '../services/TokenService'
-import { _VerifyToken } from '../services/AuthServices'
 import Home from '../views/Home'
 import Projects from '../views/Projects'
 import Project from '../views/Project'
 import Login from '../views/Login'
-import ProtectedServices from '../services/ProtectedServices'
-import Dashboard from '../views/Dashboard'
+import Dashboard from '../views/Private/Dashboard'
+import AdminProjects from '../views/Private/AdminProjects'
+import ManageProject from '../views/Private/ManageProject'
 
 const Routes = ({ authenticated, setAuthentication, darkTheme, history }) => {
   const handleRedirect = () => {
@@ -56,20 +56,24 @@ const Routes = ({ authenticated, setAuthentication, darkTheme, history }) => {
           )}
         />
         <ProtectedRoute
+          exact
           path="/dashboard"
           component={Dashboard}
-          authenticated={authenticated}
-        />
-        {/* <ProtectedRoute
-          path="/customers"
-          component={Customers}
+          darkTheme={darkTheme}
           authenticated={authenticated}
         />
         <ProtectedRoute
-          path="/inventory"
-          component={Inventory}
+          exact
+          path="/dashboard/projects"
+          component={AdminProjects}
+          darkTheme={darkTheme}
           authenticated={authenticated}
-        /> */}
+        />
+        <ProtectedRoute
+          path="/dashboard/projects/:project_id"
+          component={ManageProject}
+          authenticated={authenticated}
+        />
       </Switch>
     </>
   )

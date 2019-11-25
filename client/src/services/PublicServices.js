@@ -21,4 +21,12 @@ export default class PublicService {
       throw error
     }
   }
+  async getTags() {
+    try {
+      const resp = await api.get('/tags')
+      return resp.data
+    } catch (error) {
+      throw error
+    }
+  }
 }

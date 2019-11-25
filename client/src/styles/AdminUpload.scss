@@ -1,0 +1,52 @@
+.project-manage {
+  .upload-form {
+    width: 80%;
+    .form {
+      width: 80%;
+      .input,
+      select {
+        margin: 1em auto;
+      }
+      .submit-btn,
+      .add-btn {
+        margin: 1em auto;
+      }
+    }
+    .snack {
+      margin: 1em;
+      .btn {
+        height: 30px;
+        width: 30px;
+        line-height: 20px;
+        font-size: 18px;
+        margin-left: 1em;
+      }
+    }
+    .tag-input {
+      width: 60%;
+    }
+    .tags {
+      width: 100%;
+    }
+    .tag-area {
+      padding: 0.5em 0;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+    }
+    .add-tags {
+      width: 80%;
+
+      .input {
+        width: 60%;
+      }
+      .btn {
+        margin-top: 1em;
+        align-self: flex-start;
+      }
+    }
+    .btn-group {
+      width: 40%;
+    }
+  }
+}

@@ -17,16 +17,15 @@ const checkGif = files => {
 const checkTags = async tags => {
   let returnedTags = []
   for (let i = 0; i < tags.length; i++) {
-    const findTag = await Tag.findOneAndUpdate(
-      { name: req.body.tags[i] },
-      { expire: new Date() },
-      {
-        upsert: true,
-        new: true,
-        setDefaultsOnInsert: true
-      }
-    )
-    returnedTags.push(findTag._id.toString())
+    const findTag = await Tag.findOne({ name: tags[i] })
+    if (!findTag) {
+      const newTag = new Tag({ name: tags[i] })
+      console.log(newTag)
+      await newTag.save()
+      returnedTags.push(newTag._id.toString())
+    } else {
+      returnedTags.push(findTag._id.toString())
+    }
   }
   return returnedTags
 }
@@ -57,8 +56,14 @@ export const filterProjects = async (req, res) => {
 
 export const getProject = async (req, res) => {
   try {
-    const project = await Project.findById(req.params.project_id)
-    res.send(project)
+    await Project.findById(req.params.project_id)
+      .populate('tags')
+      .exec((err, project) => {
+        if (err) res.status(500).json({ error: error.message })
+        else {
+          res.send(project)
+        }
+      })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
@@ -66,14 +71,17 @@ export const getProject = async (req, res) => {
 
 export const updateProject = async (req, res) => {
   try {
+    console.log(req.body)
+
     await Project.updateOne(
       { _id: req.params.project_id },
-      { ...req.body.project, tags: checkTags(req.body.tags) }
+      { ...req.body.project, tags: await checkTags(req.body.tags) }
     )
     const project = await Project.findById(req.params.project_id)
     res.send(project)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error })
+    throw error
   }
 }
 
