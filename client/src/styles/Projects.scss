@@ -74,17 +74,19 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .projects {
-    .project-card {
-      width: 50%;
-    }
-    .hovered {
-      animation: growCard 0.6s ease forwards;
-    }
+    .card-wrapper {
+      .project-card {
+        width: 50%;
+      }
+      .hovered {
+        animation: growCard 0.6s ease forwards;
+      }
 
-    .no-hover {
-      animation: shrinkCard 0.6s ease forwards;
+      .no-hover {
+        animation: shrinkCard 0.6s ease forwards;
+      }
     }
   }
 }
