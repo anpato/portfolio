@@ -72,12 +72,13 @@ export const getProject = async (req, res) => {
 export const updateProject = async (req, res) => {
   try {
     const images = req.files.length ? checkGif(res.locals.files) : null
-
+    const projectBody = JSON.parse(req.body.project)
+    console.log(projectBody)
     const project = await Project.findById(req.params.project_id)
     await Project.updateOne(
       { _id: req.params.project_id },
       {
-        ...req.body.project,
+        ...projectBody,
         tags: await checkTags(req.body.tags),
         images: req.files.length ? images : project.images
       }

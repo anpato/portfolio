@@ -12,28 +12,36 @@ export default class Projects extends Component {
       isLoading: false,
       isHovered: null,
       projects: [],
-      filters: []
+      filters: [],
+      error: ''
     }
   }
 
-  async componentDidMount() {
-    // this.setState({ isLoading: true })
-    await this.fetchProjects()
+  componentDidMount() {
+    this.setState({ isLoading: true })
+    this.fetchProjects()
   }
 
   fetchProjects = async () => {
     try {
       const projects = await new PublicService().getProjects()
-      this.setState(
-        state => ({
-          projects: [...state.projects, ...projects],
-          filters: []
-        })
-        // () => this.setState({ isLoading: false })
-      )
+      this.setState(state => ({
+        projects: [...state.projects, ...projects],
+        filters: []
+      }))
     } catch (error) {
-      console.error(error)
+      await this.handleError()
     }
+  }
+
+  handleError = async () => {
+    this.setState(
+      {
+        isLoading: true,
+        error: "Hang On Something Went Wrong, let's try this again."
+      },
+      () => setTimeout(async () => await this.fetchProjects(), 1500)
+    )
   }
 
   addFilter = filter =>
@@ -48,53 +56,55 @@ export default class Projects extends Component {
     return (
       <>
         <Filter filters={this.state.filters} />
-        <FlexLayout className="project-wrapper" layout="col">
-          {this.state.projects.map((project, index) => {
-            return (
-              <FlexLayout
-                className="card-wrapper"
-                align={index % 2 === 0 ? 'end' : 'start'}
-                layout="col"
-              >
-                <ProjectCard
-                  className={
-                    (index % 2 === 0 ? 'forward' : 'reverse',
-                    this.state.isHovered === project._id
-                      ? 'hovered'
-                      : 'no-hover')
-                  }
-                  direction={index % 2 === 0 ? 'forward' : 'reverse'}
+        <FlexLayout className="project-wrapper" layout="col" align="center">
+          {this.state.projects.length ? (
+            this.state.projects.map((project, index) => {
+              return (
+                <FlexLayout
+                  className="card-wrapper"
+                  align={index % 2 === 0 ? 'end' : 'start'}
+                  layout="col"
                   key={project._id}
-                  darkTheme={darkTheme}
-                  onMouseEnter={() => this.handleHover(project._id, 'enter')}
-                  onMouseLeave={() => this.handleHover(null, 'leave')}
-                  title={project.title}
-                  released={project.released}
-                  onLoad={() => this.setState({ isLoading: false })}
-                  image={project.images.gif}
-                  description={project.description}
-                  onClick={() =>
-                    this.props.history.push(`/projects/${project._id}`)
-                  }
-                />
-              </FlexLayout>
-            )
-          })}
+                >
+                  <ProjectCard
+                    className={
+                      (index % 2 === 0 ? 'forward' : 'reverse',
+                      this.state.isHovered === project._id
+                        ? 'hovered'
+                        : 'no-hover')
+                    }
+                    direction={index % 2 === 0 ? 'forward' : 'reverse'}
+                    darkTheme={darkTheme}
+                    onMouseEnter={() => this.handleHover(project._id, 'enter')}
+                    onMouseLeave={() => this.handleHover(null, 'leave')}
+                    title={project.title}
+                    released={project.released}
+                    // onLoad={() => this.setState({ isLoading: false })}
+                    image={project.images.gif}
+                    description={project.description}
+                    onClick={() =>
+                      this.props.history.push(`/projects/${project._id}`)
+                    }
+                  />
+                </FlexLayout>
+              )
+            })
+          ) : (
+            <div className="message">
+              <Spinner color={darkTheme ? '#eeff41' : '#f06292'} />
+              <p className="error">{this.state.error}</p>
+            </div>
+          )}
         </FlexLayout>
       </>
     )
   }
 
   render() {
-    const { darkTheme } = this.props
     return (
       <FlexLayout className="projects" align="center" layout="col">
         <SideBar />
-        {!this.state.isLoading && this.state.projects.length ? (
-          this.renderProjects()
-        ) : (
-          <Spinner color={darkTheme ? '#eeff41' : '#f06292'} />
-        )}
+        {this.renderProjects()}
       </FlexLayout>
     )
   }

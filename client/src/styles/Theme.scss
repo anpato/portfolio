@@ -69,9 +69,12 @@
     }
   }
   .projects {
-    .project-wrapper-card {
+    .project-card {
       color: $WhiteHover;
       background: #424242;
+      .detail-wrapper {
+        background: rgba(0, 0, 0, 0.8);
+      }
     }
   }
   .in-process {
@@ -152,9 +155,12 @@
   }
 
   .projects {
-    .project-wrapper-card {
+    .project-card {
       color: $DarkMain;
       background: $White;
+      .detail-wrapper {
+        background: rgba(255, 255, 255, 0.8);
+      }
     }
   }
   .project {

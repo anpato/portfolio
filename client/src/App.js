@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Scroll } from 'react-fns'
 import Routes from './routes/Routes'
 import NavBar from './components/NavBar'
 

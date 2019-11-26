@@ -6,7 +6,7 @@
   "author": "Andre Pato <anpato1994@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec babel-node ./src/",
+    "dev": "nodemon --exec babel-node ./src/server.js",
     "heroku-postbuild": "yarn install",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src -s ",

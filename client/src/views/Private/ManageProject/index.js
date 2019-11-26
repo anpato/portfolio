@@ -16,6 +16,8 @@ export default class ManageProject extends Component {
     this.state = {
       title: '',
       description: '',
+      githubLink: '',
+      deployedLink: '',
       newTag: '',
       newGif: '',
       images: [],
@@ -42,6 +44,8 @@ export default class ManageProject extends Component {
         title: project.title,
         description: project.description,
         images: [...project.images.static, project.images.gif],
+        githubLink: project.github_link,
+        deployedLink: project.deploy_link ? project.deploy_link : '',
         tags
       })
     } catch (error) {
@@ -82,6 +86,7 @@ export default class ManageProject extends Component {
           <span>
             {tag}
             <Button
+              className="add-btn"
               title="X"
               color="red"
               variant="fab"
@@ -118,13 +123,22 @@ export default class ManageProject extends Component {
   handleSubmit = async e => {
     e.preventDefault()
     this.setState({ isLoading: true })
-    const { title, description, tags, images } = this.state
+    const {
+      title,
+      description,
+      tags,
+      images,
+      githubLink,
+      deployedLink
+    } = this.state
     try {
       const formData = new FormData()
       images.forEach(image => formData.append('projects', image))
       const data = {
         project: {
           title,
+          deploy_link: deployedLink,
+          github_link: githubLink,
           description
         },
         tags
@@ -169,7 +183,13 @@ export default class ManageProject extends Component {
               ''
             )}
           </FlexLayout>
-          <Button type="button" title="+" color="red" onClick={this.addTag} />
+          <Button
+            className="add-btn"
+            type="button"
+            title="+"
+            color="red"
+            onClick={this.addTag}
+          />
         </FlexLayout>
       )
     }
@@ -188,7 +208,14 @@ export default class ManageProject extends Component {
   }
 
   render() {
-    const { title, description, isLoading, error } = this.state
+    const {
+      title,
+      description,
+      isLoading,
+      error,
+      githubLink,
+      deployedLink
+    } = this.state
 
     return (
       <FlexLayout className="project-manage" align="center">
@@ -204,6 +231,7 @@ export default class ManageProject extends Component {
               name="title"
               value={title}
               color="red"
+              onChange={this.handleChange}
               required
             />
             <TextInput
@@ -212,6 +240,24 @@ export default class ManageProject extends Component {
               label="Description"
               name="description"
               value={description}
+              onChange={this.handleChange}
+              color="red"
+            />
+            <TextInput
+              floating
+              label="Deployed Link"
+              name="deployedLink"
+              value={deployedLink}
+              onChange={this.handleChange}
+              color="red"
+            />
+            <TextInput
+              floating
+              required
+              label="Github Link"
+              name="githubLink"
+              value={githubLink}
+              onChange={this.handleChange}
               color="red"
             />
             <FlexLayout className="image-field-wrapper" layout="col">
