@@ -79,7 +79,7 @@ export default class Projects extends PureComponent {
                     onMouseLeave={() => this.handleHover(null, 'leave')}
                     title={project.title}
                     released={project.released}
-                    // onLoad={() => this.setState({ isLoading: false })}
+                    onLoad={() => this.setState({ isLoading: false })}
                     image={project.images.gif}
                     description={project.description}
                     onClick={() =>
