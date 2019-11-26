@@ -45,7 +45,7 @@ export default class Project extends Component {
           >
             {images.static.map((image, index) => (
               <div key={index}>
-                <img src={image} alt="project" />
+                <img src={image} alt="project" onLoad={this.props.onLoad} />
               </div>
             ))}
           </Carousel>

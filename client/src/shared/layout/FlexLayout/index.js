@@ -5,9 +5,11 @@ export const FlexLayout = ({
   children,
   align,
   layout,
-  direction
+  direction,
+  ...rest
 }) => (
   <div
+    {...rest}
     className={`flex-layout ${className ? className : ''} ${
       align ? align : ''
     } ${layout ? layout : ''} ${direction ? `${direction}-row` : ''}`}

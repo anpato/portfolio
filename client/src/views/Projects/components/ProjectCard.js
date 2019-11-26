@@ -3,37 +3,36 @@ import { FlexLayout, Button } from '../../../shared'
 
 const ProjectCard = ({
   className,
-  darkTheme,
   direction,
+  darkTheme,
   onClick,
+  onMouseEnter,
+  onMouseLeave,
   title,
   image,
   released
 }) => (
   <FlexLayout
-    className={`project-wrapper-card ${className}`}
-    layout="wrap center"
+    className={`project-card ${className}`}
+    layout="center"
     direction={direction}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
   >
-    <FlexLayout className="detail-wrapper" align="center" layout="col">
-      <h2>{title}</h2>
-      <span>
-        <h3>Status</h3>
-        <span className={released ? 'snack released' : 'snack in-process'}>
-          {released ? 'Released' : 'In Development'}
-        </span>
+    <FlexLayout className="detail-wrapper" align="center" layout="row">
+      <span className={released ? 'snack released' : 'snack in-process'}>
+        {released ? 'Released' : 'In Development'}
       </span>
+      <h2>{title}</h2>
       <Button
-        title="View Details"
-        onClick={onClick}
         className="nav-btn"
+        title="View Details"
+        color={darkTheme ? 'green' : 'blue'}
+        onClick={onClick}
         variant="raised"
-        color={darkTheme ? 'green' : 'red'}
       />
     </FlexLayout>
-    <div className="wrapper">
-      <img src={image} alt="Project" />
-    </div>
+    <img src={image} alt="Project" />
   </FlexLayout>
 )
 
