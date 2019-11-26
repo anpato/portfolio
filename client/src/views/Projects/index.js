@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { PureComponent, Component } from 'react'
 import PublicService from '../../services/PublicServices'
 import { FlexLayout, Spinner } from '../../shared'
 import ProjectCard from './components/ProjectCard'
 import Filter from './components/Filter'
 import SideBar from './components/SideBar'
 
-export default class Projects extends Component {
+export default class Projects extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
