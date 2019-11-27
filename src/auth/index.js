@@ -6,8 +6,8 @@ const jwt = jsonwebtoken
 const TOKEN_KEY = process.env.TOKEN_KEY
 const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS)
 
-export default class AuthService {
-  authenticate = async (req, res, next) => {
+export default class AuthController {
+  async Authenticate(req, res, next) {
     try {
       const token = req.headers.authorization.split(' ')[1]
       const data = jwt.verify(token, TOKEN_KEY)
@@ -19,7 +19,7 @@ export default class AuthService {
     }
   }
 
-  verifyToken = async (req, res) => {
+  async VerifyToken(req, res) {
     try {
       const token = req.headers.authorization.split(' ')[1]
       const user = jwt.verify(token, TOKEN_KEY)
@@ -29,7 +29,7 @@ export default class AuthService {
     }
   }
 
-  signToken = payload => {
+  SignToken(payload) {
     const token = jwt.sign(
       { payload, exp: Math.floor(new Date().getTime() / 1000) + 42 * 3600 },
       TOKEN_KEY
@@ -37,7 +37,7 @@ export default class AuthService {
     return token
   }
 
-  VerifyPassword = async (user, password, res) => {
+  async VerifyPassword(user, password, res) {
     try {
       return await bcrypt.compare(password, user.password_digest)
     } catch (error) {
@@ -45,7 +45,7 @@ export default class AuthService {
     }
   }
 
-  HashPassword = async (password, res) => {
+  async HashPassword(password, res) {
     try {
       return await bcrypt.hash(password, SALT_ROUNDS)
     } catch (error) {

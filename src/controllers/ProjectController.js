@@ -36,7 +36,7 @@ class Helpers {
     return returnedTags
   }
 }
-export default class ProjectController {
+class ProjectController {
   constructor() {
     this.Helper = new Helpers()
   }
@@ -137,3 +137,5 @@ export default class ProjectController {
     }
   }
 }
+
+export { ProjectController }
