@@ -9,6 +9,7 @@ import AuthController from '../auth'
 // Controllers
 
 const Router = ExpressRouter()
+
 const storage = multer.memoryStorage({
   destination: (req, file, cb) => {
     cb(null, '')
