@@ -5,7 +5,7 @@ class ProjectController {
     this.Helper = new HelperService()
   }
 
-  async getProjects(req, res) {
+  getProjects = async (req, res) => {
     try {
       await Project.find()
         .populate('tags')
@@ -19,7 +19,7 @@ class ProjectController {
       res.status(500).json({ error: error.message })
     }
   }
-  async filterProjects(req, res) {
+  filterProjects = async (req, res) => {
     try {
       const project = await Project.find({ released: req.query.released })
       res.send(project)
@@ -27,7 +27,7 @@ class ProjectController {
       res.status(500).json({ error: error.message })
     }
   }
-  async getProject(req, res) {
+  getProject = async (req, res) => {
     try {
       await Project.findById(req.params.project_id)
         .populate('tags')
@@ -42,7 +42,7 @@ class ProjectController {
     }
   }
 
-  async uploadProject(req, res) {
+  uploadProject = async (req, res) => {
     try {
       const images = this.Helpers.checkGif(res.locals.files)
       const tags = await this.Helpers.checkTags(req.body.tags)
@@ -58,7 +58,7 @@ class ProjectController {
     }
   }
 
-  async updateProject(req, res) {
+  updateProject = async (req, res) => {
     try {
       const images = req.files.length ? this.checkGif(res.locals.files) : null
       const projectBody = JSON.parse(req.body.project)
@@ -78,7 +78,7 @@ class ProjectController {
       throw error
     }
   }
-  async deleteProject(req, res, next) {
+  deleteProject = async (req, res, next) => {
     try {
       const project = await Project.findById(req.params.project_id)
       const image = project.image_url.split('/')
@@ -90,7 +90,7 @@ class ProjectController {
       res.status(500).json({ error: error.message })
     }
   }
-  async getTags(req, res) {
+  getTags = async (req, res) => {
     try {
       const tags = await Tag.find()
       res.send(tags)

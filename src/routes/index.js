@@ -51,7 +51,7 @@ Router.put(
 )
 Router.post(
   '/projects',
-  // authController.Authenticate,
+  authController.Authenticate,
   multer({ storage }).array('projects'),
   awsController.upload,
   projectController.uploadProject

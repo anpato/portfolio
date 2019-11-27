@@ -55,7 +55,7 @@ class AwsController {
     })
   }
 
-  upload(req, res, next) {
+  upload = (req, res, next) => {
     const project = this.Helpers.dataParser(req.body.project)
     const subFolder = this.Helpers.generateSubFolder(project.title)
     if (req.files.length) {
@@ -98,7 +98,7 @@ class AwsController {
       next()
     }
   }
-  deleteFile(req, res, file) {
+  deleteFile = (req, res, file) => {
     this.params = this.Helpers.setParams({ file })
     this.s3.deleteObject(this.params, (err, data) => {
       if (err) console.log(err)
