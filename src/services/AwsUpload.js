@@ -1,6 +1,5 @@
 import 'dotenv/config'
-import fs from 'fs'
-import awsSdk, { DataExchange } from 'aws-sdk'
+import awsSdk from 'aws-sdk'
 
 const pushKeys = data => {
   let existingFiles = []
