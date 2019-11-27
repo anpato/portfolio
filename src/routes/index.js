@@ -9,11 +9,16 @@ import AuthController from '../auth'
 // Controllers
 
 const Router = ExpressRouter()
+
+/* ============================================= */
+// Multer Config
 const storage = multer.memoryStorage({
   destination: (req, file, cb) => {
     cb(null, '')
   }
 })
+// Multer Config
+/* ============================================= */
 
 /* ============================================= */
 // Initialize controllers
