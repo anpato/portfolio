@@ -2,8 +2,7 @@ import { Router as ExpressRouter } from 'express'
 import multer from 'multer'
 
 // Controllers
-import { awsFileUpload, awsFileRemove } from '../services/AwsUpload'
-import { sendContact } from '../services'
+import { AwsController, sendContact } from '../services'
 import { ProjectController, UserController } from '../controllers/'
 import AuthController from '../auth'
 // Controllers
@@ -24,6 +23,7 @@ const storage = multer.memoryStorage({
 // Initialize controllers
 const authController = new AuthController()
 const userController = new UserController()
+const awsController = new AwsController()
 const projectController = new ProjectController()
 // Initialize controllers
 /* ============================================= */
@@ -46,21 +46,21 @@ Router.put(
   '/projects/:project_id',
   authController.Authenticate,
   multer({ storage }).array('projects'),
-  awsFileUpload,
+  awsController.upload,
   projectController.updateProject
 )
 Router.post(
   '/projects',
   // authController.Authenticate,
   multer({ storage }).array('projects'),
-  awsFileUpload,
+  awsController.upload,
   projectController.uploadProject
 )
 Router.delete(
   '/projects/:project_id',
   authController.Authenticate,
   projectController.deleteProject,
-  awsFileRemove
+  awsController.deleteFile
 )
 // Project Routes
 /* ============================================= */
