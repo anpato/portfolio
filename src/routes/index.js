@@ -7,17 +7,8 @@ import { authenticate, verifyToken } from '../auth'
 // Controller Methods
 import { awsFileUpload, awsFileRemove } from '../services/AwsUpload'
 import { registerUser, loginUser } from '../controllers/UserController'
-
-import {
-  uploadProject,
-  deleteProject,
-  getProjects,
-  getProject,
-  filterProjects,
-  updateProject,
-  getTags
-} from '../controllers/ProjectController'
 import { sendContact } from '../services'
+import ProjectController from '../controllers/ProjectController'
 // Controller Methods
 const Router = ExpressRouter()
 const storage = multer.memoryStorage({
@@ -38,29 +29,34 @@ Router.get('/auth/verify', verifyToken)
 
 /* ============================================= */
 // Project Routes
-Router.get('/projects', getProjects)
-Router.get('/projects/:project_id', getProject)
-Router.get('/projects/filter/released', filterProjects)
+const projectController = new ProjectController()
+Router.get('/projects', projectController.getProjects)
+Router.get('/projects/:project_id', projectController.getProject)
+Router.get('/projects/filter/released', projectController.filterProjects)
 Router.put(
   '/projects/:project_id',
   authenticate,
   multer({ storage }).array('projects'),
   awsFileUpload,
-  updateProject
+  projectController.updateProject
 )
 Router.post(
   '/projects',
   // authenticate,
   multer({ storage }).array('projects'),
   awsFileUpload,
-  uploadProject
+  projectController.uploadProject
 )
 Router.delete(
   '/projects/:project_id',
   authenticate,
-  deleteProject,
+  projectController.deleteProject,
   awsFileRemove
 )
+
+// Tags
+Router.get('/tags', projectController.getTags)
+// Tags
 // Project Routes
 
 /* ============================================== */
@@ -70,9 +66,5 @@ Router.post('/contact', sendContact)
 // Contact Routes
 
 /* ============================================== */
-
-// Tags
-Router.get('/tags', getTags)
-// Tags
 
 export default Router
