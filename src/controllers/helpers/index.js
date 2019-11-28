@@ -1,9 +1,4 @@
 export default class HelperService {
-  constructor() {
-    this.checkGif = this.checkGif.bind(this)
-    this.checkTags = this.checkTags.bind(this)
-  }
-
   checkGif(files) {
     const obj = {
       gif: '',
@@ -18,13 +13,13 @@ export default class HelperService {
     })
     return obj
   }
-  async checkTags(tags) {
+  async checkTags(tags, Model) {
     const cleanedTags = JSON.parse(tags)
     let returnedTags = []
     for (let i = 0; i < cleanedTags.length; i++) {
-      const findTag = await Tag.findOne({ name: cleanedTags[i] })
+      const findTag = await Model.findOne({ name: cleanedTags[i] })
       if (!findTag) {
-        const newTag = new Tag({ name: cleanedTags[i] })
+        const newTag = new Model({ name: cleanedTags[i] })
         await newTag.save()
         returnedTags.push(newTag._id.toString())
       } else {

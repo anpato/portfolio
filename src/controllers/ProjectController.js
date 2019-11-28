@@ -2,7 +2,7 @@ import { Project, Tag } from '../database'
 import HelperService from './helpers'
 class ProjectController {
   constructor() {
-    this.Helper = new HelperService()
+    this.Helpers = new HelperService()
   }
 
   getProjects = async (req, res) => {
@@ -45,7 +45,7 @@ class ProjectController {
   uploadProject = async (req, res) => {
     try {
       const images = this.Helpers.checkGif(res.locals.files)
-      const tags = await this.Helpers.checkTags(req.body.tags)
+      const tags = await this.Helpers.checkTags(req.body.tags, Tag)
       const project = new Project({
         ...req.body.project,
         images,
@@ -60,7 +60,9 @@ class ProjectController {
 
   updateProject = async (req, res) => {
     try {
-      const images = req.files.length ? this.checkGif(res.locals.files) : null
+      const images = req.files.length
+        ? this.Helpers.checkGif(res.locals.files)
+        : null
       const projectBody = JSON.parse(req.body.project)
       console.log(projectBody)
       const project = await Project.findById(req.params.project_id)
@@ -68,7 +70,7 @@ class ProjectController {
         { _id: req.params.project_id },
         {
           ...projectBody,
-          tags: await this.checkTags(req.body.tags),
+          tags: await this.Helpers.checkTags(req.body.tags, Tag),
           images: req.files.length ? images : project.images
         }
       )
