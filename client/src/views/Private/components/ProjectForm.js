@@ -1,24 +1,36 @@
 import React from 'react'
+import TagForm from './TagForm'
+import Tags from './Tags'
+import {
+  FlexLayout,
+  FormGroup,
+  TextInput,
+  Button,
+  Spinner
+} from '../../../shared'
 
 const ProjectForm = ({
   darkTheme,
-  error,
+  formData,
+  onChange,
   onSubmit,
+  children,
   imageChange,
   imageUpload,
-  onChange,
-  renderSnacks,
-  renderTags,
-  formData
+  isLoading,
+  error,
+  images,
+  history
 }) => (
   <FlexLayout className="upload-form" align="center">
-    <FormGroup className="form" variant="col" onSubmit={this.handleSubmit}>
+    <FormGroup className="form" variant="col" onSubmit={e => onSubmit(e)}>
       <TextInput
         floating
         label="Title"
         name="title"
         value={formData.title}
         color="red"
+        onChange={e => onChange(e)}
         required
       />
       <TextInput
@@ -27,6 +39,24 @@ const ProjectForm = ({
         label="Description"
         name="description"
         value={formData.description}
+        onChange={e => onChange(e)}
+        color="red"
+      />
+      <TextInput
+        floating
+        label="Deployed Link"
+        name="deployedLink"
+        value={formData.deployedLink}
+        onChange={e => onChange(e)}
+        color="red"
+      />
+      <TextInput
+        floating
+        required
+        label="Github Link"
+        name="githubLink"
+        value={formData.githubLink}
+        onChange={e => onChange(e)}
         color="red"
       />
       <FlexLayout className="image-field-wrapper" layout="col">
@@ -66,22 +96,15 @@ const ProjectForm = ({
             onClick={() => imageUpload('newImage')}
           />
         </FlexLayout>
-        {renderSnacks()}
+        {images
+          ? images.map((image, index) => (
+              <p key={index} className="snack released">
+                {typeof image === 'string' ? image : image.name}
+              </p>
+            ))
+          : null}
       </FlexLayout>
-      <FlexLayout className="tag-area" layout="col">
-        <FlexLayout className="tags" align="start space wrap">
-          {this.renderTags()}
-        </FlexLayout>
-        {renderNewTagForm()}
-        <Button
-          className="add-btn"
-          title="Add New Tag"
-          color="red"
-          type="button"
-          variant="flat"
-          onClick={() => this.setState({ createNewTag: true })}
-        />
-      </FlexLayout>
+      {children}
       <FlexLayout className="btn-group" align="space">
         <Button
           className="submit-btn"
@@ -111,3 +134,5 @@ const ProjectForm = ({
     </FormGroup>
   </FlexLayout>
 )
+
+export default ProjectForm

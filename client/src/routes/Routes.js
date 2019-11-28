@@ -50,9 +50,9 @@ const Routes = ({ authenticated, setAuthentication, darkTheme }) => {
             />
           )}
         />
-        <Route
+        {/* <Route
           component={props => <NotFound {...props} darkTheme={darkTheme} />}
-        />
+        /> */}
         <ProtectedRoute
           exact
           path="/dashboard"
