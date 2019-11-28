@@ -9,6 +9,8 @@ import {
 } from '../../../shared'
 import { _TagParser } from '../../../helpers'
 import ProtectedServices from '../../../services/ProtectedServices'
+import ProjectForm from '../components/ProjectForm'
+import TagForm from '../components/TagForm'
 
 export default class ManageProject extends Component {
   constructor(props) {
@@ -210,140 +212,43 @@ export default class ManageProject extends Component {
   render() {
     const {
       title,
+      createNewTag,
       description,
       isLoading,
       error,
+      newTag,
+      tagError,
+      tags,
       githubLink,
-      deployedLink
+      deployedLink,
+      images
     } = this.state
 
     return (
       <FlexLayout className="project-manage" align="center">
-        <FlexLayout className="upload-form" align="center">
-          <FormGroup
-            className="form"
-            variant="col"
-            onSubmit={this.handleSubmit}
+        <ProjectForm
+          onSubmit={this.handleSubmit}
+          formData={{ title, description, githubLink, deployedLink }}
+          imageChange={this.handleImageChange}
+          imageUpload={this.handleImageUpload}
+          darkTheme={this.props.darkTheme}
+          onChange={this.handleChange}
+          images={images}
+          error={error}
+          isLoading={isLoading}
+          history={this.props.history}
+        >
+          <TagForm
+            onClick={this.removeTag}
+            newTag={newTag}
+            tags={tags}
+            tagError={tagError}
+            createNewTag={createNewTag}
+            addNewTag={this.addNewTag}
           >
-            <TextInput
-              floating
-              label="Title"
-              name="title"
-              value={title}
-              color="red"
-              onChange={this.handleChange}
-              required
-            />
-            <TextInput
-              floating
-              required
-              label="Description"
-              name="description"
-              value={description}
-              onChange={this.handleChange}
-              color="red"
-            />
-            <TextInput
-              floating
-              label="Deployed Link"
-              name="deployedLink"
-              value={deployedLink}
-              onChange={this.handleChange}
-              color="red"
-            />
-            <TextInput
-              floating
-              required
-              label="Github Link"
-              name="githubLink"
-              value={githubLink}
-              onChange={this.handleChange}
-              color="red"
-            />
-            <FlexLayout className="image-field-wrapper" layout="col">
-              <label htmlFor="newGif">Gif</label>
-              <FlexLayout>
-                <TextInput
-                  type="file"
-                  name="project"
-                  onChange={e => this.handleImageChange(e, 'newGif')}
-                  color="red"
-                />
-                <Button
-                  title="+"
-                  variant="fab"
-                  color="blue"
-                  className="add-btn"
-                  type="button"
-                  onClick={() => this.handleImageUpload('newGif')}
-                />
-              </FlexLayout>
-            </FlexLayout>
-            <FlexLayout className="image-field-wrapper" layout="col">
-              <label htmlFor="newImage">New Image</label>
-              <FlexLayout>
-                <TextInput
-                  type="file"
-                  name="project"
-                  color="red"
-                  onChange={e => this.handleImageChange(e, 'newImage')}
-                />
-                <Button
-                  title="+"
-                  variant="fab"
-                  color="blue"
-                  className="add-btn"
-                  type="button"
-                  onClick={() => this.handleImageUpload('newImage')}
-                />
-              </FlexLayout>
-              {this.renderImageSnacks()}
-            </FlexLayout>
-            <FlexLayout className="tag-area" layout="col">
-              <FlexLayout className="tags" align="start space wrap">
-                {this.renderTags()}
-              </FlexLayout>
-              {this.renderNewTagForm()}
-              <Button
-                className="add-btn"
-                title="Add New Tag"
-                color="red"
-                type="button"
-                variant="flat"
-                onClick={() => this.setState({ createNewTag: true })}
-              />
-            </FlexLayout>
-            <FlexLayout className="btn-group" align="space">
-              <Button
-                className="submit-btn"
-                title={isLoading ? '' : 'Update'}
-                color={this.props.darkTheme ? 'green' : 'blue'}
-                type="submit"
-                variant="raised"
-              >
-                {isLoading ? <Spinner size={16} /> : ''}
-              </Button>
-              <Button
-                className="submit-btn"
-                title="Cancel"
-                color="red"
-                type="submit"
-                variant="raised"
-                onClick={() => this.props.history.goBack()}
-              >
-                {isLoading ? (
-                  <Spinner
-                    size={16}
-                    color={this.props.darkTheme ? 'green' : 'yellow'}
-                  />
-                ) : (
-                  ''
-                )}
-              </Button>
-            </FlexLayout>
-            {error ? <p className="error">{error}</p> : ''}
-          </FormGroup>
-        </FlexLayout>
+            {this.renderNewTagForm()}
+          </TagForm>
+        </ProjectForm>
       </FlexLayout>
     )
   }
