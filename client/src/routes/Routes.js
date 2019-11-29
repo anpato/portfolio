@@ -50,9 +50,11 @@ const Routes = ({ authenticated, setAuthentication, darkTheme }) => {
             />
           )}
         />
-        {/* <Route
-          component={props => <NotFound {...props} darkTheme={darkTheme} />}
-        /> */}
+        {authenticated ? null : (
+          <Route
+            component={props => <NotFound {...props} darkTheme={darkTheme} />}
+          />
+        )}
         <ProtectedRoute
           exact
           path="/dashboard"
@@ -66,6 +68,14 @@ const Routes = ({ authenticated, setAuthentication, darkTheme }) => {
           component={AdminProjects}
           darkTheme={darkTheme}
           authenticated={authenticated}
+        />
+        <ProtectedRoute
+          exact
+          path="/dashboard/projects/upload"
+          component={ManageProject}
+          darkTheme={darkTheme}
+          authenticated={authenticated}
+          key={Math.floor(Math.random()) * 20}
         />
         <ProtectedRoute
           path="/dashboard/projects/:project_id"

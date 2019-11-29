@@ -36,7 +36,7 @@ const NavBar = ({
           </NavLink>
           <NavLink
             exact
-            to="/dashboard/add-projects"
+            to="/dashboard/projects/upload"
             activeClassName="nav-active"
           >
             Upload Projects

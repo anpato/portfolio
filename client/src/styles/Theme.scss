@@ -92,6 +92,12 @@
       }
     }
   }
+  .not-found-message,
+  h2,
+  h4,
+  p {
+    color: $WhiteHover;
+  }
 }
 
 .theme--light {

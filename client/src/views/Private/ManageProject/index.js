@@ -14,6 +14,7 @@ export default class ManageProject extends Component {
       description: '',
       githubLink: '',
       deployedLink: '',
+      released: false,
       newTag: '',
       newGif: '',
       images: [],
@@ -22,12 +23,17 @@ export default class ManageProject extends Component {
       isLoading: false,
       createNewTag: false,
       error: '',
-      tagError: ''
+      tagError: '',
+      newProject: false
     }
   }
 
   componentDidMount() {
-    this.fetchProject()
+    if (this.props.match.params.project_id) {
+      this.fetchProject()
+    } else {
+      this.setState({ newProject: true })
+    }
   }
 
   fetchProject = async () => {
@@ -125,7 +131,9 @@ export default class ManageProject extends Component {
       tags,
       images,
       githubLink,
-      deployedLink
+      deployedLink,
+      released,
+      newProject
     } = this.state
     try {
       const formData = new FormData()
@@ -135,7 +143,8 @@ export default class ManageProject extends Component {
           title,
           deploy_link: deployedLink,
           github_link: githubLink,
-          description
+          description,
+          released
         },
         tags
       }
@@ -143,13 +152,21 @@ export default class ManageProject extends Component {
       for (let key in data) {
         formData.append(key, JSON.stringify(data[key]))
       }
-      const resp = await new ProtectedServices(
-        this.props.match.params.project_id,
-        null,
-        formData
-      ).updateProject()
-      if (resp.status === 200) {
-        this.props.history.push('/dashboard/projects')
+      if (newProject) {
+        const resp = await new ProtectedServices(
+          this.props.match.params.project_id,
+          null,
+          formData
+        ).updateProject()
+        if (resp.status === 200) {
+          this.props.history.push('/dashboard/projects')
+        }
+      } else {
+        const resp = await new ProtectedServices(
+          null,
+          null,
+          formData
+        ).uploadProject()
       }
     } catch (error) {
       this.setState({
@@ -215,7 +232,8 @@ export default class ManageProject extends Component {
       tags,
       githubLink,
       deployedLink,
-      images
+      images,
+      newProject
     } = this.state
 
     return (
@@ -231,6 +249,7 @@ export default class ManageProject extends Component {
           error={error}
           isLoading={isLoading}
           history={this.props.history}
+          newProject={newProject}
         >
           <TagForm
             onClick={this.removeTag}

@@ -20,7 +20,8 @@ const ProjectForm = ({
   isLoading,
   error,
   images,
-  history
+  history,
+  newProject
 }) => (
   <FlexLayout className="upload-form" align="center">
     <FormGroup className="form" variant="col" onSubmit={e => onSubmit(e)}>
@@ -108,7 +109,7 @@ const ProjectForm = ({
       <FlexLayout className="btn-group" align="space">
         <Button
           className="submit-btn"
-          title={isLoading ? '' : 'Update'}
+          title={isLoading ? '' : newProject ? 'Upload' : 'Update'}
           color={darkTheme ? 'green' : 'blue'}
           type="submit"
           variant="raised"
