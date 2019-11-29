@@ -5,6 +5,14 @@ export default class PublicService {
     this.id = id
     this.data = data
   }
+  async contact() {
+    try {
+      const resp = await api.post('/contact', this.data)
+      return resp
+    } catch (error) {
+      throw error
+    }
+  }
   async getProjects() {
     try {
       const resp = await api.get('/projects')

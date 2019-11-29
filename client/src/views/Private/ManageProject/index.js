@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import PublicService from '../../../services/PublicServices'
-import {
-  FormGroup,
-  TextInput,
-  FlexLayout,
-  Button,
-  Spinner
-} from '../../../shared'
+import { TextInput, FlexLayout, Button } from '../../../shared'
 import { _TagParser } from '../../../helpers'
 import ProtectedServices from '../../../services/ProtectedServices'
 import ProjectForm from '../components/ProjectForm'

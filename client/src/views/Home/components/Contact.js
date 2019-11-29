@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
-import { FlexLayout, FormGroup, TextInput, Button } from '../../../shared'
+import {
+  FlexLayout,
+  FormGroup,
+  TextInput,
+  Button,
+  Spinner
+} from '../../../shared'
 import BitmojiPosted from '../../../assets/bitmoji-posted.png'
 import BitmojiTalk from '../../../assets/bitmoji-talk-soon.png'
+import PublicService from '../../../services/PublicServices'
 export default class Contact extends Component {
   constructor() {
     super()
     this.state = {
       sent: false,
       loading: false,
+      error: '',
+      resMsg: '',
       email: '',
       name: '',
       subject: '',
@@ -17,13 +26,70 @@ export default class Contact extends Component {
 
   handleSubmit = async e => {
     e.preventDefault()
-    this.setState({ sent: true })
+    try {
+      this.setState({ loading: true })
+
+      const res = await this.sendMail().then(() => {
+        this.setState({
+          email: '',
+          name: '',
+          subject: '',
+          message: '',
+          sent: true,
+          loading: false,
+          resMsg:
+            "Thanks for reaching out! I'll get back to you as soon as possible!"
+        })
+      })
+    } catch (error) {
+      console.log(error)
+      this.setState(
+        {
+          error: 'Hang on, it looks like something went wrong... '
+        },
+        () =>
+          setTimeout(
+            async () =>
+              await this.sendMail().catch(err => {
+                this.setState({
+                  loading: false,
+                  error:
+                    "Well, something is definitely broken, I'm going to look into it! Can you try again later?"
+                })
+              }),
+            1000
+          )
+      )
+    }
+  }
+
+  sendMail = async () => {
+    const { email, name, subject, message } = this.state
+    try {
+      await new PublicService(null, {
+        email,
+        name,
+        subject,
+        message
+      }).contact()
+    } catch (error) {
+      throw error
+    }
   }
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
 
   render() {
-    const { email, name, subject, message, sent, loading } = this.state
+    const {
+      email,
+      name,
+      subject,
+      message,
+      sent,
+      loading,
+      error,
+      resMsg
+    } = this.state
     const { darkTheme } = this.props
     return (
       <FlexLayout className="contact" layout="center">
@@ -82,10 +148,19 @@ export default class Contact extends Component {
               onChange={this.handleChange}
             />
             <Button
+              disabled={loading}
               title={loading ? '' : 'Send'}
               variant="raised"
               color={darkTheme ? 'green' : 'blue'}
-            />
+            >
+              <Spinner size={16} color={darkTheme ? 'green' : 'white'} />
+            </Button>
+            {error ? <p className="error">{error}</p> : null}
+            {resMsg ? (
+              <p style={darkTheme ? { color: '#f8f8f8' } : { color: '#333' }}>
+                {resMsg}
+              </p>
+            ) : null}
           </FormGroup>
         </FlexLayout>
       </FlexLayout>
