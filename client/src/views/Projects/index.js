@@ -1,4 +1,4 @@
-import React, { PureComponent, Component } from 'react'
+import React, { PureComponent } from 'react'
 import PublicService from '../../services/PublicServices'
 import { FlexLayout, Spinner } from '../../shared'
 import ProjectCard from './components/ProjectCard'

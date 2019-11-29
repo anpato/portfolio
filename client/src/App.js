@@ -4,7 +4,7 @@ import NavBar from './components/NavBar'
 
 function App() {
   const [darkTheme, setTheme] = useState(false)
-  const [authenticated, setAuthentication] = useState(true)
+  const [authenticated, setAuthentication] = useState(false)
   return (
     <div
       className={`${darkTheme ? 'theme--dark' : 'theme--light'} theme--wrapper`}

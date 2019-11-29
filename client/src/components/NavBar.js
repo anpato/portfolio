@@ -28,8 +28,11 @@ const NavBar = ({
         </nav>
       ) : (
         <nav>
-          <NavLink exact to="/dashboard" activeClassName="nav-active">
-            Dashboard
+          <NavLink exact to="/" activeClassName="nav-active">
+            Home
+          </NavLink>
+          <NavLink exact to="/projects" activeClassName="nav-active">
+            View Projects
           </NavLink>
           <NavLink exact to="/dashboard/projects" activeClassName="nav-active">
             Projects

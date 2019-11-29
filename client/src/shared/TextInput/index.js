@@ -10,7 +10,9 @@ export const TextInput = ({
   onChange,
   value,
   required,
-  autocomplete
+  autocomplete,
+  style,
+  onSubmit
 }) => (
   <div
     className={`input input-${color} ${floating ? 'float' : 'no-float'} ${
@@ -19,10 +21,12 @@ export const TextInput = ({
   >
     <input
       name={name}
+      onSubmit={onSubmit}
       type={type}
       onChange={e => onChange(e)}
       value={value}
       required={required}
+      style={style}
     />
     <label htmlFor={name}>
       <span>{label}</span>

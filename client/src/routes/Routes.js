@@ -6,7 +6,6 @@ import Home from '../views/Home'
 import Projects from '../views/Projects'
 import Project from '../views/Project'
 import Login from '../views/Login'
-import Dashboard from '../views/Private/Dashboard'
 import AdminProjects from '../views/Private/AdminProjects'
 import ManageProject from '../views/Private/ManageProject'
 import NotFound from '../views/NotFound'
@@ -55,13 +54,6 @@ const Routes = ({ authenticated, setAuthentication, darkTheme }) => {
             component={props => <NotFound {...props} darkTheme={darkTheme} />}
           />
         )}
-        <ProtectedRoute
-          exact
-          path="/dashboard"
-          component={Dashboard}
-          darkTheme={darkTheme}
-          authenticated={authenticated}
-        />
         <ProtectedRoute
           exact
           path="/dashboard/projects"

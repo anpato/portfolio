@@ -21,7 +21,7 @@ export default class Login extends Component {
     }
   }
   componentDidMount() {
-    this.props.fetchToken(this.props.history)
+    this.props.fetchToken()
   }
 
   handleSubmit = async e => {
@@ -50,7 +50,8 @@ export default class Login extends Component {
 
   render() {
     if (this.props.authenticated) {
-      return <Redirect to="/dashboard" />
+      this.props.fetchToken()
+      return <Redirect to="/dashboard/projects" />
     }
     const { username, password, isLoading, error } = this.state
     const { darkTheme } = this.props

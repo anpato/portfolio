@@ -29,7 +29,7 @@ export default class Contact extends Component {
     try {
       this.setState({ loading: true })
 
-      const res = await this.sendMail().then(() => {
+      await this.sendMail().then(() => {
         this.setState({
           email: '',
           name: '',

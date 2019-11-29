@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/database/index.js"],"names":[],"mappings":";;;;;;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA","sourcesContent":["export * from './Schema'\n"],"file":"index.js"}

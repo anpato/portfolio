@@ -4,6 +4,7 @@ import { FlexLayout, Button } from '../../../shared'
 const ProjectCard = ({
   className,
   direction,
+  description,
   darkTheme,
   onClick,
   onMouseEnter,
@@ -19,11 +20,12 @@ const ProjectCard = ({
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
   >
-    <FlexLayout className="detail-wrapper" align="center" layout="row">
+    <FlexLayout className="detail-wrapper" align="center" layout="col">
       <span className={released ? 'snack released' : 'snack in-process'}>
         {released ? 'Released' : 'In Development'}
       </span>
       <h2>{title}</h2>
+      <p>{className === 'hovered' ? description : null}</p>
       <Button
         className="nav-btn"
         title="View Details"

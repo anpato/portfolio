@@ -10,7 +10,7 @@ const NotFound = ({ history, darkTheme, location }) => (
   >
     {console.log(location)}
     <div className="wrapper">
-      <img src={NotFoundImage} />
+      <img src={NotFoundImage} alt="not found" />
       <FlexLayout className="not-found-message" layout="col" align="center">
         <h2>Well This is awkward...</h2>
         <h4>It seems that the page you were looking for doesn't exist</h4>

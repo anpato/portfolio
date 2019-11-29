@@ -1,139 +1,70 @@
 import React, { Component } from 'react'
 import PublicService from '../../../services/PublicServices'
-import { TextInput, FlexLayout, Button } from '../../../shared'
+import {
+  TextInput,
+  FlexLayout,
+  Button,
+  FormGroup,
+  Spinner
+} from '../../../shared'
 import { _TagParser } from '../../../helpers'
 import ProtectedServices from '../../../services/ProtectedServices'
-import ProjectForm from '../components/ProjectForm'
-import TagForm from '../components/TagForm'
+import { FiX as Delete, FiPlus as Add } from 'react-icons/fi'
 
 export default class ManageProject extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: '',
-      description: '',
-      githubLink: '',
-      deployedLink: '',
-      released: false,
-      newTag: '',
-      newGif: '',
+      formData: {
+        title: '',
+        description: '',
+        github_Link: '',
+        deploy_Link: '',
+        released: ''
+      },
+      new_Tag: '',
       images: [],
       tags: [],
-      newImage: '',
-      isLoading: false,
-      createNewTag: false,
-      error: '',
-      tagError: '',
-      newProject: false
+      addTag: false,
+      isLoading: false
     }
   }
 
   componentDidMount() {
     if (this.props.match.params.project_id) {
       this.fetchProject()
-    } else {
-      this.setState({ newProject: true })
     }
   }
 
   fetchProject = async () => {
     try {
-      const project = await new PublicService(
+      const resp = await new PublicService(
         this.props.match.params.project_id
       ).getProject()
-      const tags = _TagParser(project.tags)
+
       this.setState({
-        title: project.title,
-        description: project.description,
-        images: [...project.images.static, project.images.gif],
-        githubLink: project.github_link,
-        deployedLink: project.deploy_link ? project.deploy_link : '',
-        tags
+        formData: {
+          title: resp.title,
+          description: resp.description,
+          github_Link: resp.github_link,
+          deploy_Link: resp.deploy_link,
+          released: resp.released
+        },
+        images: [resp.images.gif, ...resp.images.static],
+        tags: _TagParser(resp.tags)
       })
     } catch (error) {
-      console.error(error)
+      throw error
     }
-  }
-
-  handleChange = e =>
-    this.setState({
-      [e.target.name]: e.target.value,
-      tagError: '',
-      error: ''
-    })
-
-  handleImageUpload = key => {
-    this.setState(state => ({
-      images: [...state.images, state[key]],
-      [key]: ''
-    }))
-  }
-
-  handleImageChange = (e, key) => {
-    this.setState({
-      [key]: e.target.files[0]
-    })
-  }
-
-  removeTag = tag => {
-    const currentTagsToAdd = this.state.tags
-    currentTagsToAdd.splice(tag, 1)
-    this.setState({ tags: currentTagsToAdd })
-  }
-
-  renderTags = () => {
-    if (this.state.tags.length) {
-      return this.state.tags.map((tag, index) => (
-        <p key={tag} className="snack released">
-          <span>
-            {tag}
-            <Button
-              className="add-btn"
-              title="X"
-              color="red"
-              variant="fab"
-              onClick={() => this.removeTag(index)}
-            >
-              X
-            </Button>
-          </span>
-        </p>
-      ))
-    }
-  }
-
-  addTag = () => {
-    if (
-      !this.state.tags.includes(this.state.newTag) &&
-      this.state.newTag.length > 1
-    )
-      this.setState({ tags: [...this.state.tags, this.state.newTag] }, () =>
-        this.setState({ newTag: '' })
-      )
-    else
-      this.setState({
-        tagError: this.state.tags.includes(this.state.newTag)
-          ? 'Tag Already Added'
-          : 'Please add a tag'
-      })
-  }
-
-  addNewTag = () => {
-    this.setState({ createNewTag: true })
   }
 
   handleSubmit = async e => {
     e.preventDefault()
     this.setState({ isLoading: true })
     const {
-      title,
-      description,
+      formData: { title, description, github_Link, deploy_Link, released },
       tags,
-      images,
-      githubLink,
-      deployedLink,
-      released,
-      newProject
+      images
     } = this.state
     try {
       const formData = new FormData()
@@ -141,10 +72,10 @@ export default class ManageProject extends Component {
       const data = {
         project: {
           title,
-          deploy_link: deployedLink,
-          github_link: githubLink,
+          deploy_link: deploy_Link,
+          github_link: github_Link,
           description,
-          released
+          released: released === 'true' || 'yes' ? true : 'false'
         },
         tags
       }
@@ -152,7 +83,7 @@ export default class ManageProject extends Component {
       for (let key in data) {
         formData.append(key, JSON.stringify(data[key]))
       }
-      if (newProject) {
+      if (this.props.match.params.project_id) {
         const resp = await new ProtectedServices(
           this.props.match.params.project_id,
           null,
@@ -167,6 +98,10 @@ export default class ManageProject extends Component {
           null,
           formData
         ).uploadProject()
+        console.log(resp)
+        if (resp === 200) {
+          this.props.history.push('/dashboard/projects')
+        }
       }
     } catch (error) {
       this.setState({
@@ -176,36 +111,65 @@ export default class ManageProject extends Component {
     }
   }
 
-  renderNewTagForm = () => {
-    if (this.state.createNewTag) {
-      return (
-        <FlexLayout className="add-tags" align="center">
-          <FlexLayout className="tag-input" layout="col">
-            <TextInput
-              type="text"
-              label="Tag"
-              value={this.state.newTag}
-              name="newTag"
-              color="red"
-              onChange={this.handleChange}
-              onSubmit={this.addTag}
-            />
-            {this.state.tagError ? (
-              <p className="error">{this.state.tagError}</p>
-            ) : (
-              ''
-            )}
-          </FlexLayout>
-          <Button
-            className="add-btn"
-            type="button"
-            title="+"
-            color="red"
-            onClick={this.addTag}
-          />
-        </FlexLayout>
+  renderStaticFields = () => {
+    const { formData } = this.state
+    const inputFields = []
+    for (let key in formData) {
+      const inputName = `${key[0].toUpperCase()}${key.slice(1)}`
+      const inputField = inputName.split('_').join(' ')
+      inputFields.push(
+        <TextInput
+          key={key}
+          name={key}
+          value={formData[key]}
+          label={inputField}
+          color="red"
+          onChange={e => this.handleChange(e, 'formData')}
+          type="text"
+          floating
+          required={key === 'deploy_Link' ? false : true}
+        />
       )
     }
+    return inputFields.map(field => field)
+  }
+
+  handleImageUpload = e => {
+    let newImage = e.target.files[0]
+    this.setState(state => ({
+      images: [...state.images, newImage]
+    }))
+  }
+
+  handleChange = (e, key) => {
+    if (key && key === 'formData') {
+      const fields = { [e.target.name]: e.target.value }
+
+      this.setState(state => ({
+        formData: Object.assign(state.formData, fields)
+      }))
+    } else {
+      this.setState({ [e.target.name]: e.target.value })
+    }
+  }
+
+  renderImageField = () => {
+    return (
+      <TextInput
+        type="file"
+        label="New Image"
+        floating
+        value=""
+        color="red"
+        onChange={this.handleImageUpload}
+      />
+    )
+  }
+
+  removeItem = (index, key) => {
+    const field = this.state[key]
+    field.splice(index, 1)
+    this.setState({ [key]: field })
   }
 
   renderImageSnacks = () => {
@@ -213,55 +177,133 @@ export default class ManageProject extends Component {
       return this.state.images.map((image, index) => {
         return (
           <p key={index} className="snack released">
-            {typeof image === 'string' ? image : image.name}
+            {typeof image === 'object' ? image.name : image}
+            <Button
+              className="add-btn"
+              color="red"
+              variant="fab"
+              type="button"
+              onClick={() => this.removeItem(index, 'images')}
+            >
+              {<Delete />}
+            </Button>
           </p>
         )
       })
     }
   }
 
-  render() {
-    const {
-      title,
-      createNewTag,
-      description,
-      isLoading,
-      error,
-      newTag,
-      tagError,
-      tags,
-      githubLink,
-      deployedLink,
-      images,
-      newProject
-    } = this.state
+  addTag = e => {
+    e.preventDefault()
+    this.setState(
+      state => ({ tags: [...state.tags, state.new_Tag] }),
+      () => this.setState({ new_Tag: '' })
+    )
+  }
 
+  renderTagSnacks = () => {
+    if (this.state.tags.length) {
+      return this.state.tags.map((tag, index) => (
+        <p key={index} className="snack released">
+          {tag}
+          <Button
+            className="add-btn"
+            color="red"
+            variant="fab"
+            type="button"
+            onClick={() => this.removeItem(index, 'tags')}
+          >
+            {<Delete />}
+          </Button>
+        </p>
+      ))
+    }
+  }
+
+  renderTagField = () => {
+    if (this.state.addTag) {
+      return (
+        <FlexLayout className="tag-field" layout="row" align="center">
+          <TextInput
+            type="text"
+            value={this.state.new_Tag}
+            name="new_Tag"
+            label="New Tag"
+            onChange={this.handleChange}
+            color="red"
+            onSubmit={this.addTag}
+          />
+          <Button
+            className="add-btn"
+            color="red"
+            variant="fab"
+            type="button"
+            onClick={this.addTag}
+          >
+            {<Add />}
+          </Button>
+        </FlexLayout>
+      )
+    }
+  }
+
+  render() {
+    const { addTag, isLoading } = this.state
+    const { darkTheme } = this.props
     return (
       <FlexLayout className="project-manage" align="center">
-        <ProjectForm
+        <FormGroup
+          className="upload-form"
+          variant="vertical"
           onSubmit={this.handleSubmit}
-          formData={{ title, description, githubLink, deployedLink }}
-          imageChange={this.handleImageChange}
-          imageUpload={this.handleImageUpload}
-          darkTheme={this.props.darkTheme}
-          onChange={this.handleChange}
-          images={images}
-          error={error}
-          isLoading={isLoading}
-          history={this.props.history}
-          newProject={newProject}
         >
-          <TagForm
-            onClick={this.removeTag}
-            newTag={newTag}
-            tags={tags}
-            tagError={tagError}
-            createNewTag={createNewTag}
-            addNewTag={this.addNewTag}
-          >
-            {this.renderNewTagForm()}
-          </TagForm>
-        </ProjectForm>
+          {/* renders static fields */}
+          {this.renderStaticFields()}
+          {/* renders static fields */}
+
+          {/* renders image field */}
+          {this.renderImageField()}
+          {/* renders image field */}
+
+          {/* Renders image snacks */}
+          {this.renderImageSnacks()}
+          {/* Renders image snacks */}
+          <FlexLayout className="snack-area" layout="col">
+            <Button
+              className="add-snack"
+              title={addTag ? 'Close' : 'Add Tag'}
+              color="red"
+              variant="flat"
+              type="button"
+              onClick={() =>
+                this.setState(state => ({ addTag: !state.addTag }))
+              }
+            />
+            {this.renderTagField()}
+            <FlexLayout className="tags-row" layout="row" align="start wrap">
+              {this.renderTagSnacks()}
+            </FlexLayout>
+          </FlexLayout>
+          <FlexLayout className="btn-group" align="center">
+            <Button
+              type="submit"
+              title={isLoading ? '' : 'Upload'}
+              color="blue"
+              variant="flat"
+            >
+              {isLoading ? (
+                <Spinner color={darkTheme ? 'green' : 'white'} size={16} />
+              ) : null}
+            </Button>
+            <Button
+              type="button"
+              title="Cancel"
+              color="red"
+              variant="flat"
+              onClick={() => this.props.history.push('/dashboard/projects')}
+            />
+          </FlexLayout>
+        </FormGroup>
       </FlexLayout>
     )
   }

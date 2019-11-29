@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/controllers/index.js"],"names":[],"mappings":";;;;;;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AACA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA","sourcesContent":["export * from './ProjectController'\nexport * from './UserController'\n"],"file":"index.js"}

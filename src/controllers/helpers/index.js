@@ -28,4 +28,7 @@ export default class HelperService {
     }
     return returnedTags
   }
+  parser(data) {
+    return JSON.parse(data)
+  }
 }
