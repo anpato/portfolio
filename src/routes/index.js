@@ -41,7 +41,7 @@ Router.get('/auth/verify', authController.VerifyToken)
 // Project Routes
 Router.get('/projects', projectController.getProjects)
 Router.get('/projects/:project_id', projectController.getProject)
-Router.get('/projects/filter/released', projectController.filterProjects)
+Router.get('/projects/filter/projects', projectController.filterProjects)
 Router.put(
   '/projects/:project_id',
   authController.Authenticate,

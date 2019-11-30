@@ -1,80 +1,64 @@
 @import 'Pallete';
 
 .projects {
-  padding-top: 5%;
-  .project-wrapper {
-    width: 95%;
-    margin: auto;
-    .nav-btn {
-      position: absolute;
-      bottom: 1em;
-      transition: all 0.8s;
-    }
-    .snack {
-      position: absolute;
-      left: 0.2em;
-      top: 0.2em;
-    }
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  .sidebar {
+    flex: 0.8;
+    height: 100vh;
+    box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.2);
 
-    .forward-row {
-      align-self: flex-end;
-      animation: slideRight 0.8s ease forwards;
+    .tag-wrapper {
+      width: 100%;
+      margin: 6em auto;
+      li {
+        cursor: pointer;
+        margin: auto;
+        list-style: none;
+        font-weight: 700;
+        // border: 1px solid blue;
+        width: 100%;
+        text-align: center;
+        padding: 1em 0;
+        &:hover {
+          background: $White;
+        }
+      }
     }
-    .reverse-row {
-      animation: slideLeft 0.8s ease forwards;
-    }
-    .card-wrapper {
+  }
+  .project-container {
+    flex: 3;
+    margin-top: 4em;
+    .spinner-wrapper {
       margin: auto;
-      width: 90%;
-      flex: 1;
-
-      .project-card {
-        position: relative;
-        margin: 2em 0;
-        border-radius: 4px;
-        box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
-        width: 60%;
-        .detail-wrapper {
-          align-self: flex-end;
-          align-items: center;
-          position: absolute;
-          width: 100%;
-          height: 20%;
-          p {
-            width: 50%;
-            margin: 0.5em auto;
-            text-align: center;
-          }
-          .btn {
-            margin-top: 1em;
-          }
+      align-self: center;
+    }
+    .filters {
+      width: 95%;
+      margin: auto;
+      height: 4em;
+      .snack {
+        margin: 1em;
+        display: flex;
+        align-items: center;
+        .btn {
+          margin-left: 1em;
+          height: 30px;
+          width: 30px;
+          line-height: 30px;
         }
+      }
+    }
+    .project-wrapper {
+      height: 100%;
+      width: 100%;
+      margin: auto;
+      align-self: flex-start;
+      .card {
+        margin: 1em;
         img {
-          object-fit: contain;
-          border-radius: 4px;
           width: 100%;
-        }
-      }
-
-      .hovered {
-        .nav-btn {
-          opacity: 1;
-        }
-        .detail-wrapper {
-          padding: 0;
-          height: 100%;
-          animation: grow 0.6s ease forwards;
-        }
-      }
-
-      .no-hover {
-        .nav-btn {
-          pointer-events: none;
-          opacity: 0;
-        }
-        .detail-wrapper {
-          animation: shrink 0.6s ease forwards;
-          border-radius: 4px;
         }
       }
     }
@@ -82,104 +66,10 @@
 }
 
 @media (min-width: 900px) {
-  .projects {
-    .card-wrapper {
-      .project-card {
-        width: 50%;
-      }
-      .hovered {
-        animation: growCard 0.6s ease forwards;
-      }
-
-      .no-hover {
-        animation: shrinkCard 0.6s ease forwards;
-      }
-    }
-  }
-}
-
-@keyframes slideRight {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideLeft {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes grow {
-  from {
-    height: 40%;
-  }
-  to {
-    height: 60%;
-  }
-}
-@keyframes shrink {
-  from {
-    height: 60%;
-  }
-  to {
-    height: 40%;
-  }
-}
-
-@keyframes growCard {
-  from {
-    width: 50%;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-  }
-  to {
-    width: 60%;
-    box-shadow: 2px 6px 16px rgba(0, 0, 0, 0.6);
-  }
-}
-
-@keyframes shrinkCard {
-  from {
-    width: 60%;
-    box-shadow: 2px 6px 20px rgba(0, 0, 0, 0.6);
-  }
-  to {
-    width: 50%;
-    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
-  }
 }
 
 @media (max-width: 500px) {
   .projects {
     padding-top: 20%;
-    .project-wrapper {
-      .card-wrapper {
-        width: 100%;
-        .project-card {
-          align-self: center;
-          width: 100%;
-        }
-      }
-    }
-    .hovered {
-      h2 {
-        margin-top: 2em;
-      }
-    }
-    .no-hover {
-      h2 {
-        margin-top: 2em;
-      }
-    }
   }
 }

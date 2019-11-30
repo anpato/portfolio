@@ -29,6 +29,14 @@ export default class PublicService {
       throw error
     }
   }
+  async filterProjects(query, name) {
+    try {
+      const resp = await api.get(`/projects/filter/projects?${query}=${name}`)
+      return resp.data
+    } catch (error) {
+      throw error
+    }
+  }
   async getTags() {
     try {
       const resp = await api.get('/tags')

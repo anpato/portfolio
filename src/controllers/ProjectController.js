@@ -9,10 +9,10 @@ class ProjectController {
     try {
       await Project.find()
         .populate('tags')
-        .exec((err, data) => {
+        .exec((err, projects) => {
           if (err) res.status(500).json({ error: err })
           else {
-            res.send(data)
+            res.send(projects)
           }
         })
     } catch (error) {
@@ -21,8 +21,16 @@ class ProjectController {
   }
   filterProjects = async (req, res) => {
     try {
-      const project = await Project.find({ released: req.query.released })
-      res.send(project)
+      const value = Object.values(req.query)[0]
+      const query = Object.keys(req.query)[0]
+      await Project.find({ [query]: value })
+        .populate({
+          path: 'tags'
+        })
+        .exec((err, data) => {
+          if (err) throw err
+          res.send(data)
+        })
     } catch (error) {
       res.status(500).json({ error: error.message })
     }
@@ -57,7 +65,6 @@ class ProjectController {
       await project.save()
       res.send(project)
     } catch (error) {
-      throw error
       res.status(500).json({ error: error.message })
     }
   }
