@@ -99,6 +99,12 @@
         color: $WhiteHover;
       }
     }
+    .wrapper-title {
+      a {
+        background: $YellowScheme;
+        color: $DarkMain;
+      }
+    }
   }
   .not-found-message,
   h2,
@@ -179,6 +185,14 @@
         &:hover {
           background: $White;
         }
+      }
+    }
+  }
+  .project {
+    .wrapper-title {
+      a {
+        background: $Blue;
+        color: $WhiteHover;
       }
     }
   }
