@@ -10,13 +10,11 @@ export default class Projects extends PureComponent {
     super(props)
     this.state = {
       isLoading: true,
-      isHovered: null,
       tags: [],
       projects: [],
       projectsToFilter: [],
       filters: [],
-      error: '',
-      filterError: ''
+      error: ''
     }
   }
 
