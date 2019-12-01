@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 import 'dotenv/config'
-import App from '../server'
+import App from '..'
 
 export const compare = req => {
   return crypto.timingSafeEqual(
