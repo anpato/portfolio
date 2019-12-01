@@ -59,7 +59,6 @@ class AwsController {
   upload = (req, res, next) => {
     const project = this.Helpers.dataParser(req.body.project)
     const subFolder = this.Helpers.generateSubFolder(project.title)
-
     if (req.files.length) {
       req.files.map(file => {
         let params = {

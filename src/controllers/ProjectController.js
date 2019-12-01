@@ -40,7 +40,7 @@ class ProjectController {
       await Project.findById(req.params.project_id)
         .populate('tags')
         .exec((err, project) => {
-          if (err) res.status(500).json({ error: error.message })
+          if (err) throw err
           else {
             res.send(project)
           }
