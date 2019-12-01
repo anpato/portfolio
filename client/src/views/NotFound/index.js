@@ -6,9 +6,8 @@ const NotFound = ({ history, darkTheme, location }) => (
     className="404"
     align="center"
     layout="col"
-    style={{ width: '100%' }}
+    style={{ width: '100%', marginTop: '4em' }}
   >
-    {console.log(location)}
     <div className="wrapper">
       <img src={NotFoundImage} alt="not found" />
       <FlexLayout className="not-found-message" layout="col" align="center">

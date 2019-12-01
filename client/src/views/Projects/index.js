@@ -9,7 +9,7 @@ export default class Projects extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: false,
+      isLoading: true,
       isHovered: null,
       tags: [],
       projects: [],
@@ -21,7 +21,6 @@ export default class Projects extends PureComponent {
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true })
     this.fetchProjects()
     this.fetchFilters()
   }
@@ -29,10 +28,13 @@ export default class Projects extends PureComponent {
   fetchProjects = async () => {
     try {
       const projects = await new PublicService().getProjects()
-      this.setState(state => ({
-        projects: projects,
-        projectsToFilter: projects
-      }))
+      this.setState(
+        state => ({
+          projects: projects,
+          projectsToFilter: projects
+        }),
+        () => this.setState({ isLoading: false })
+      )
     } catch (error) {
       await this.handleError()
     }
@@ -41,7 +43,7 @@ export default class Projects extends PureComponent {
   fetchFilters = async () => {
     try {
       const tags = await new PublicService().getTags()
-      this.setState({ tags })
+      this.setState({ tags, isLoading: false })
     } catch (error) {
       throw error
     }
@@ -87,7 +89,7 @@ export default class Projects extends PureComponent {
                 onClick={() =>
                   this.props.history.push(`/projects/${project._id}`)
                 }
-                color="blue"
+                color={this.props.darkTheme ? 'green' : 'blue'}
                 variant="flat"
               />
             </FlexLayout>
@@ -114,21 +116,36 @@ export default class Projects extends PureComponent {
   filterProject = (query, item) => {
     this.state.filters.forEach(async (filter, index) => {
       const projects = await new PublicService().filterProjects(query, item)
-      await this.setState(state => ({
-        projectsToFilter: projects
+      this.setState(state => ({
+        projectsToFilter: projects,
+        isLoading: false
       }))
     })
-    this.setState({ isLoading: false })
   }
 
   addFilter = filter => {
-    this.setState(
-      state => ({
-        filters: [...state.filters, filter],
-        isLoading: true
-      }),
-      () => this.filterProject('tags', filter._id)
-    )
+    if (!this.state.filters.length) {
+      this.setState(
+        state => ({
+          filters: [...state.filters, filter],
+          isLoading: true
+        }),
+        () => this.filterProject('tags', filter._id)
+      )
+      return null
+    }
+
+    this.state.filters.forEach(ExsitingFilter => {
+      if (filter.name !== ExsitingFilter.name) {
+        this.setState(
+          state => ({
+            filters: [...state.filters, filter],
+            isLoading: true
+          }),
+          () => this.filterProject('tags', filter._id)
+        )
+      }
+    })
   }
 
   renderFilters = () => {
@@ -173,7 +190,7 @@ export default class Projects extends PureComponent {
           </StackGrid>
           {!this.state.projectsToFilter.length ? (
             <FlexLayout className="spinner-wrapper" layout="col" align="center">
-              <Spinner />
+              <Spinner color={this.props.darkTheme ? '#eeff41' : '#82d4fa'} />
               <p className="error">{this.state.error}</p>
             </FlexLayout>
           ) : null}

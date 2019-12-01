@@ -17,13 +17,10 @@
         margin: auto;
         list-style: none;
         font-weight: 700;
-        // border: 1px solid blue;
+        transition: all 0.3s ease;
         width: 100%;
         text-align: center;
         padding: 1em 0;
-        &:hover {
-          background: $White;
-        }
       }
     }
   }
@@ -70,6 +67,8 @@
 
 @media (max-width: 500px) {
   .projects {
-    padding-top: 20%;
+    .sidebar {
+      display: none;
+    }
   }
 }

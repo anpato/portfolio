@@ -71,9 +71,17 @@
   .projects {
     .project-card {
       color: $WhiteHover;
-      background: #424242;
-      .detail-wrapper {
-        background: rgba(0, 0, 0, 0.8);
+      background: $DarkMain;
+      border: 2px solid $DarkMain;
+    }
+    .sidebar {
+      background: #141313;
+      li {
+        color: $WhiteHover;
+        &:hover {
+          background: $DarkMain;
+          color: #fbfbfb;
+        }
       }
     }
   }
@@ -162,19 +170,15 @@
 
   .projects {
     .project-card {
-      color: $DarkMain;
-      background: $White;
-      .detail-wrapper {
-        background: rgba(255, 255, 255, 0.8);
-      }
+      border: 2px solid $WhiteHover;
     }
-  }
-  .project {
-    .project-card {
-      background: $White;
-      h2,
-      p {
-        color: $DarkSecondary;
+    .sidebar {
+      background: $WhiteHover;
+      li {
+        color: $DarkMain;
+        &:hover {
+          background: $White;
+        }
       }
     }
   }
