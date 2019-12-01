@@ -33,7 +33,14 @@ export default class Project extends Component {
 
   renderProject = () => {
     if (this.state.project && !this.state.isLoading) {
-      const { title, description, images, released } = this.state.project
+      const {
+        title,
+        description,
+        images,
+        released,
+        github_link,
+        deploy_link
+      } = this.state.project
       return (
         <FlexLayout className="project-card" layout="col" align="center">
           <Carousel
@@ -49,7 +56,25 @@ export default class Project extends Component {
               </div>
             ))}
           </Carousel>
-          <h2>{title}</h2>
+          <FlexLayout className="wrapper-title" align="center space">
+            <a
+              className="btn"
+              href={`${github_link}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View It On Github
+            </a>
+            <h2>{title}</h2>
+            <a
+              className="btn"
+              href={`https://${deploy_link}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              See It Live
+            </a>
+          </FlexLayout>
           <span className={released ? 'snack released' : 'snack in-process'}>
             {released ? 'Released' : 'In Development'}
           </span>
