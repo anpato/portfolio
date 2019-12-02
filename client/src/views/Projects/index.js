@@ -123,8 +123,7 @@ export default class Projects extends PureComponent {
     this.state.filters.forEach(async (filter, index) => {
       const projects = await new PublicService().filterProjects(query, item)
       this.setState(state => ({
-        projectsToFilter: projects,
-        isLoading: false
+        projectsToFilter: projects
       }))
     })
   }
@@ -144,8 +143,7 @@ export default class Projects extends PureComponent {
       if (filter.name !== ExsitingFilter.name) {
         this.setState(
           state => ({
-            filters: [...state.filters, filter],
-            isLoading: true
+            filters: [...state.filters, filter]
           }),
           () => this.filterProject('tags', filter._id)
         )
