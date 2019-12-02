@@ -13,7 +13,7 @@ import { genID } from './services'
 const App = express()
 const sameSite = process.argv[2] || true
 const PORT = process.env.PORT || process.env.LOCAL_PORT
-
+App.use('/api', Router)
 App.use(helmet())
 App.disable('x-powered-by')
 App.use(logger('dev'))
@@ -39,7 +39,6 @@ App.get('/', (req, res) =>
     .cookie('sessionID', App.locals.sessionID, { sameSite: sameSite })
     .json({ msg: 'Portfolio' })
 )
-App.use('/api', Router)
 
 App.listen(PORT)
 
