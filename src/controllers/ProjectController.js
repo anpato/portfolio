@@ -71,12 +71,9 @@ class ProjectController {
 
   updateProject = async (req, res) => {
     try {
-      const imagesFromFiles = req.files.length
-        ? this.Helpers.checkGif(res.locals.files)
-        : null
       const images = req.files.length
-        ? null
-        : this.Helpers.checkGif([req.body.projects])
+        ? this.Helpers.checkGif(res.locals.files)
+        : this.Helpers.checkGif(Array.from(req.body.projects))
       const projectBody = JSON.parse(req.body.project)
       const project = await Project.findById(req.params.project_id)
       await Project.findOneAndUpdate(
@@ -84,7 +81,7 @@ class ProjectController {
         {
           ...projectBody,
           tags: await this.Helpers.checkTags(req.body.tags, Tag),
-          images: req.files.length ? imagesFromFiles : images
+          images
         },
         { upsert: true }
       )
