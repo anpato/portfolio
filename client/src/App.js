@@ -1,28 +1,34 @@
-import React from 'react';
-import Header from './components/Header';
-import './styles/App.scss';
-import Admin from './components/Admin';
-import Public from './components/Public';
-import {Route,Switch} from 'react-router-dom';
-import Private from './components/Private';
-import {Scroll} from 'react-fns'
+import React, { useState, useEffect } from 'react'
+import Routes from './routes/Routes'
+import NavBar from './components/NavBar'
+import { getToken } from './services/TokenService'
 
 function App() {
-
+  const [darkTheme, setTheme] = useState(false)
+  const [authenticated, setAuthentication] = useState(false)
+  useEffect(() => {
+    const token = getToken()
+    if (token) {
+      setAuthentication(true)
+    }
+  }, [])
   return (
-    <div className="app">
-      <Scroll render={({x,y}) => (
-        <Header yHeight={y}/>
-      )}/>
-      <Switch>
-        <Route exact path='/' component={(props)=><Public {...props}/>}/>
-        <Route exact path='/admin/login' component={(props)=> <Admin {...props}/>}/>
-        <Route exact path='/admin/authenticated' component={(props)=> <Private {...props}/>}/>
-      </Switch>
-      </div>
-    
-
-  );
+    <div
+      className={`${darkTheme ? 'theme--dark' : 'theme--light'} theme--wrapper`}
+    >
+      <NavBar
+        darkTheme={darkTheme}
+        setTheme={setTheme}
+        authenticated={authenticated}
+        setAuthentication={setAuthentication}
+      />
+      <Routes
+        darkTheme={darkTheme}
+        setAuthentication={setAuthentication}
+        authenticated={authenticated}
+      />
+    </div>
+  )
 }
 
-export default App;
+export default App

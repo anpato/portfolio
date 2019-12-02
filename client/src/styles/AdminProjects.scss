@@ -1,0 +1,39 @@
+.admin-projects {
+  margin-top: 4em;
+  .project-wrapper {
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+    width: 80%;
+    .project-card {
+      margin: 1em;
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .admin-projects {
+    .project-wrapper {
+      width: 90%;
+      .project-card {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .admin-projects {
+    .project-wrapper {
+      width: 90%;
+      .project-card {
+        width: 50%;
+      }
+    }
+  }
+}

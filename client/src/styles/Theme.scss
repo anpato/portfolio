@@ -1,0 +1,206 @@
+@import 'Pallete';
+
+.theme--wrapper {
+  transition: all 0.4s ease;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.theme--dark {
+  background-image: linear-gradient(
+    to bottom,
+    $DarkSecondary 0%,
+    #141313 50%,
+    $DarkMain 100%
+  );
+  .nav-layout {
+    background: $DarkSecondary;
+    nav {
+      a {
+        color: #757575;
+        &:hover {
+          color: #e0e0e0;
+        }
+      }
+    }
+  }
+  .nav-active {
+    border-bottom: 2px solid $Highlight;
+  }
+  .theme-toggle {
+    background: $YellowScheme;
+    border-color: $YellowScheme;
+  }
+
+  .animated-message {
+    color: white;
+    .toggle {
+      color: $Highlight;
+    }
+
+    .toggle-off {
+      color: $YellowScheme;
+    }
+  }
+
+  .about {
+    color: $White;
+    .bubble {
+      background: $DarkSecondary;
+      &:after {
+        border-right-color: $DarkSecondary;
+      }
+    }
+  }
+  .contact-wrapper {
+    background: $DarkSecondary;
+    .input {
+      input {
+        color: $White;
+      }
+    }
+    textarea {
+      color: $White;
+      border-bottom: 2px solid $Highlight;
+      &::placeholder {
+        color: $Highlight;
+      }
+    }
+  }
+  .projects {
+    .project-card {
+      color: $WhiteHover;
+      background: $DarkMain;
+      border: 2px solid $DarkMain;
+    }
+    .sidebar {
+      background: #141313;
+      li {
+        color: $WhiteHover;
+        &:hover {
+          background: $DarkMain;
+          color: #fbfbfb;
+        }
+      }
+    }
+  }
+  .in-process {
+    color: $DarkMain;
+  }
+  .released {
+    color: $White !important;
+  }
+  .project {
+    .project-card {
+      background: #424242;
+      h2,
+      p {
+        color: $WhiteHover;
+      }
+    }
+    .wrapper-title {
+      a {
+        background: $YellowScheme;
+        color: $DarkMain;
+      }
+    }
+  }
+  .not-found-message,
+  h2,
+  h4,
+  p {
+    color: $WhiteHover;
+  }
+}
+
+.theme--light {
+  background-image: linear-gradient(
+    to bottom,
+    $WhiteHover 0%,
+    #eee 50%,
+    $White 100%
+  );
+  .theme-toggle {
+    background: $DarkMain;
+    border-color: $DarkMain;
+    color: $WhiteHover;
+  }
+
+  .nav-active {
+    border-bottom: 2px solid $RedScheme;
+  }
+  .nav-layout {
+    background-image: linear-gradient(120deg, #ebedee 0%, #fdfbfb 100%);
+    nav {
+      a {
+        color: $DarkMain;
+        &:hover {
+          color: #757575;
+        }
+      }
+    }
+  }
+  .animated-message {
+    .toggle {
+      color: $RedScheme;
+    }
+
+    .toggle-off {
+      color: $BlueScheme;
+    }
+  }
+  .about {
+    .bubble {
+      background: $White;
+      &:after {
+        border-right-color: $White;
+      }
+    }
+  }
+  .contact-wrapper {
+    background: $White;
+    .input {
+      input {
+        color: $DarkMain;
+      }
+    }
+    textarea {
+      color: $DarkMain;
+      border-bottom: 2px solid $Blue;
+      &::placeholder {
+        color: $Blue;
+      }
+    }
+  }
+
+  .projects {
+    .project-card {
+      background: $WhiteHover;
+      border: 2px solid $WhiteHover;
+    }
+    .sidebar {
+      background: $WhiteHover;
+      li {
+        color: $DarkMain;
+        &:hover {
+          background: $White;
+        }
+      }
+    }
+  }
+  .project {
+    .wrapper-title {
+      a {
+        background: $Blue;
+        color: $WhiteHover;
+      }
+    }
+  }
+  .in-process {
+    color: $DarkMain;
+  }
+  .released {
+    color: $White;
+  }
+}
