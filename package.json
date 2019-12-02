@@ -13,8 +13,8 @@
     "heroku-postbuild": "npm install",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src -s ",
-    "build": "npm clean && yarn build-babel",
-    "start": "npm build && node ./build/index.js"
+    "build": "npm run clean && yarn build-babel",
+    "start": "npm run build && node ./build/index.js"
   },
   "dependencies": {
     "aws-sdk": "^2.474.0",
