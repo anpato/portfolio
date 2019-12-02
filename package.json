@@ -13,7 +13,7 @@
     "heroku-postbuild": "npm install",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src -s ",
-    "build": "npm run clean && yarn build-babel",
+    "build": "npm run clean && npm build-babel",
     "start": "npm run build && node ./build/index.js"
   },
   "dependencies": {
