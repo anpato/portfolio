@@ -8,7 +8,6 @@
     flex: 0.8;
     height: 100vh;
     box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.2);
-
     .tag-wrapper {
       width: 100%;
       margin: 6em auto;
@@ -30,6 +29,16 @@
     .spinner-wrapper {
       margin: auto;
       align-self: center;
+    }
+    .grid-wrapper {
+      // width: 50% !important;
+      margin: auto;
+      .project-card .card {
+        width: 300px;
+        img {
+          width: 100%;
+        }
+      }
     }
     .filters {
       width: 95%;
