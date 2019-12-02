@@ -1,0 +1,19 @@
+@import '../../styles/Pallete.scss';
+.card {
+  border-radius: 6px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  border: 2px solid $White;
+  padding: 1em;
+}
+
+.card-lg {
+  min-width: 16em;
+}
+
+.card-md {
+  min-width: 8em;
+}
+
+.card-sm {
+  min-width: 5em;
+}

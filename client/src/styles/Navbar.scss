@@ -1,0 +1,62 @@
+@import 'Pallete';
+.nav-layout {
+  position: fixed;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-height: 48px;
+  z-index: 1000;
+  &:hover {
+    opacity: 1;
+  }
+
+  .nav-active {
+    opacity: 1;
+  }
+  img {
+    animation: spin 4s linear infinite;
+    margin: 0.5em 1em;
+    height: 2em;
+  }
+  nav {
+    margin-right: 1em;
+    align-self: flex-end;
+    position: relative;
+
+    a {
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: all 0.4s;
+      padding: 0 1em;
+      border-bottom: 2px solid transparent;
+    }
+  }
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: 1em;
+  left: 1em;
+  z-index: 2000;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 500px) {
+  .theme-toggle {
+    top: 93vh;
+    right: 0.2em;
+  }
+}

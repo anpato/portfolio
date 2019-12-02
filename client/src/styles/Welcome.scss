@@ -1,0 +1,52 @@
+.welcome {
+  height: 100%;
+  width: 100%;
+  padding-top: 10%;
+  .animated-welcome {
+    width: 90%;
+    margin: auto;
+    .animated-message {
+      margin-right: 2em;
+      text-align: center;
+      flex: 3;
+      h2 {
+        font-size: 2.5rem;
+        text-decoration: underline;
+      }
+      .toggle {
+        font-size: 2.8rem;
+      }
+    }
+    .right {
+      flex: 3;
+      img {
+        max-width: 90%;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .welcome {
+    padding-top: 20%;
+    padding-bottom: 10%;
+    .animated-welcome {
+      width: 100%;
+      .animated-message {
+        margin-right: 0;
+        h2 {
+          font-size: 2.1rem;
+        }
+        .toggle {
+          font-size: 2.2rem;
+        }
+      }
+    }
+
+    .animated-welcome {
+      .right {
+        display: none;
+      }
+    }
+  }
+}

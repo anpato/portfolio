@@ -1,0 +1,16 @@
+.login {
+  height: 100vh;
+  .login-card {
+    width: 40%;
+    form {
+      margin: auto;
+      width: 80%;
+      .input {
+        margin-top: 2em;
+      }
+      .btn {
+        margin-top: 2em;
+      }
+    }
+  }
+}

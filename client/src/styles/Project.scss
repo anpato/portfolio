@@ -1,0 +1,55 @@
+.project {
+  padding: 5% 0;
+  .project-card {
+    border-radius: 4px;
+    padding: 1em 0;
+    margin: auto;
+    width: 80%;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+    height: 100%;
+    .project-carousel {
+      width: 90%;
+      img {
+        width: 100%;
+      }
+    }
+    .wrapper-title {
+      width: 80%;
+      margin: auto;
+      h2 {
+        text-decoration: underline;
+      }
+      a {
+        border-radius: 4px;
+        box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+        &:hover {
+          box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .project {
+    padding-top: 20%;
+    .project-card {
+      width: 95%;
+      .wrapper-title {
+        width: 90%;
+        flex-direction: column;
+        margin: 1em auto;
+        padding-bottom: 0.5em;
+        border-bottom: 2px solid $DarkMain;
+
+        a {
+          border-radius: 4px;
+          box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+          &:hover {
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+    }
+  }
+}
