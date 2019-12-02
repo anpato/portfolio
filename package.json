@@ -5,6 +5,9 @@
   "repository": "https://github.com/anpato/portfolio.git",
   "author": "Andre Pato <anpato1994@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "13.2.0"
+  },
   "scripts": {
     "dev": "nodemon --exec babel-node ./src",
     "heroku-postbuild": "yarn install",
