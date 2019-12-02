@@ -10,11 +10,11 @@
   },
   "scripts": {
     "dev": "nodemon --exec babel-node ./src",
-    "heroku-postbuild": "npm install",
+    "heroku-postbuild": "yarn install",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src -s ",
-    "build": "npm run clean && npm build-babel",
-    "start": "npm run build && node ./build/index.js"
+    "build": "yarn clean && yarn build-babel",
+    "start": "yarn build && node ./build/index.js"
   },
   "dependencies": {
     "aws-sdk": "^2.474.0",
