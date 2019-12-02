@@ -3,8 +3,17 @@ import PublicService from '../../services/PublicServices'
 import { FlexLayout, Spinner, Card, Button } from '../../shared'
 import Wrapper from '../Wrapper'
 import { FiX } from 'react-icons/fi'
-import StackGrid from 'react-stack-grid'
+import {
+  CSSGrid,
+  layout,
+  makeResponsive,
+  measureItems
+} from 'react-stonecutter'
 
+const Grid = makeResponsive(measureItems(CSSGrid), {
+  maxWidth: 1200,
+  minPadding: 20
+})
 export default class Projects extends PureComponent {
   constructor(props) {
     super(props)
@@ -26,13 +35,10 @@ export default class Projects extends PureComponent {
   fetchProjects = async () => {
     try {
       const projects = await new PublicService().getProjects()
-      this.setState(
-        state => ({
-          projects: projects,
-          projectsToFilter: projects
-        }),
-        () => this.setState({ isLoading: false })
-      )
+      this.setState(state => ({
+        projects: [...state.projects, projects],
+        projectsToFilter: projects
+      }))
     } catch (error) {
       await this.handleError()
     }
@@ -71,27 +77,29 @@ export default class Projects extends PureComponent {
         this.filterProject()
       }
     )
-    this.forceUpdate()
+    // this.forceUpdate()
   }
 
   renderProjects = () => {
     if (this.state.projectsToFilter.length) {
       return this.state.projectsToFilter.map(project => {
         return (
-          <Card key={project._id} className="project-card">
-            <img src={project.images.gif} />
-            <FlexLayout className="card-details" align="center" layout="col">
-              <h3>{project.title}</h3>
-              <Button
-                title="View Details"
-                onClick={() =>
-                  this.props.history.push(`/projects/${project._id}`)
-                }
-                color={this.props.darkTheme ? 'green' : 'blue'}
-                variant="flat"
-              />
-            </FlexLayout>
-          </Card>
+          <div key={project._id} itemHeight={300} className="project-card">
+            <Card>
+              <img src={project.images.gif} alt="Project" />
+              <FlexLayout className="card-details" align="center" layout="col">
+                <h3>{project.title}</h3>
+                <Button
+                  title="View Details"
+                  onClick={() =>
+                    this.props.history.push(`/projects/${project._id}`)
+                  }
+                  color={this.props.darkTheme ? 'green' : 'blue'}
+                  variant="flat"
+                />
+              </FlexLayout>
+            </Card>
+          </div>
         )
       })
     }
@@ -115,8 +123,7 @@ export default class Projects extends PureComponent {
     this.state.filters.forEach(async (filter, index) => {
       const projects = await new PublicService().filterProjects(query, item)
       this.setState(state => ({
-        projectsToFilter: projects,
-        isLoading: false
+        projectsToFilter: projects
       }))
     })
   }
@@ -125,8 +132,7 @@ export default class Projects extends PureComponent {
     if (!this.state.filters.length) {
       this.setState(
         state => ({
-          filters: [...state.filters, filter],
-          isLoading: true
+          filters: [...state.filters, filter]
         }),
         () => this.filterProject('tags', filter._id)
       )
@@ -137,8 +143,7 @@ export default class Projects extends PureComponent {
       if (filter.name !== ExsitingFilter.name) {
         this.setState(
           state => ({
-            filters: [...state.filters, filter],
-            isLoading: true
+            filters: [...state.filters, filter]
           }),
           () => this.filterProject('tags', filter._id)
         )
@@ -178,14 +183,18 @@ export default class Projects extends PureComponent {
           <FlexLayout className="filters" align="start space">
             {this.renderFilters()}
           </FlexLayout>
-          <StackGrid
-            className="project-wrapper"
+          <Grid
+            className="grid-wrapper"
+            columns={4}
             columnWidth={300}
-            gutterWidth={20}
+            gutterWidth={50}
             gutterHeight={20}
+            layout={layout.pinterest}
+            duration={400}
+            easing="ease-out"
           >
             {this.renderProjects()}
-          </StackGrid>
+          </Grid>
           {!this.state.projectsToFilter.length ? (
             <FlexLayout className="spinner-wrapper" layout="col" align="center">
               <Spinner color={this.props.darkTheme ? '#eeff41' : '#82d4fa'} />
