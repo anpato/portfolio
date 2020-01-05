@@ -1,5 +1,3 @@
-import 'dotenv/config'
-import { compare } from '../services'
 import jsonwebtoken from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 const jwt = jsonwebtoken
