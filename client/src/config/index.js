@@ -14,7 +14,7 @@ export const api = Axios.create({
 api.interceptors.request.use(
   config => {
     const token = getToken()
-    if (token !== null) {
+    if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
     return config

@@ -1,46 +1,54 @@
-import 'dotenv/config'
 import express from 'express'
-import { connect, connection } from 'mongoose'
-import bodyParser from 'body-parser'
-import helmet from 'helmet'
-import cookieParser from 'cookie-parser'
-import logger from 'morgan'
-import cors from 'cors'
-import { db } from './config'
+import middleWare from './middleware/ServerConfig'
 import Router from './routes'
-import { genID } from './services'
+import { db } from './config'
+import { connect, connection } from 'mongoose'
+import { PORT } from './env'
 
-const App = express()
-const sameSite = process.argv[2] || true
-const PORT = process.env.PORT || process.env.LOCAL_PORT
+class App {
+  constructor(port, middleWare, database, baseRoute) {
+    this.app = express()
+    this.port = port
+    this.middleWare = middleWare
+    this.database = database
+    this.baseRoute = baseRoute
+  }
+  get() {
+    this.app.get(this.baseRoute, (req, res) => res.json({ mdg: 'Portfolio' }))
+  }
 
-App.use(helmet())
-App.disable('x-powered-by')
-App.use(logger('dev'))
-App.use(cookieParser())
-App.use(cors())
-App.use(bodyParser.urlencoded({ extended: true }))
-App.use(bodyParser.json())
-App.use('/api', Router)
-// App.locals.sessionID = genID()
-// Mongodb Connection
-connect(db().connect, {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-})
-connection.once('open', () => {
-  console.log(`connected to ${db().name}`)
-})
-// Mongodb Connection
-App.get('/', (req, res) =>
-  res
-    .status(200)
-    .cookie('sessionID', App.locals.sessionID, { sameSite: sameSite })
-    .json({ msg: 'Portfolio' })
-)
+  listen() {
+    this.app.listen(this.port, () =>
+      console.info(`App Started on ${this.port}`)
+    )
+  }
 
-App.listen(PORT)
+  init_middleWare() {
+    this.middleWare.forEach(tool => this.app.use(tool))
+  }
+  init_routes() {
+    this.app.use('/api', Router)
+  }
+  connectDB() {
+    connect(this.database().connection, {
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+      useUnifiedTopology: true
+    })
+    connection.once('open', () => {
+      console.log(`connected to ${this.database().name}`)
+    })
+  }
+  initialize() {
+    this.app.disable('x-powered-by')
+    this.init_middleWare()
+    this.init_routes()
+    this.connectDB()
+    this.listen()
+  }
+}
 
-export default App
+const app = new App(PORT, middleWare, db, '/')
+
+app.initialize()

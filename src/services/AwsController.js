@@ -1,6 +1,5 @@
-import 'dotenv/config'
 import awsSdk from 'aws-sdk'
-
+import { AWS_KEY, AWS_SECRET, AWS_BUCKET } from '../env'
 class AwsHelpers {
   constructor() {
     this.title = ''
@@ -32,7 +31,7 @@ class AwsHelpers {
   setParams(file, subFolder) {
     let params = {
       ACL: 'public-read',
-      Bucket: process.env.AWS_BUCKET,
+      Bucket: AWS_BUCKET,
       Body: file.buffer,
       Key: `project/${subFolder}/${file.originalname}`
     }
@@ -50,8 +49,8 @@ class AwsController {
     this.deleteFile = this.deleteFile.bind(this)
     this.params = null
     this.s3.config.update({
-      accessKeyId: process.env.AWS_KEY,
-      secretAccessKey: process.env.AWS_SECRET,
+      accessKeyId: AWS_KEY,
+      secretAccessKey: AWS_SECRET,
       region: 'us-east-1'
     })
   }
@@ -63,7 +62,7 @@ class AwsController {
       req.files.map(file => {
         let params = {
           ACL: 'public-read',
-          Bucket: process.env.AWS_BUCKET,
+          Bucket: AWS_BUCKET,
           Body: file.buffer,
           Key: `project/${subFolder}/${this.date}-${file.originalname}`
         }

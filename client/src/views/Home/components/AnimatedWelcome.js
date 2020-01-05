@@ -12,16 +12,16 @@ export default class AnimatedWelcome extends PureComponent {
     super(props)
     this.state = {
       wordsToSwap: ['Mobile Developer', 'Full Stack Developer', 'Andre Pato'],
-      wordToDisplay: 'Web Developer',
+      wordToDisplay: 'Full Stack Developer',
       timer: 0
     }
   }
 
   componentDidMount() {
-    this.word = setInterval(() => this.swapword(), 2500)
+    // this.word = setInterval(() => this.swapword(), 2500)
   }
   componentWillUnmount() {
-    clearInterval(this.word)
+    // clearInterval(this.word)
   }
 
   swapword = () => {
