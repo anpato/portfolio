@@ -13,7 +13,7 @@ import { genID } from './services'
 const App = express()
 const sameSite = process.argv[2] || true
 const PORT = process.env.PORT || process.env.LOCAL_PORT
-App.use('/api', Router)
+
 App.use(helmet())
 App.disable('x-powered-by')
 App.use(logger('dev'))
@@ -21,6 +21,7 @@ App.use(cookieParser())
 App.use(cors())
 App.use(bodyParser.urlencoded({ extended: true }))
 App.use(bodyParser.json())
+App.use('/api', Router)
 // App.locals.sessionID = genID()
 // Mongodb Connection
 connect(db().connect, {

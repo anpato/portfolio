@@ -66,14 +66,20 @@ export default class Project extends Component {
               View It On Github
             </a>
             <h2>{title}</h2>
-            <a
-              className="btn"
-              href={`https://${deploy_link}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              See It Live
-            </a>
+            {released ? (
+              <a
+                className="btn"
+                href={`https://${deploy_link}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                See It Live
+              </a>
+            ) : (
+              <a className="btn" href="#">
+                Under Construction
+              </a>
+            )}
           </FlexLayout>
           <span className={released ? 'snack released' : 'snack in-process'}>
             {released ? 'Released' : 'In Development'}

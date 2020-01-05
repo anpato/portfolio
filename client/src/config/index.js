@@ -1,10 +1,10 @@
 import Axios from 'axios'
 import { getToken } from '../services/TokenService'
-const { REACT_APP_LOCAL, REACT_APP_PRODUCTION } = process.env
+const { REACT_APP_PRODUCTION } = process.env
 export const api = Axios.create({
   baseURL:
     window.location.hostname === 'localhost'
-      ? REACT_APP_LOCAL
+      ? 'http://localhost:3001/api'
       : REACT_APP_PRODUCTION,
   headers: {
     'Access-Control-Allow-Origin': '*'
