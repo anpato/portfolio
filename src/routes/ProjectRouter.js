@@ -1,8 +1,10 @@
-import { Router as ProjectRouter } from 'express'
+import { Router as ExpressRouter } from 'express'
 import { ProjectController } from '../controllers'
 import { AwsController } from '../services'
 import AuthController from '../auth'
 import multer from 'multer'
+
+const ProjectRouter = ExpressRouter()
 
 const Auth = new AuthController()
 const controller = new ProjectController()

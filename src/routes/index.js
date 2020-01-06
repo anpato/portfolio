@@ -1,25 +1,17 @@
 import { Router as ExpressRouter } from 'express'
-// Controllers
 import { sendContact } from '../services'
 import ProjectRouter from './ProjectRouter'
 import AuthRouter from './AuthRouter'
-
-// Controllers
+import TagRouter from './TagROuter'
 
 const Router = ExpressRouter()
+
 Router.use('/projects', ProjectRouter)
 Router.use('/auth', AuthRouter)
+Router.use('/tags', TagRouter)
 
-/* ============================================= */
-// Tags
-Router.get('/tags', projectController.getTags)
-// Tags
-/* ============================================== */
-
-/* ============================================== */
-// Contact Routes
+// Contact Route
 Router.post('/contact', sendContact)
 // Contact Routes
-/* ============================================== */
 
 export default Router
