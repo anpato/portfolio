@@ -3,12 +3,9 @@ import { AWS_KEY, AWS_SECRET, AWS_BUCKET } from '../env'
 class AwsHelpers {
   constructor() {
     this.title = ''
-    this.generateSubFolder = this.generateSubFolder.bind(this)
-    this.dataParser = this.dataParser.bind(this)
-    this.getKeys = this.getKeys.bind(this)
-    this.setParams = this.setParams.bind(this)
+    this.date = new Date().getTime()
   }
-  generateSubFolder(title) {
+  generateSubFolder = title => {
     return title
       .split(' ')
       .join('-')
@@ -18,7 +15,7 @@ class AwsHelpers {
     return JSON.parse(data)
   }
 
-  getKeys(data) {
+  getKeys = data => {
     let existingFiles = []
     for (let i = 0; i < data.length; i++) {
       if (data[i].Key.includes('project')) {
@@ -28,7 +25,7 @@ class AwsHelpers {
     return existingFiles
   }
 
-  setParams(file, subFolder) {
+  setParams = (file, subFolder) => {
     let params = {
       ACL: 'public-read',
       Bucket: AWS_BUCKET,
@@ -44,10 +41,6 @@ class AwsController {
     this.file = null
     this.s3 = new awsSdk.S3()
     this.Helpers = new AwsHelpers()
-    this.date = new Date().getTime()
-    this.pushKeys = this.Helpers.getKeys
-    this.deleteFile = this.deleteFile.bind(this)
-    this.params = null
     this.s3.config.update({
       accessKeyId: AWS_KEY,
       secretAccessKey: AWS_SECRET,
@@ -60,24 +53,18 @@ class AwsController {
     const subFolder = this.Helpers.generateSubFolder(project.title)
     if (req.files.length) {
       req.files.map(file => {
-        let params = {
-          ACL: 'public-read',
-          Bucket: AWS_BUCKET,
-          Body: file.buffer,
-          Key: `project/${subFolder}/${this.date}-${file.originalname}`
-        }
+        const params = this.Helpers.setParams(file, subFolder)
         this.s3.upload(params, (err, data) => {
           if (err) throw err
           this.files.push(data.Location)
           if (this.files.length === req.files.length) {
             res.locals.files = this.files
-            next()
+            return next()
           }
         })
       })
-    } else {
-      next()
     }
+    return next()
   }
   deleteFile = (req, res, file) => {
     this.params = this.Helpers.setParams(file)

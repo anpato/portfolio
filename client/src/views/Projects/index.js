@@ -53,7 +53,7 @@ export default class Projects extends PureComponent {
         projectsToFilter: projects
       }))
     } catch (error) {
-      this.handleError()
+      // this.handleError()
     }
   }
 

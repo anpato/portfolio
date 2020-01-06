@@ -1,5 +1,5 @@
 import express from 'express'
-import middleWare from './middleware/ServerConfig'
+import middleWare from './config/ServerConfig'
 import Router from './routes'
 import { db } from './config'
 import { connect, connection } from 'mongoose'

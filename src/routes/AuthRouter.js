@@ -4,8 +4,8 @@ const AuthRouter = ExpressRouter()
 
 const controller = new UserController()
 
-AuthRouter.post('/auth/sign-up', controller.registerUser)
-AuthRouter.post('/auth/login', controller.loginUser)
-AuthRouter.post('/auth/register', controller.registerUser)
+AuthRouter.post('/sign-up', controller.registerUser)
+AuthRouter.post('/login', controller.loginUser)
+AuthRouter.post('/register', controller.registerUser)
 
 export default AuthRouter

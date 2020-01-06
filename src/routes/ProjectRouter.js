@@ -15,25 +15,25 @@ const storage = multer.memoryStorage({
   }
 })
 
-ProjectRouter.get('/projects', controller.getProjects)
-ProjectRouter.get('/projects/:project_id', controller.getProject)
-ProjectRouter.get('/projects/filter/projects', controller.filterProjects)
+ProjectRouter.get('/', controller.getProjects)
+ProjectRouter.get('/:project_id', controller.getProject)
+ProjectRouter.get('/filter/projects', controller.filterProjects)
 ProjectRouter.put(
-  '/projects/:project_id',
+  '/:project_id',
   Auth.Authenticate,
   multer({ storage }).array('projects'),
   awsController.upload,
   controller.updateProject
 )
 ProjectRouter.post(
-  '/projects',
+  '/',
   Auth.Authenticate,
   multer({ storage }).array('projects'),
   awsController.upload,
   controller.uploadProject
 )
 ProjectRouter.delete(
-  '/projects/:project_id',
+  '/:project_id',
   Auth.Authenticate,
   controller.deleteProject,
   awsController.deleteFile
