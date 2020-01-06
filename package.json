@@ -5,8 +5,13 @@
   "repository": "https://github.com/anpato/portfolio.git",
   "author": "Andre Pato <anpato1994@gmail.com>",
   "license": "MIT",
+  "nodemonConfig": {
+    "ignore": [
+      "./client"
+    ]
+  },
   "scripts": {
-    "dev": "nodemon --exec babel-node ./src/server.js",
+    "dev": "nodemon --exec babel-node ./src",
     "heroku-postbuild": "yarn install",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src -s ",

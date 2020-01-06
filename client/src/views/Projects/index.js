@@ -32,6 +32,19 @@ export default class Projects extends PureComponent {
     this.fetchFilters()
   }
 
+  handleError = async () => {
+    this.setState(
+      {
+        isLoading: true,
+        error: "Hang On Something Went Wrong, let's try this again."
+      },
+      async () => {
+        await this.fetchProjects()
+        await this.fetchFilters()
+      }
+    )
+  }
+
   fetchProjects = async () => {
     try {
       const projects = await new PublicService().getProjects()
@@ -40,7 +53,7 @@ export default class Projects extends PureComponent {
         projectsToFilter: projects
       }))
     } catch (error) {
-      await this.handleError()
+      this.handleError()
     }
   }
 
@@ -103,20 +116,6 @@ export default class Projects extends PureComponent {
         )
       })
     }
-  }
-
-  handleError = async () => {
-    this.setState(
-      {
-        isLoading: true,
-        error: "Hang On Something Went Wrong, let's try this again."
-      },
-      () =>
-        setTimeout(async () => {
-          await this.fetchProjects()
-          await this.fetchFilters()
-        }, 1500)
-    )
   }
 
   filterProject = (query, item) => {
