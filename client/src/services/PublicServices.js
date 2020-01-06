@@ -1,13 +1,9 @@
 import { api } from '../config'
 
 export default class PublicService {
-  constructor(id, data) {
-    this.id = id
-    this.data = data
-  }
-  async contact() {
+  async contact(data) {
     try {
-      const resp = await api.post('/contact', this.data)
+      const resp = await api.post('/contact', data)
       return resp
     } catch (error) {
       throw error
@@ -21,9 +17,9 @@ export default class PublicService {
       throw error
     }
   }
-  async getProject() {
+  async getProject(id) {
     try {
-      const resp = await api.get(`/projects/${this.id}`)
+      const resp = await api.get(`/projects/${id}`)
       return resp.data
     } catch (error) {
       throw error

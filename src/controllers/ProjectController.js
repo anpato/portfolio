@@ -1,5 +1,6 @@
 import { Project, Tag } from '../database'
 import HelperService from './helpers'
+
 class ProjectController {
   constructor() {
     this.Helpers = new HelperService()
@@ -72,7 +73,8 @@ class ProjectController {
   updateProject = async (req, res) => {
     try {
       const projectBody = JSON.parse(req.body.project)
-      console.log(projectBody)
+      const files = res.locals.files
+      console.log(files)
     } catch (error) {
       res.status(500).json({ error: error })
       throw error
