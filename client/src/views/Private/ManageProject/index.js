@@ -23,9 +23,10 @@ export default class ManageProject extends Component {
         github_Link: '',
         deploy_Link: ''
       },
+      image_uploaded: null,
       released: false,
       new_Tag: '',
-      images: {},
+      images: [],
       tags: [],
       addTag: false,
       isLoading: false
@@ -47,13 +48,21 @@ export default class ManageProject extends Component {
     }
   }
 
+  handleImages = e => {
+    const image = e.target.files[0]
+    console.log(image)
+    this.setState(state => ({
+      images: [...state.images, image]
+    }))
+  }
+
   handleTextChange = e => {
-    console.log(e.target.value)
-    // this.setState(state => ({
-    //   formData: Object.assign(state.formData, {
-    //     [e.target.name]: e.target.value
-    //   })
-    // }))
+    const values = {
+      [e.target.name]: e.target.value
+    }
+    this.setState(state => ({
+      formData: Object.assign(state.formData, values)
+    }))
   }
 
   renderForm = () => {
@@ -71,22 +80,57 @@ export default class ManageProject extends Component {
         />
       )
     }
-    return (
-      <>
-        {fields.map(field => field)}
-        <input type="file" />
-      </>
-    )
+    return <>{fields.map(field => field)}</>
+  }
+
+  handleSubmit = async e => {
+    e.preventDefault()
+    try {
+      const formData = new FormData()
+      this.state.images.forEach(image => formData.append('projects', image))
+      const data = {
+        project: {
+          ...this.state.formData
+        },
+        tags: this.state.tags
+      }
+      for (let key in data) {
+        formData.append(key, JSON.stringify(data[key]))
+      }
+
+      const resp = await this.Private.uploadProject(formData)
+      console.log(resp)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  renderImagesToBeUpload = () => {
+    return this.state.images.length
+      ? this.state.images.map(image => (
+          <div>
+            <h3>{image.name}</h3>
+          </div>
+        ))
+      : null
   }
 
   render() {
     const { addTag, isLoading } = this.state
     const { darkTheme } = this.props
+    console.log(this.state.images)
     return (
       <FlexLayout className="project-manage" align="center">
-        <FormGroup variant="vertical">
+        <FormGroup variant="vertical" onSubmit={this.handleSubmit}>
           {this.renderForm()}
+          <TextInput
+            onChange={this.handleImages}
+            type="file"
+            name="images"
+            value={this.state.image_uploaded}
+          />
           <Button title="Upload" color="blue" variant="raised" />
+          {this.renderImagesToBeUpload()}
         </FormGroup>
       </FlexLayout>
     )

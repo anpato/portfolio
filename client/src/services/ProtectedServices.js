@@ -26,9 +26,9 @@ export default class ProtectedServices {
       throw error
     }
   }
-  async uploadProject() {
+  async uploadProject(data) {
     try {
-      const resp = await api.post('/projects', this.data)
+      const resp = await api.post('/projects', data)
       return resp.status
     } catch (error) {
       throw error
