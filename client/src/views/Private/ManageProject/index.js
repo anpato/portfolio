@@ -56,13 +56,17 @@ export default class ManageProject extends Component {
     }))
   }
 
-  handleTextChange = e => {
+  handleTextChange = (e, query) => {
     const values = {
       [e.target.name]: e.target.value
     }
-    this.setState(state => ({
-      formData: Object.assign(state.formData, values)
-    }))
+    if (query) {
+      this.setState({ [query]: e.target.value })
+    } else {
+      this.setState(state => ({
+        formData: Object.assign(state.formData, values)
+      }))
+    }
   }
 
   renderForm = () => {
@@ -80,7 +84,18 @@ export default class ManageProject extends Component {
         />
       )
     }
-    return <>{fields.map(field => field)}</>
+    return (
+      <>
+        {fields.map(field => field)}
+        <select
+          onChange={e => this.handleTextChange(e, 'released')}
+          name="released"
+        >
+          <option value={false}>NO</option>
+          <option value={true}>Yes</option>
+        </select>
+      </>
+    )
   }
 
   handleSubmit = async e => {

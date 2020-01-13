@@ -1,14 +1,15 @@
 export default class HelperService {
   checkGif(files) {
+    console.log(files)
     const obj = {
-      gif: '',
-      static: []
+      image_gif: '',
+      image_static: []
     }
     files.forEach(file => {
       if (file.includes('.gif')) {
-        Object.assign(obj, { gif: file })
+        Object.assign(obj, { image_gif: file })
       } else {
-        obj.static.push(file)
+        obj.image_static.push(file)
       }
     })
     return obj

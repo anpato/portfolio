@@ -15,6 +15,12 @@ class AwsHelpers {
     return JSON.parse(data)
   }
 
+  uploadFiles = async (file, subfolder, s3) => {
+    let location
+
+    console.log(location)
+  }
+
   getKeys = data => {
     let existingFiles = []
     for (let i = 0; i < data.length; i++) {
@@ -48,24 +54,27 @@ class AwsController {
     })
   }
 
-  upload = (req, res, next) => {
+  upload = async (req, res, next) => {
     const project = this.Helpers.dataParser(req.body.project)
-    const subFolder = this.Helpers.generateSubFolder(project.title)
+    const subfolder = this.Helpers.generateSubFolder(project.title)
     if (req.files.length) {
-      req.files.map(file => {
-        const params = this.Helpers.setParams(file, subFolder)
-        this.s3.upload(params, (err, data) => {
+      await req.files.forEach(async file => {
+        const params = this.Helpers.setParams(file, subfolder)
+        await this.s3.upload(params, (err, data) => {
           if (err) throw err
           this.files.push(data.Location)
-          if (this.files.length === req.files.length) {
-            res.locals.files = this.files
-            return next()
-          }
+          if (this.files.length === req.files.length)
+            this.sendFiles(this.files, res, next)
         })
       })
     }
-    return next()
   }
+
+  sendFiles = (files, res, next) => {
+    res.locals.files = files
+    next()
+  }
+
   deleteFile = (req, res, file) => {
     this.params = this.Helpers.setParams(file)
     this.s3.deleteObject(this.params, (err, data) => {

@@ -53,18 +53,18 @@ class ProjectController {
 
   uploadProject = async (req, res) => {
     try {
-      console.log(JSON.parse(req.body.project))
-      // const images = req.files.length
-      //   ? this.Helpers.checkGif(res.locals.files)
-      //   : null
-      // const tags = await this.Helpers.checkTags(req.body.tags, Tag)
-      // const projectBody = this.Helpers.parser(req.body.project)
-      // const project = new Project({
-      //   ...projectBody,
-      //   images,
-      //   tags
-      // })
-      await project.save()
+      const images = res.locals.files.length
+        ? await this.Helpers.checkGif(res.locals.files)
+        : null
+      const tags = await this.Helpers.checkTags(req.body.tags, Tag)
+      const projectBody = this.Helpers.parser(req.body.project)
+      console.log(projectBody)
+      const project = new Project({
+        ...projectBody,
+        ...images,
+        tags
+      })
+      project.save()
       res.send(project)
     } catch (error) {
       res.status(500).json({ error: error.message })
