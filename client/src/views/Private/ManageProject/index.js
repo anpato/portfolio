@@ -4,13 +4,12 @@ import {
   TextInput,
   FlexLayout,
   Button,
-  FormGroup
-  // Spinner
+  FormGroup,
+  Spinner
 } from '../../../shared'
-// import { _TagParser } from '../../../helpers'
+import { _TagParser } from '../../../helpers'
 import ProtectedServices from '../../../services/ProtectedServices'
-import { stat } from 'fs'
-// import { FiX as Delete, FiPlus as Add } from 'react-icons/fi'
+import { FiX as Delete, FiPlus as Add } from 'react-icons/fi'
 
 export default class ManageProject extends Component {
   constructor(props) {
@@ -114,6 +113,7 @@ export default class ManageProject extends Component {
 
   handleSubmit = async e => {
     e.preventDefault()
+    this.setState({ isLoading: true })
     try {
       const formData = new FormData()
       this.state.images.forEach(image => {
@@ -133,11 +133,13 @@ export default class ManageProject extends Component {
         formData.append(key, JSON.stringify(data[key]))
       }
       this.state.updating
-        ? await this.Private.updateProject(
+        ? this.Private.updateProject(
             this.props.match.params.project_id,
             formData
+          ).then(() => this.props.history.push('/dashboard/projects'))
+        : await this.Private.uploadProject(formData).then(() =>
+            this.props.history.push('/dashboard/projects')
           )
-        : await this.Private.uploadProject(formData)
     } catch (error) {
       console.error(error)
     }
@@ -155,7 +157,10 @@ export default class ManageProject extends Component {
   renderImagesToBeUpload = () => {
     return this.state.images.length
       ? this.state.images.map((image, index) => (
-          <div key={index}>
+          <div
+            key={index}
+            style={{ width: '80%', display: 'flex', alignItems: 'center' }}
+          >
             <Button
               type="button"
               variant="fab"
@@ -164,7 +169,7 @@ export default class ManageProject extends Component {
             >
               X
             </Button>
-            <h3>{image.name || image}</h3>
+            <h3 style={{ marginLeft: '1em' }}>{image.name || image}</h3>
           </div>
         ))
       : null
@@ -181,7 +186,14 @@ export default class ManageProject extends Component {
           {this.state.removedCounter > 0 ? (
             <p>{this.state.removedCounter} Items have been removed</p>
           ) : null}
-          <Button title="Upload" color="blue" variant="raised" />
+          {this.state.isLoading ? (
+            <Button color="blue" variant="raised">
+              <Spinner size={20} color="#f8f8f8" />
+            </Button>
+          ) : (
+            <Button title="Upload" color="blue" variant="raised" />
+          )}
+
           {this.renderImagesToBeUpload()}
         </FormGroup>
       </FlexLayout>

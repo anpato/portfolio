@@ -19,9 +19,9 @@ export default class Project extends Component {
 
   fetchProject = async () => {
     try {
-      const project = await new PublicService(
+      const project = await new PublicService().getProject(
         this.props.match.params.project_id
-      ).getProject()
+      )
       this.setState(
         state => ({ project: project }),
         () => setTimeout(() => this.setState({ isLoading: false }), 1000)
@@ -36,7 +36,7 @@ export default class Project extends Component {
       const {
         title,
         description,
-        images,
+        image_static,
         released,
         github_link,
         deploy_link
@@ -48,9 +48,9 @@ export default class Project extends Component {
             stopOnHover={true}
             infiniteLoop={true}
             showStatus={false}
-            showIndicators={images.static.length > 1 ? true : false}
+            showIndicators={image_static.length > 1 ? true : false}
           >
-            {images.static.map((image, index) => (
+            {image_static.map((image, index) => (
               <div key={index}>
                 <img src={image} alt="project" onLoad={this.props.onLoad} />
               </div>
