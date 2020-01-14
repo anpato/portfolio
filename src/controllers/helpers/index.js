@@ -6,10 +6,12 @@ export default class HelperService {
       image_static: []
     }
     files.forEach(file => {
-      if (file.includes('.gif')) {
-        Object.assign(obj, { image_gif: file })
-      } else {
-        obj.image_static.push(file)
+      if (typeof file === 'string') {
+        if (file.includes('.gif')) {
+          Object.assign(obj, { image_gif: file })
+        } else {
+          obj.image_static.push(file)
+        }
       }
     })
     return obj

@@ -27,9 +27,10 @@ export default class AdminProjects extends Component {
   renderProjects = () => {
     const { darkTheme } = this.props
     if (this.state.projects && !this.state.isLoading) {
+      console.log(this.state.projects)
       return this.state.projects.map(project => (
         <Card key={project._id} className="project-card">
-          <img src={project.images.gif} alt="project" />
+          <img src={project.image_gif} alt="project" />
           <h3>{project.title}</h3>
           <Button
             title="Manage"

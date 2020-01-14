@@ -4,12 +4,13 @@ import {
   TextInput,
   FlexLayout,
   Button,
-  FormGroup,
-  Spinner
+  FormGroup
+  // Spinner
 } from '../../../shared'
-import { _TagParser } from '../../../helpers'
+// import { _TagParser } from '../../../helpers'
 import ProtectedServices from '../../../services/ProtectedServices'
-import { FiX as Delete, FiPlus as Add } from 'react-icons/fi'
+import { stat } from 'fs'
+// import { FiX as Delete, FiPlus as Add } from 'react-icons/fi'
 
 export default class ManageProject extends Component {
   constructor(props) {
@@ -23,7 +24,9 @@ export default class ManageProject extends Component {
         github_Link: '',
         deploy_Link: ''
       },
-      image_uploaded: null,
+      removedCounter: 0,
+      updating: false,
+      image_uploaded: '',
       released: false,
       new_Tag: '',
       images: [],
@@ -42,7 +45,19 @@ export default class ManageProject extends Component {
       const project = await this.Public.getProject(
         this.props.match.params.project_id
       )
+      const images = [project.image_gif, ...project.image_static]
       console.log(project)
+      this.setState({
+        formData: {
+          title: project.title || '',
+          deploy_Link: project.deploy_link || '',
+          github_Link: project.github_link || '',
+          description: project.description || ''
+        },
+        images,
+        tags: project.tags,
+        updating: true
+      })
     } catch (error) {
       console.error(error)
     }
@@ -50,7 +65,6 @@ export default class ManageProject extends Component {
 
   handleImages = e => {
     const image = e.target.files[0]
-    console.log(image)
     this.setState(state => ({
       images: [...state.images, image]
     }))
@@ -102,48 +116,71 @@ export default class ManageProject extends Component {
     e.preventDefault()
     try {
       const formData = new FormData()
-      this.state.images.forEach(image => formData.append('projects', image))
+      this.state.images.forEach(image => {
+        if (typeof image !== 'string') {
+          formData.append('projects', image)
+        }
+      })
       const data = {
         project: {
-          ...this.state.formData
+          ...this.state.formData,
+          released: this.state.released,
+          project_images: [...this.state.images]
         },
         tags: this.state.tags
       }
       for (let key in data) {
         formData.append(key, JSON.stringify(data[key]))
       }
-
-      const resp = await this.Private.uploadProject(formData)
-      console.log(resp)
+      this.state.updating
+        ? await this.Private.updateProject(
+            this.props.match.params.project_id,
+            formData
+          )
+        : await this.Private.uploadProject(formData)
     } catch (error) {
       console.error(error)
     }
   }
 
+  handleRemoveItem = (type, index) => {
+    const data = this.state[type]
+    data.splice(index, 1)
+    this.setState(state => ({
+      [type]: data,
+      removedCounter: state.removedCounter + 1
+    }))
+  }
+
   renderImagesToBeUpload = () => {
     return this.state.images.length
-      ? this.state.images.map(image => (
-          <div>
-            <h3>{image.name}</h3>
+      ? this.state.images.map((image, index) => (
+          <div key={index}>
+            <Button
+              type="button"
+              variant="fab"
+              color="red"
+              onClick={() => this.handleRemoveItem('images', index)}
+            >
+              X
+            </Button>
+            <h3>{image.name || image}</h3>
           </div>
         ))
       : null
   }
 
   render() {
-    const { addTag, isLoading } = this.state
-    const { darkTheme } = this.props
-    console.log(this.state.images)
+    // const { addTag, isLoading } = this.state
+    // const { darkTheme } = this.props
     return (
       <FlexLayout className="project-manage" align="center">
         <FormGroup variant="vertical" onSubmit={this.handleSubmit}>
           {this.renderForm()}
-          <TextInput
-            onChange={this.handleImages}
-            type="file"
-            name="images"
-            value={this.state.image_uploaded}
-          />
+          <TextInput onChange={this.handleImages} type="file" name="images" />
+          {this.state.removedCounter > 0 ? (
+            <p>{this.state.removedCounter} Items have been removed</p>
+          ) : null}
           <Button title="Upload" color="blue" variant="raised" />
           {this.renderImagesToBeUpload()}
         </FormGroup>

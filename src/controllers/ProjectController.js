@@ -20,22 +20,7 @@ class ProjectController {
       res.status(500).json({ error: error.message })
     }
   }
-  filterProjects = async (req, res) => {
-    try {
-      const value = Object.values(req.query)[0]
-      const query = Object.keys(req.query)[0]
-      await Project.find({ [query]: value })
-        .populate({
-          path: 'tags'
-        })
-        .exec((err, data) => {
-          if (err) throw err
-          res.send(data)
-        })
-    } catch (error) {
-      res.status(500).json({ error: error.message })
-    }
-  }
+
   getProject = async (req, res) => {
     try {
       await Project.findById(req.params.project_id)
@@ -53,16 +38,14 @@ class ProjectController {
 
   uploadProject = async (req, res) => {
     try {
-      const images = res.locals.files.length
-        ? await this.Helpers.checkGif(res.locals.files)
-        : null
-      const tags = await this.Helpers.checkTags(req.body.tags, Tag)
+      const images = await this.Helpers.checkGif(res.locals.files)
+      // const tags = await this.Helpers.checkTags(req.body.tags, Tag)
       const projectBody = this.Helpers.parser(req.body.project)
-      console.log(projectBody)
+      // console.log(projectBody)
       const project = new Project({
         ...projectBody,
-        ...images,
-        tags
+        ...images
+        // tags
       })
       project.save()
       res.send(project)
@@ -74,8 +57,22 @@ class ProjectController {
   updateProject = async (req, res) => {
     try {
       const projectBody = JSON.parse(req.body.project)
-      const files = res.locals.files
-      console.log(files)
+      const images = this.Helpers.checkGif(res.locals.files)
+
+      delete projectBody.images
+      await Project.findOneAndUpdate(
+        req.params.project_id,
+        {
+          ...projectBody,
+          image_gif: images.image_gif,
+          image_static: images.image_static
+        },
+        { new: true },
+        (err, doc) => {
+          console.log(doc)
+          res.send(doc)
+        }
+      )
     } catch (error) {
       res.status(500).json({ error: error })
       throw error

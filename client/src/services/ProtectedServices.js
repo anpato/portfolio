@@ -34,9 +34,10 @@ export default class ProtectedServices {
       throw error
     }
   }
-  async updateProject() {
+  async updateProject(id, data) {
     try {
-      const resp = await api.put(`/projects/${this.id}`, this.data)
+      console.log(data)
+      const resp = await api.put(`/projects/${id}`, data)
       return resp
     } catch (error) {
       throw error

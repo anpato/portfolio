@@ -4,14 +4,14 @@ import ProjectRouter from './ProjectRouter'
 import AuthRouter from './AuthRouter'
 import TagRouter from './TagROuter'
 
-const Router = ExpressRouter()
+const AppRouter = ExpressRouter()
 
-Router.use('/projects', ProjectRouter)
-Router.use('/auth', AuthRouter)
-Router.use('/tags', TagRouter)
+AppRouter.use('/projects', ProjectRouter)
+AppRouter.use('/auth', AuthRouter)
+AppRouter.use('/tags', TagRouter)
 
 // Contact Route
-Router.post('/contact', sendContact)
+AppRouter.post('/contact', sendContact)
 // Contact Routes
 
-export default Router
+export default AppRouter

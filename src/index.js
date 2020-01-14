@@ -1,6 +1,6 @@
 import express from 'express'
 import middleWare from './config/ServerConfig'
-import Router from './routes'
+import AppRouter from './routes'
 import { db } from './config'
 import { connect, connection } from 'mongoose'
 import { PORT } from './env'
@@ -27,7 +27,7 @@ class App {
     this.middleWare.forEach(tool => this.app.use(tool))
   }
   init_routes() {
-    this.app.use('/api', Router)
+    this.app.use('/api', AppRouter)
   }
   connectDB() {
     connect(this.database().connection, {

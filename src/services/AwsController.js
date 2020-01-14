@@ -36,7 +36,7 @@ class AwsHelpers {
       ACL: 'public-read',
       Bucket: AWS_BUCKET,
       Body: file.buffer,
-      Key: `project/${subFolder}/${file.originalname}`
+      Key: `project/${subFolder}/${this.date}-${file.originalname}`
     }
     return params
   }
@@ -57,21 +57,31 @@ class AwsController {
   upload = async (req, res, next) => {
     const project = this.Helpers.dataParser(req.body.project)
     const subfolder = this.Helpers.generateSubFolder(project.title)
+    console.log(project)
+    this.files.push(...project.project_images)
+    res.locals.project = project
     if (req.files.length) {
       await req.files.forEach(async file => {
         const params = this.Helpers.setParams(file, subfolder)
-        await this.s3.upload(params, (err, data) => {
-          if (err) throw err
-          this.files.push(data.Location)
-          if (this.files.length === req.files.length)
-            this.sendFiles(this.files, res, next)
-        })
+        if (typeof file !== 'string') {
+          await this.s3.upload(params, (err, data) => {
+            if (err) throw err
+            this.files.push(data.Location)
+            if (
+              this.files.length ===
+              req.files.length + project.project_images.length
+            )
+              return this.sendFiles(this.files, res, next)
+          })
+        }
       })
     }
+    return this.sendFiles(this.files, res, next)
   }
 
   sendFiles = (files, res, next) => {
     res.locals.files = files
+    delete res.locals.project.images
     next()
   }
 
