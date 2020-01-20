@@ -196,7 +196,7 @@ export default class ManageProject extends Component {
             >
               X
             </Button>
-            <h3 style={{ marginLeft: '1em' }}>{image?.name || image}</h3>
+            <h3 style={{ marginLeft: '1em' }}>{image.name || image}</h3>
           </div>
         ))
       : null
