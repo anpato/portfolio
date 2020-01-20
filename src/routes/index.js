@@ -2,7 +2,7 @@ import { Router as ExpressRouter } from 'express'
 import { sendContact } from '../services'
 import ProjectRouter from './ProjectRouter'
 import AuthRouter from './AuthRouter'
-import TagRouter from './TagROuter'
+import TagRouter from './TagRouter'
 
 const AppRouter = ExpressRouter()
 
