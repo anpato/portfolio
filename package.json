@@ -19,6 +19,7 @@
     "start": "yarn build && node ./build/index.js"
   },
   "dependencies": {
+    "@babel/runtime": "^7.7.7",
     "aws-sdk": "^2.474.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
@@ -42,6 +43,7 @@
     "@babel/core": "^7.7.2",
     "@babel/node": "^7.7.0",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.1",
     "nodemon": "^2.0.0"
   }
