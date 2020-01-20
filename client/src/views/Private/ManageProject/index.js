@@ -45,7 +45,6 @@ export default class ManageProject extends Component {
         this.props.match.params.project_id
       )
       const images = [project.image_gif, ...project.image_static]
-      console.log(project)
       this.setState({
         formData: {
           title: project.title || '',
@@ -197,7 +196,7 @@ export default class ManageProject extends Component {
             >
               X
             </Button>
-            <h3 style={{ marginLeft: '1em' }}>{image.name || image}</h3>
+            <h3 style={{ marginLeft: '1em' }}>{image?.name || image}</h3>
           </div>
         ))
       : null

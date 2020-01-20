@@ -99,7 +99,10 @@ export default class Projects extends PureComponent {
         return (
           <div key={project._id} itemHeight={300} className="project-card">
             <Card>
-              <img src={project.image_gif} alt="Project" />
+              <img
+                src={project.image_gif || project.image_static[0]}
+                alt="Project"
+              />
               <FlexLayout className="card-details" align="center" layout="col">
                 <h3>{project.title}</h3>
                 <Button
