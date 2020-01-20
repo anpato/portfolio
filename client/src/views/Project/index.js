@@ -69,7 +69,7 @@ export default class Project extends Component {
             {released ? (
               <a
                 className="btn"
-                href={`https://${deploy_link}`}
+                href={`${deploy_link}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

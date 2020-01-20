@@ -17,7 +17,7 @@ const storage = multer.memoryStorage({
 
 ProjectRouter.get('/', controller.getProjects)
 ProjectRouter.get('/:project_id', controller.getProject)
-// ProjectRouter.get('/filter/projects', controller.filterProjects)
+ProjectRouter.get('/filter/projects', controller.filterProjects)
 ProjectRouter.put(
   '/:project_id',
   Auth.Authenticate,

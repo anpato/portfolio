@@ -111,6 +111,34 @@ export default class ManageProject extends Component {
     )
   }
 
+  removeTag = index => {
+    const tags = this.state.tags
+    tags.splice(index, 1)
+    this.setState({ tags })
+  }
+
+  renderTags = () => {
+    if (this.state.tags.length) {
+      return this.state.tags.map((tag, index) => {
+        return (
+          <FlexLayout className="snack" align="center" key={tag.name}>
+            <h3 style={{ marginRight: '1em' }}>{tag.name}</h3>
+            <Button variant="fab" onClick={() => this.removeTag(index)}>
+              <Delete />
+            </Button>
+          </FlexLayout>
+        )
+      })
+    }
+  }
+
+  addTag = () => {
+    this.setState(state => ({
+      tags: [...state.tags, { name: this.state.new_Tag }],
+      new_Tag: ''
+    }))
+  }
+
   handleSubmit = async e => {
     e.preventDefault()
     this.setState({ isLoading: true })
@@ -193,7 +221,19 @@ export default class ManageProject extends Component {
           ) : (
             <Button title="Upload" color="blue" variant="raised" />
           )}
-
+          <FlexLayout direction="row">
+            <TextInput
+              label="Tag"
+              color="blue"
+              value={this.state.new_Tag}
+              name="new_tag"
+              onChange={e => this.handleTextChange(e, 'new_Tag')}
+            />
+            <Button color="blue" type="button" onClick={this.addTag}>
+              <Add />
+            </Button>
+          </FlexLayout>
+          {this.renderTags()}
           {this.renderImagesToBeUpload()}
         </FormGroup>
       </FlexLayout>
